@@ -11,7 +11,7 @@ import { useForm, ValidationError } from '@formspree/react';
 
 // ——————————————————————————————————————
 // Bereket Fikre — Creative Designer Portfolio (One Page)
-// Brand Colors: Black (#000000) - Primary, Mint Green (#8AEA92) - Secondary, White (#FFFFFF) - Background
+// Theme: Navy Blue (#000F33) and Broken White (#F8F4EF)
 // ——————————————————————————————————————
 
 const PROFILE = {
@@ -58,54 +58,119 @@ const SERVICES = [
 const PROJECTS = [
   {
     id: "p1",
-    title: "Logo & Branding Kit",
+    title: "Zewd Brand Identity",
     role: "Brand Identity",
-    thumb: "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1600&auto=format&fit=crop",
+    thumb: "/img/Zewd.webp",
     images: [
-      "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1600&auto=format&fit=crop",
+      "/img/Zewd.webp",
     ],
     summary:
-      "Full branding system including logo, color palette, and visual identity guidelines for a modern company.",
+      "Complete brand identity design featuring minimalist typography and modern visual elements. Includes logo design, color palette, and comprehensive brand guidelines.",
     tags: ["Branding", "Identity", "Design"],
     link: "#",
   },
   {
     id: "p2",
-    title: "UI/UX Web Dashboard",
-    role: "UI/UX · Web App",
-    thumb: "https://images.unsplash.com/photo-1551281044-8d8f1e59ad69?q=80&w=1600&auto=format&fit=crop",
+    title: "Swan Clothing Brand Package",
+    role: "Brand Identity · Fashion",
+    thumb: "/img/swan-clothing.webp",
     images: [
-      "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop",
+      "/img/swan-clothing.webp",
     ],
     summary:
-      "A clean and functional dashboard UI for a SaaS application with focus on usability and accessibility.",
-    tags: ["UI/UX", "Dashboard", "Prototyping"],
+      "Complete brand identity package including logo design, product packaging mockups, and comprehensive brand guidelines for a modern fashion brand.",
+    tags: ["Branding", "Fashion", "Packaging"],
     link: "#",
   },
   {
     id: "p3",
-    title: "Social Media Campaign",
-    role: "Graphic Design · Social",
-    thumb: "https://images.unsplash.com/photo-1518894781321-630e638d0742?q=80&w=1600&auto=format&fit=crop",
+    title: "Finix Web Asset Collection",
+    role: "Web Design · Digital Marketing",
+    thumb: "/img/Finix.webp",
     images: [
-      "https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?q=80&w=1600&auto=format&fit=crop",
+      "/img/Finix.webp",
     ],
     summary:
-      "Creative graphics and reels designed for a digital campaign, optimized for engagement and brand awareness.",
-    tags: ["Social", "Campaign", "Motion"],
+      "Comprehensive web asset collection including website banners, digital marketing materials, and promotional graphics for engaging online presence.",
+    tags: ["Web", "Digital", "Marketing"],
     link: "#",
   },
   {
     id: "p4",
-    title: "Company Website Design",
-    role: "Web Design · Frontend",
-    thumb: "https://images.unsplash.com/photo-1526498460520-4c246339dccb?q=80&w=1600&auto=format&fit=crop",
+    title: "Social Media Template Collection",
+    role: "Social Media · Templates",
+    thumb: "/img/SM.webp",
     images: [
-      "https://images.unsplash.com/photo-1487014679447-9f8336841d58?q=80&w=1600&auto=format&fit=crop",
+      "/img/SM.webp",
     ],
     summary:
-      "A fast, minimalist website design for a company showcasing services, case studies, and contact info.",
-    tags: ["Web", "React", "Frontend"],
+      "Professional social media template collection featuring Instagram post and story design layouts for consistent brand presence across platforms.",
+    tags: ["Social", "Templates", "Design"],
+    link: "#",
+  },
+  {
+    id: "p5",
+    title: "Lensa Fashion Packaging Design",
+    role: "Packaging Design · Fashion",
+    thumb: "/img/Lensa Fashion Design & Makeup.webp",
+    images: [
+      "/img/Lensa Fashion Design & Makeup.webp",
+    ],
+    summary:
+      "Complete packaging design including branded shopping bags, product labels, and retail packaging solutions for a fashion-forward brand identity.",
+    tags: ["Packaging", "Fashion", "Retail"],
+    link: "#",
+  },
+  {
+    id: "p6",
+    title: "Company Profile Print Design",
+    role: "Print Design · Corporate",
+    thumb: "/img/Company profile.webp",
+    images: [
+      "/img/Company profile.webp",
+    ],
+    summary:
+      "Professional print design including company profile brochures, catalogues, menus, and promotional flyers with comprehensive cover and interior layouts.",
+    tags: ["Print", "Corporate", "Brochures"],
+    link: "#",
+  },
+  {
+    id: "p7",
+    title: "Maleda Coffee Product Advertisement",
+    role: "Product Design · E-commerce",
+    thumb: "/img/Maleda Coffee.webp",
+    images: [
+      "/img/Maleda Coffee.webp",
+    ],
+    summary:
+      "Creative product advertisement design featuring coffee cup photography, packaging design, and compelling brand visuals for e-commerce marketing.",
+    tags: ["Product", "E-commerce", "Photography"],
+    link: "#",
+  },
+  {
+    id: "p8",
+    title: "Andegna Signage Design",
+    role: "Environmental Design · Corporate",
+    thumb: "/img/Andegna.webp",
+    images: [
+      "/img/Andegna.webp",
+    ],
+    summary:
+      "Professional signage design including office wall graphics, roll-up banner displays, and environmental graphics for impactful corporate communication.",
+    tags: ["Signage", "Environmental", "Corporate"],
+    link: "#",
+  },
+  {
+    id: "p9",
+    title: "Y.A.T Construction Stationery Set",
+    role: "Stationery Design · Corporate",
+    thumb: "/img/Y.A.T Construction PLC.webp",
+    images: [
+      "/img/Y.A.T Construction PLC.webp",
+    ],
+    summary:
+      "Complete stationery design including professional letterheads, business cards, envelopes, and folders for cohesive corporate identity.",
+    tags: ["Stationery", "Corporate", "Identity"],
     link: "#",
   },
 ];
@@ -113,24 +178,45 @@ const PROJECTS = [
 const TESTIMONIALS = [
   {
     quote:
-      "Bereket delivered exactly what we needed — sophisticated design with a clear strategy behind every decision.",
-    author: "Selam M.",
-    role: "Marketing Lead, Kofi Co.",
-    avatar: "/img/testimonial-1.jpg", // Add your testimonial avatar image here
+      "Working with Bereket Fikre was a game-changer for our non-profit. He created compelling visuals that helped us double donations during our annual campaign. Passionate and mission-aligned!",
+    author: "Gedyon Megersa",
+    role: "Non-Profit Director",
+    avatar: "/img/Gedy.webp",
   },
   {
     quote:
-      "Clean, fast, and beautiful. Our product finally feels intuitive. Highly recommend working with him.",
-    author: "Nahom A.",
-    role: "Founder, Nimbus SaaS",
-    avatar: "/img/testimonial-2.jpg", // Add your testimonial avatar image here
+      "From event posters to digital ads, Bereket Fikre made our product launch unforgettable. His designs grabbed attention and drove ticket sales. Will definitely work with him again!",
+    author: "Dagmawi Yeshiwas",
+    role: "Creative Director",
+    avatar: "/img/Dag.webp",
   },
   {
     quote:
-      "Professional process and exceptional results. The brand kit elevated our presence everywhere.",
-    author: "Beti T.",
-    role: "CEO, Fikir Studio",
-    avatar: "/img/testimonial-3.jpg", // Add your testimonial avatar image here
+      "Professional, quick, and always on point. He captured exactly what we envisioned and more!",
+    author: "Abenezer A",
+    role: "Digital Marketer",
+    avatar: "/img/Abenezer.webp",
+  },
+  {
+    quote:
+      "As a small business, we needed affordable yet high-quality designs. Bereket Fikre delivered stunning flyers and social media graphics that boosted our local visibility. Professional and budget-friendly!",
+    author: "Kassaye Getachew",
+    role: "Business Owner",
+    avatar: "/img/Kass.webp",
+  },
+  {
+    quote:
+      "We hired Bereket Fikre to revamp our corporate branding, and the results exceeded expectations. His strategic approach and attention to detail gave us a cohesive identity across all platforms. A+ service!",
+    author: "Micky",
+    role: "Digital Artist",
+    avatar: "/img/Miko.webp",
+  },
+  {
+    quote:
+      "Bereket understood my personal brand instantly and created a logo that reflects my values. The process was collaborative, and the result was uniquely 'me.' Exceptional talent!",
+    author: "Hayleyesus",
+    role: "Web Developer",
+    avatar: "/img/Hayle.webp",
   },
 ];
 
@@ -154,21 +240,23 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 backdrop-blur bg-[#000000]/90 border-b border-[#FFF44F]/20">
+    <header className="fixed top-0 inset-x-0 z-50 backdrop-blur bg-[#000000]/90 border-b border-[#8AEA92]/20">
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-        <a href="#home" className="font-semibold tracking-tight text-[#FFF44F] text-lg">
+        <a href="#home" className="font-semibold tracking-tight text-[#8AEA92] text-lg">
           BF
         </a>
         <nav className="hidden md:flex items-center gap-6">
           {NAV.map((item) => (
-            <a key={item.href} href={item.href} className="text-sm text-[#FFF44F]/80 hover:text-[#FFF44F] transition-colors">
+            <a key={item.href} href={item.href} className="text-sm text-[#8AEA92]/80 hover:text-[#8AEA92]">
               {item.label}
             </a>
           ))}
         </nav>
         <div className="flex items-center gap-2">
           <a href="#contact">
-            <Button size="sm" className="rounded-2xl bg-[#FFF44F] text-[#000000] hover:bg-[#FFF44F]/90 transition-colors">Contact</Button>
+            <Button size="sm" className="relative rounded-2xl bg-[#8AEA92] text-[#000000] hover:bg-[#80ADA0] transition-all duration-300 group shadow-[0_0_20px_rgba(138,234,146,0.6)] hover:shadow-[0_0_30px_rgba(138,234,146,0.8)] hover:shadow-[0_0_40px_rgba(138,234,146,0.4)]">
+              <span className="relative z-10">Contact</span>
+            </Button>
           </a>
         </div>
       </div>
@@ -812,31 +900,87 @@ const Testimonials = () => (
           className="text-center pt-12"
         >
           <div className="bg-[#8AEA92] rounded-3xl p-8 border border-[#000000]/20">
-            <h3 className="text-2xl font-bold text-[#000000] mb-6">Trusted by Amazing Clients</h3>
+            <h3 className="text-2xl font-bold text-[#000000] mb-6">Trusted by</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-70">
               <div className="text-center">
-                <div className="w-16 h-16 bg-[#000000]/20 rounded-xl mx-auto mb-2 flex items-center justify-center">
-                  <span className="text-[#000000] font-bold text-lg">K</span>
+                <div className="w-16 h-16 bg-white rounded-xl mx-auto mb-2 flex items-center justify-center p-2 shadow-sm">
+                  <img 
+                    src="/img/Andegna Logo Outline copy.webp" 
+                    alt="Andegna Furniture" 
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div 
+                    className="w-full h-full bg-[#000000]/20 rounded-lg flex items-center justify-center"
+                    style={{ display: 'none' }}
+                  >
+                    <span className="text-[#000000] font-bold text-lg">A</span>
+                  </div>
                 </div>
-                <p className="text-sm text-[#000000]/80">Kofi Co.</p>
+                <p className="text-sm text-[#000000]/80">Andegna Furniture</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-[#000000]/20 rounded-xl mx-auto mb-2 flex items-center justify-center">
-                  <span className="text-[#000000] font-bold text-lg">N</span>
+                <div className="w-16 h-16 bg-white rounded-xl mx-auto mb-2 flex items-center justify-center p-2 shadow-sm">
+                  <img 
+                    src="/img/Niqat.webp" 
+                    alt="Niqat Coffee" 
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div 
+                    className="w-full h-full bg-gradient-to-br from-[#8B4513] to-[#D2691E] rounded-lg flex items-center justify-center"
+                    style={{ display: 'none' }}
+                  >
+                    <span className="text-white font-bold text-lg">N</span>
+                  </div>
                 </div>
-                <p className="text-sm text-[#000000]/80">Nimbus SaaS</p>
+                <p className="text-sm text-[#000000]/80">Niqat Coffee</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-[#000000]/20 rounded-xl mx-auto mb-2 flex items-center justify-center">
-                  <span className="text-[#000000] font-bold text-lg">F</span>
+                <div className="w-16 h-16 bg-white rounded-xl mx-auto mb-2 flex items-center justify-center p-2 shadow-sm">
+                  <img 
+                    src="/img/Prime All.webp" 
+                    alt="Prime All Trading" 
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div 
+                    className="w-full h-full bg-gradient-to-br from-[#000000] to-[#333333] rounded-lg flex items-center justify-center"
+                    style={{ display: 'none' }}
+                  >
+                    <span className="text-white font-bold text-lg">P</span>
+                  </div>
                 </div>
-                <p className="text-sm text-[#000000]/80">Fikir Studio</p>
+                <p className="text-sm text-[#000000]/80">Prime All Trading</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-[#000000]/20 rounded-xl mx-auto mb-2 flex items-center justify-center">
-                  <span className="text-[#000000] font-bold text-lg">+</span>
+                <div className="w-16 h-16 bg-white rounded-xl mx-auto mb-2 flex items-center justify-center p-2 shadow-sm">
+                  <img 
+                    src="/img/Medavail logo.webp" 
+                    alt="Medavail Pharmaceutical" 
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div 
+                    className="w-full h-full bg-gradient-to-br from-[#8AEA92] to-[#000000] rounded-lg flex items-center justify-center"
+                    style={{ display: 'none' }}
+                  >
+                    <span className="text-white font-bold text-lg">M</span>
+                  </div>
                 </div>
-                <p className="text-sm text-[#000000]/80">More</p>
+                <p className="text-sm text-[#000000]/80">Medavail Pharmaceutical</p>
               </div>
             </div>
           </div>
@@ -1342,7 +1486,7 @@ export default function CreativeDesignerPortfolio() {
   }, []);
 
   return (
-    <main className="antialiased text-[#000000] bg-white selection:bg-[#000000] selection:text-[#8AEA92]">
+    <main className="antialiased text-[#000F33] bg-[#F8F4EF] selection:bg-[#000F33] selection:text-[#F8F4EF]">
       <Header />
       <Hero />
       <About />
