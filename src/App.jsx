@@ -264,57 +264,168 @@ const Header = () => {
   );
 };
 
-const Hero = () => (
-  <Section id="home" className="relative pt-24 pb-32 overflow-hidden">
-    {/* Background Elements */}
-    <div className="absolute inset-0 -z-10">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#8AEA92] to-white"></div>
-      
-      {/* Floating Geometric Shapes */}
-      <motion.div
-        className="absolute top-20 left-10 w-20 h-20 border border-[#000000]/20 rounded-full"
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 180, 360],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div
-        className="absolute top-40 right-20 w-16 h-16 bg-[#000000]/10 rounded-lg"
-        animate={{
-          y: [0, 20, 0],
-          rotate: [0, -90, 0],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
-      />
-      <motion.div
-        className="absolute bottom-20 left-1/4 w-12 h-12 border-2 border-[#000000]/30 rounded-full"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.5, 1, 0.5],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-      />
-      
-      {/* Decorative Lines */}
-      <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#000000]/30 to-transparent"></div>
-      <div className="absolute bottom-1/4 right-0 w-full h-px bg-gradient-to-l from-transparent via-[#000000]/30 to-transparent"></div>
-    </div>
+const Hero = () => {
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const [isPaused, setIsPaused] = React.useState(false);
+  
+  // Available background images
+  const backgroundImages = [
+    "/img/BG.webp",
+    "/img/BG-2.webp", 
+    "/img/BG-3.webp",
+    "/img/BG-4.webp",
+    "/img/BG-5.webp",
+    "/img/BG-6.webp"
+  ];
+
+  // Auto-advance slides with pause functionality
+  React.useEffect(() => {
+    if (isPaused) return;
+    
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % backgroundImages.length);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [backgroundImages.length, isPaused]);
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % backgroundImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + backgroundImages.length) % backgroundImages.length);
+  };
+
+  return (
+    <Section id="home" className="relative pt-24 pb-32 overflow-hidden">
+      {/* Sliding Background Images */}
+      <div className="absolute inset-0 -z-10">
+        {backgroundImages.map((image, index) => (
+          <motion.div
+            key={index}
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: currentSlide === index ? 1 : 0,
+              scale: currentSlide === index ? 1 : 1.1
+            }}
+            transition={{ 
+              duration: 1.5, 
+              ease: "easeInOut" 
+            }}
+            style={{
+              backgroundImage: `url(${image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          />
+        ))}
+        
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#000000]/40 via-[#000000]/20 to-[#000000]/40"></div>
+        
+        {/* Gradient overlay for better text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#8AEA92]/20 to-white/30"></div>
+      </div>
+
+      {/* Navigation Arrows */}
+      <div className="absolute inset-y-0 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
+        <button
+          onClick={prevSlide}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          className="pointer-events-auto group p-3 rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-sm transition-all duration-300 border border-white/20 hover:border-white/40"
+          aria-label="Previous slide"
+        >
+          <svg className="w-6 h-6 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        
+        <button
+          onClick={nextSlide}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          className="pointer-events-auto group p-3 rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-sm transition-all duration-300 border border-white/20 hover:border-white/40"
+          aria-label="Next slide"
+        >
+          <svg className="w-6 h-6 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Navigation Dots */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
+        {backgroundImages.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              currentSlide === index 
+                ? 'bg-[#8AEA92] scale-125 shadow-lg shadow-[#8AEA92]/50' 
+                : 'bg-white/50 hover:bg-white/70 hover:scale-110'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Slide Counter */}
+      <div className="absolute top-8 right-8 z-20">
+        <div className="px-4 py-2 rounded-full bg-black/20 backdrop-blur-sm border border-white/20">
+          <span className="text-white text-sm font-medium">
+            {currentSlide + 1} / {backgroundImages.length}
+          </span>
+        </div>
+      </div>
+
+      {/* Progress Bar */}
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-black/20 z-20">
+        <motion.div
+          className="h-full bg-gradient-to-r from-[#8AEA92] to-[#80ADA0]"
+          initial={{ width: "0%" }}
+          animate={{ width: isPaused ? "100%" : "0%" }}
+          transition={{ 
+            duration: isPaused ? 0 : 5, 
+            ease: "linear",
+            repeat: isPaused ? 0 : Infinity
+          }}
+        />
+      </div>
+
+      {/* Floating Particles Effect */}
+      <div className="absolute inset-0 pointer-events-none z-10">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-white/30 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -100, 0],
+              opacity: [0, 1, 0],
+              scale: [0, 1, 0],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+      </div>
 
     <div className="mx-auto max-w-6xl px-4 relative z-10">
       <motion.div
@@ -446,7 +557,8 @@ const Hero = () => (
       </motion.div>
     </div>
   </Section>
-);
+  );
+};
 
 const About = () => (
   <Section id="about" className="relative py-24 bg-gradient-to-b from-white to-[#8AEA92] overflow-hidden">
@@ -1238,7 +1350,7 @@ const Contact = () => (
 );
 
 const Footer = () => (
-  <footer className="relative bg-gradient-to-b from-[#000000] to-[#333333] text-[#8AEA92] overflow-hidden">
+  <footer className="relative bg-black text-[#8AEA92] overflow-hidden">
     {/* Background Elements */}
     <div className="absolute inset-0">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#8AEA92]/20 to-transparent"></div>
@@ -1327,7 +1439,7 @@ const Footer = () => (
                 <span className="text-sm">{PROFILE.email}</span>
               </motion.a>
               <motion.a
-                href={`tel:${PROFILE.phone}`}
+                href={`tel:${PROFILE.phone}op `}
                 className="flex items-center gap-3 text-[#8AEA92]/70 hover:text-[#8AEA92] transition-colors group"
                 whileHover={{ x: 5 }}
               >
