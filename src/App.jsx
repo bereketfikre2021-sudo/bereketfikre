@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";on
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Mail, Phone, ExternalLink, Palette, LayoutGrid, PenTool, Rocket, Instagram, Linkedin, Github, Dribbble, ChevronUp, MessageCircle } from "lucide-react";
+import { ArrowRight, Mail, Phone, ExternalLink, Palette, LayoutGrid, PenTool, Rocket, Instagram, Linkedin, Github, Dribbble, ChevronUp, MessageCircle, Eye, X } from "lucide-react";
 import { useForm, ValidationError } from '@formspree/react';
 
 // ——————————————————————————————————————
@@ -16,7 +16,7 @@ import { useForm, ValidationError } from '@formspree/react';
 
 const PROFILE = {
   name: "Bereket Fikre",
-  title: "Creative Designer — UI/UX, Branding, Graphics",
+  title: "Graphic Designer, Brand Builder & Design Educator",
   email: "bereketfikre2021@gmail.com",
   phone: "+251 923 988 838",
   location: "Addis Ababa, Ethiopia",
@@ -58,24 +58,11 @@ const SERVICES = [
 const PROJECTS = [
   {
     id: "p1",
-    title: "Zewd Brand Identity",
-    role: "Brand Identity",
-    thumb: "/img/Zewd.webp",
-    images: [
-      "/img/Zewd.webp",
-    ],
-    summary:
-      "Complete brand identity design featuring minimalist typography and modern visual elements. Includes logo design, color palette, and comprehensive brand guidelines.",
-    tags: ["Branding", "Identity", "Design"],
-    link: "#",
-  },
-  {
-    id: "p2",
-    title: "Swan Clothing Brand Package",
+    title: "Brand Identity - Swan Clothing",
     role: "Brand Identity · Fashion",
-    thumb: "/img/swan-clothing.webp",
+    thumb: "./img/swan-clothing.webp",
     images: [
-      "/img/swan-clothing.webp",
+      "./img/swan-clothing.webp",
     ],
     summary:
       "Complete brand identity package including logo design, product packaging mockups, and comprehensive brand guidelines for a modern fashion brand.",
@@ -83,12 +70,12 @@ const PROJECTS = [
     link: "#",
   },
   {
-    id: "p3",
+    id: "p2",
     title: "Finix Web Asset Collection",
     role: "Web Design · Digital Marketing",
-    thumb: "/img/Finix.webp",
+    thumb: "./img/Finix.webp",
     images: [
-      "/img/Finix.webp",
+      "./img/Finix.webp",
     ],
     summary:
       "Comprehensive web asset collection including website banners, digital marketing materials, and promotional graphics for engaging online presence.",
@@ -96,51 +83,12 @@ const PROJECTS = [
     link: "#",
   },
   {
-    id: "p4",
-    title: "Social Media Template Collection",
-    role: "Social Media · Templates",
-    thumb: "/img/SM.webp",
-    images: [
-      "/img/SM.webp",
-    ],
-    summary:
-      "Professional social media template collection featuring Instagram post and story design layouts for consistent brand presence across platforms.",
-    tags: ["Social", "Templates", "Design"],
-    link: "#",
-  },
-  {
-    id: "p5",
-    title: "Lensa Fashion Packaging Design",
-    role: "Packaging Design · Fashion",
-    thumb: "/img/Lensa Fashion Design & Makeup.webp",
-    images: [
-      "/img/Lensa Fashion Design & Makeup.webp",
-    ],
-    summary:
-      "Complete packaging design including branded shopping bags, product labels, and retail packaging solutions for a fashion-forward brand identity.",
-    tags: ["Packaging", "Fashion", "Retail"],
-    link: "#",
-  },
-  {
-    id: "p6",
-    title: "Company Profile Print Design",
-    role: "Print Design · Corporate",
-    thumb: "/img/Company profile.webp",
-    images: [
-      "/img/Company profile.webp",
-    ],
-    summary:
-      "Professional print design including company profile brochures, catalogues, menus, and promotional flyers with comprehensive cover and interior layouts.",
-    tags: ["Print", "Corporate", "Brochures"],
-    link: "#",
-  },
-  {
-    id: "p7",
-    title: "Maleda Coffee Product Advertisement",
+    id: "p3",
+    title: "Product Ad (Social Media Revamp) - Maleda Coffee",
     role: "Product Design · E-commerce",
-    thumb: "/img/Maleda Coffee.webp",
+    thumb: "./img/Maleda Coffee.webp",
     images: [
-      "/img/Maleda Coffee.webp",
+      "./img/Maleda Coffee.webp",
     ],
     summary:
       "Creative product advertisement design featuring coffee cup photography, packaging design, and compelling brand visuals for e-commerce marketing.",
@@ -148,12 +96,12 @@ const PROJECTS = [
     link: "#",
   },
   {
-    id: "p8",
-    title: "Andegna Signage Design",
+    id: "p4",
+    title: "Office Signage Design - Andegna Wood And Metal Works",
     role: "Environmental Design · Corporate",
-    thumb: "/img/Andegna.webp",
+    thumb: "./img/Andegna.webp",
     images: [
-      "/img/Andegna.webp",
+      "./img/Andegna.webp",
     ],
     summary:
       "Professional signage design including office wall graphics, roll-up banner displays, and environmental graphics for impactful corporate communication.",
@@ -161,16 +109,81 @@ const PROJECTS = [
     link: "#",
   },
   {
-    id: "p9",
-    title: "Y.A.T Construction Stationery Set",
-    role: "Stationery Design · Corporate",
-    thumb: "/img/Y.A.T Construction PLC.webp",
+    id: "p5",
+    title: "Company Logo Rebranding - Y.A.T Construction PLC",
+    role: "Logo Rebranding · Stationery Design · Corporate",
+    thumb: "./img/Y.A.T Construction PLC.webp",
     images: [
-      "/img/Y.A.T Construction PLC.webp",
+      "./img/Y.A.T Construction PLC.webp",
     ],
     summary:
-      "Complete stationery design including professional letterheads, business cards, envelopes, and folders for cohesive corporate identity.",
-    tags: ["Stationery", "Corporate", "Identity"],
+      "Complete logo rebranding and stationery design including professional letterheads, business cards, envelopes, and folders for cohesive corporate identity with modern brand transformation.",
+    tags: ["Logo Rebranding", "Stationery", "Corporate", "Identity"],
+    link: "#",
+  },
+  {
+    id: "p6",
+    title: "Company Logo Rebranding - Alta Counseling",
+    role: "Brand Identity · Corporate Rebranding",
+    thumb: "./img/Alta.webp",
+    images: [
+      "./img/Alta.webp",
+    ],
+    summary:
+      "Complete company logo rebranding including full stationery design, roll-up banners, and website banner. Comprehensive brand identity overhaul with modern design elements and cohesive visual system.",
+    tags: ["Rebranding", "Stationery", "Banners"],
+    link: "#",
+  },
+  {
+    id: "p7",
+    title: "Company Logo Rebranding - Medavail Pharmaceuticals",
+    role: "Brand Identity · Corporate Rebranding",
+    thumb: "./img/Medavail.webp",
+    images: [
+      "./img/Medavail.webp",
+    ],
+    summary:
+      "Complete company logo rebranding including office signage, stationery design, and social media templates. Comprehensive brand identity transformation with modern design elements and cohesive visual system for pharmaceutical company.",
+    tags: ["Rebranding", "Signage", "Stationery", "Social Media"],
+    link: "#",
+  },
+  {
+    id: "p8",
+    title: "Corporate Apparel Design – Driver's T-Shirt for Andegna Furniture",
+    role: "Apparel Design · Corporate Branding",
+    thumb: "./img/Andegna T-shirt.webp",
+    images: [
+      "./img/Andegna T-shirt.webp",
+    ],
+    summary:
+      "Branded t-shirt design for Andegna Furniture's delivery team, created to reflect professionalism, brand consistency, and day-to-day wearability. Corporate apparel design that enhances brand visibility while maintaining comfort and functionality for delivery personnel.",
+    tags: ["Apparel", "Corporate", "Branding", "Furniture"],
+    link: "#",
+  },
+  {
+    id: "p9",
+    title: "Restaurant Menu & Brochure Design - Niqat Coffee",
+    role: "Menu Design · Digital Integration · Print Design",
+    thumb: "./img/Niqat Menu.webp",
+    images: [
+      "./img/Niqat Menu.webp",
+    ],
+    summary:
+      "Complete restaurant menu design including trifold layout, QR code integration for digital menus, and modern typography. Professional menu design that enhances customer experience with both traditional print and digital accessibility options.",
+    tags: ["Menu Design", "QR Codes", "Trifold", "Restaurant", "Digital Integration"],
+    link: "#",
+  },
+  {
+    id: "p10",
+    title: "Rollup Banners for Different Companies",
+    role: "Banner Design · Print Design",
+    thumb: "./img/Rollup Banners.webp",
+    images: [
+      "./img/Rollup Banners.webp",
+    ],
+    summary:
+      "Professional rollup banner designs for various companies, featuring modern layouts, compelling visuals, and brand-consistent messaging. High-quality print-ready designs that effectively communicate company information and enhance brand visibility at events and exhibitions.",
+    tags: ["Banners", "Print Design", "Branding", "Events"],
     link: "#",
   },
 ];
@@ -181,42 +194,42 @@ const TESTIMONIALS = [
       "Working with Bereket Fikre was a game-changer for our non-profit. He created compelling visuals that helped us double donations during our annual campaign. Passionate and mission-aligned!",
     author: "Gedyon Megersa",
     role: "Non-Profit Director",
-    avatar: "/img/Gedy.webp",
+    avatar: "./img/Gedy.webp",
   },
   {
     quote:
       "From event posters to digital ads, Bereket Fikre made our product launch unforgettable. His designs grabbed attention and drove ticket sales. Will definitely work with him again!",
     author: "Dagmawi Yeshiwas",
     role: "Creative Director",
-    avatar: "/img/Dag.webp",
+    avatar: "./img/Dag.webp",
   },
   {
     quote:
       "Professional, quick, and always on point. He captured exactly what we envisioned and more!",
     author: "Abenezer A",
     role: "Digital Marketer",
-    avatar: "/img/Abenezer.webp",
+    avatar: "./img/Abenezer.webp",
   },
   {
     quote:
       "As a small business, we needed affordable yet high-quality designs. Bereket Fikre delivered stunning flyers and social media graphics that boosted our local visibility. Professional and budget-friendly!",
     author: "Kassaye Getachew",
     role: "Business Owner",
-    avatar: "/img/Kass.webp",
+    avatar: "./img/Kass.webp",
   },
   {
     quote:
       "We hired Bereket Fikre to revamp our corporate branding, and the results exceeded expectations. His strategic approach and attention to detail gave us a cohesive identity across all platforms. A+ service!",
     author: "Micky",
     role: "Digital Artist",
-    avatar: "/img/Miko.webp",
+    avatar: "./img/Miko.webp",
   },
   {
     quote:
       "Bereket understood my personal brand instantly and created a logo that reflects my values. The process was collaborative, and the result was uniquely 'me.' Exceptional talent!",
     author: "Hayleyesus",
     role: "Web Developer",
-    avatar: "/img/Hayle.webp",
+    avatar: "./img/Hayle.webp",
   },
 ];
 
@@ -226,8 +239,227 @@ const fadeInUp = {
 };
 
 const Section = ({ id, children, className = "" }) => (
-  <section id={id} className={`scroll-mt-24 ${className}`}>{children}</section>
+  <section id={id} className={`np ${className}`}>{children}</section>
 );
+
+// Privacy Policy Component
+const PrivacyPolicy = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-black border border-[#8AEA92]/20 rounded-2xl"
+      >
+        <div className="sticky top-0 bg-black border-b border-[#8AEA92]/20 p-4 flex justify-between items-center">
+          <h2 className="text-2xl font-bold text-[#8AEA92]">Privacy Policy</h2>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-[#8AEA92]/10 rounded-full transition-colors"
+          >
+            <X className="w-5 h-5 text-[#8AEA92]" />
+          </button>
+        </div>
+        
+        <div className="p-6 space-y-6 text-[#F8F4EF]">
+          <div className="bg-[#8AEA92]/5 backdrop-blur-sm rounded-2xl p-6 border border-[#8AEA92]/20">
+            <h3 className="text-xl font-bold text-[#8AEA92] mb-4">Our Commitment to You</h3>
+            <p className="text-[#F8F4EF]/90 leading-relaxed">
+              At Bereket Fikre Design Studio, your privacy is not just a legal requirement—it's a core value. 
+              We believe in transparent, ethical data practices that respect your rights and protect your information. 
+              This policy explains how we collect, use, and safeguard your personal data when you engage with our design services.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold text-[#8AEA92] mb-4">Information We Collect</h3>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-[#8AEA92]/5 backdrop-blur-sm rounded-xl p-4 border border-[#8AEA92]/20">
+                <h4 className="font-semibold text-[#8AEA92] mb-2">Contact Information</h4>
+                <ul className="space-y-1 text-sm text-[#F8F4EF]/80">
+                  <li>• Name and email address</li>
+                  <li>• Phone number (if provided)</li>
+                  <li>• Company name and position</li>
+                  <li>• Project requirements and preferences</li>
+                </ul>
+              </div>
+              <div className="bg-[#8AEA92]/5 backdrop-blur-sm rounded-xl p-4 border border-[#8AEA92]/20">
+                <h4 className="font-semibold text-[#8AEA92] mb-2">Technical Data</h4>
+                <ul className="space-y-1 text-sm text-[#F8F4EF]/80">
+                  <li>• Website usage analytics</li>
+                  <li>• Device and browser information</li>
+                  <li>• IP address (anonymized)</li>
+                  <li>• Cookies and similar technologies</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold text-[#8AEA92] mb-4">How We Use Your Information</h3>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <h4 className="font-semibold text-[#8AEA92] mb-2">Primary Purposes</h4>
+                <ul className="space-y-1 text-sm text-[#F8F4EF]/80">
+                  <li>• Deliver exceptional design services</li>
+                  <li>• Communicate about your projects</li>
+                  <li>• Provide customer support</li>
+                  <li>• Process payments securely</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-[#8AEA92] mb-2">Secondary Purposes</h4>
+                <ul className="space-y-1 text-sm text-[#F8F4EF]/80">
+                  <li>• Improve our services</li>
+                  <li>• Send relevant updates (with consent)</li>
+                  <li>• Comply with legal obligations</li>
+                  <li>• Protect against fraud</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold text-[#8AEA92] mb-4">Your Rights & Choices</h3>
+            <div className="bg-[#8AEA92]/5 backdrop-blur-sm rounded-xl p-4 border border-[#8AEA92]/20">
+              <p className="text-sm text-[#F8F4EF]/80 mb-3">
+                You have the right to access, correct, delete, restrict, or object to the processing of your personal data. 
+                To exercise any of these rights, contact us at:
+              </p>
+              <div className="space-y-1 text-sm text-[#F8F4EF]/80">
+                <p>📧 Email: bereketfikre2021@gmail.com</p>
+                <p>📱 Phone: +251 923 988 838</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center pt-4 border-t border-[#8AEA92]/20">
+            <p className="text-sm text-[#8AEA92] font-semibold">Last updated: {new Date().toLocaleDateString()}</p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+// Terms of Service Component
+const TermsOfService = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-black border border-[#8AEA92]/20 rounded-2xl"
+      >
+        <div className="sticky top-0 bg-black border-b border-[#8AEA92]/20 p-4 flex justify-between items-center">
+          <h2 className="text-2xl font-bold text-[#8AEA92]">Terms of Service</h2>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-[#8AEA92]/10 rounded-full transition-colors"
+          >
+            <X className="w-5 h-5 text-[#8AEA92]" />
+          </button>
+        </div>
+        
+        <div className="p-6 space-y-6 text-[#F8F4EF]">
+          <div className="bg-[#8AEA92]/5 backdrop-blur-sm rounded-2xl p-6 border border-[#8AEA92]/20">
+            <h3 className="text-xl font-bold text-[#8AEA92] mb-4">Welcome to Our Partnership</h3>
+            <p className="text-[#F8F4EF]/90 leading-relaxed">
+              These terms of service outline the foundation of our working relationship. Built on trust, 
+              transparency, and mutual respect, these guidelines ensure smooth collaboration and successful 
+              project outcomes. By engaging with Bereket Fikre Design Studio, you agree to these terms.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold text-[#8AEA92] mb-4">Our Services</h3>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-[#8AEA92]/5 backdrop-blur-sm rounded-xl p-4 border border-[#8AEA92]/20">
+                <h4 className="font-semibold text-[#8AEA92] mb-2">Design Services</h4>
+                <ul className="space-y-1 text-sm text-[#F8F4EF]/80">
+                  <li>• Brand identity and logo design</li>
+                  <li>• Print and digital design</li>
+                  <li>• UI/UX design services</li>
+                  <li>• Marketing materials</li>
+                  <li>• Corporate branding</li>
+                </ul>
+              </div>
+              <div className="bg-[#8AEA92]/5 backdrop-blur-sm rounded-xl p-4 border border-[#8AEA92]/20">
+                <h4 className="font-semibold text-[#8AEA92] mb-2">Consultation</h4>
+                <ul className="space-y-1 text-sm text-[#F8F4EF]/80">
+                  <li>• Brand strategy consultation</li>
+                  <li>• Design direction guidance</li>
+                  <li>• Creative problem solving</li>
+                  <li>• Project planning and scoping</li>
+                  <li>• Ongoing design support</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold text-[#8AEA92] mb-4">Payment Terms</h3>
+            <div className="grid md:grid-cols-3 gap-4">
+              <div className="bg-[#8AEA92]/5 backdrop-blur-sm rounded-xl p-4 border border-[#8AEA92]/20 text-center">
+                <h4 className="font-semibold text-[#8AEA92] mb-2">Payment Schedule</h4>
+                <p className="text-sm text-[#F8F4EF]/80">50% upfront, 50% upon completion. Milestone payments for larger projects.</p>
+              </div>
+              <div className="bg-[#8AEA92]/5 backdrop-blur-sm rounded-xl p-4 border border-[#8AEA92]/20 text-center">
+                <h4 className="font-semibold text-[#8AEA92] mb-2">Payment Terms</h4>
+                <p className="text-sm text-[#F8F4EF]/80">Net 15 days for invoices. Late fees may apply after 30 days.</p>
+              </div>
+              <div className="bg-[#8AEA92]/5 backdrop-blur-sm rounded-xl p-4 border border-[#8AEA92]/20 text-center">
+                <h4 className="font-semibold text-[#8AEA92] mb-2">Refund Policy</h4>
+                <p className="text-sm text-[#F8F4EF]/80">Refunds available within 48 hours of project start if work hasn't begun.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold text-[#8AEA92] mb-4">Intellectual Property Rights</h3>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <h4 className="font-semibold text-[#8AEA92] mb-2">Client Rights</h4>
+                <ul className="space-y-1 text-sm text-[#F8F4EF]/80">
+                  <li>• Full ownership of final deliverables</li>
+                  <li>• Right to use designs for intended purposes</li>
+                  <li>• Commercial usage rights included</li>
+                  <li>• Source files provided upon final payment</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-[#8AEA92] mb-2">Designer Rights</h4>
+                <ul className="space-y-1 text-sm text-[#F8F4EF]/80">
+                  <li>• Right to showcase work in portfolio</li>
+                  <li>• Credit attribution in case studies</li>
+                  <li>• Retention of working files and concepts</li>
+                  <li>• Protection of proprietary methods</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center pt-4 border-t border-[#8AEA92]/20">
+            <p className="text-sm text-[#F8F4EF]/80 mb-2">
+              Questions about these terms? Contact us at:
+            </p>
+            <div className="space-y-1 text-sm text-[#F8F4EF]/80">
+              <p>📧 Email: bereketfikre2021@gmail.com</p>
+              <p>📱 Phone: +251 923 988 838</p>
+            </div>
+            <p className="text-sm text-[#8AEA92] font-semibold mt-4">Last updated: {new Date().toLocaleDateString()}</p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
 
 const Header = () => {
   const NAV = [
@@ -265,424 +497,549 @@ const Header = () => {
 };
 
 const Hero = () => {
-  const [currentSlide, setCurrentSlide] = React.useState(0);
-  const [isPaused, setIsPaused] = React.useState(false);
-  
-  // Available background images
-  const backgroundImages = [
-    "/img/BG.webp",
-    "/img/BG-2.webp", 
-    "/img/BG-3.webp",
-    "/img/BG-4.webp",
-    "/img/BG-5.webp",
-    "/img/BG-6.webp"
-  ];
-
-  // Auto-advance slides with pause functionality
-  React.useEffect(() => {
-    if (isPaused) return;
-    
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % backgroundImages.length);
-    }, 5000); // Change slide every 5 seconds
-
-    return () => clearInterval(interval);
-  }, [backgroundImages.length, isPaused]);
-
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % backgroundImages.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + backgroundImages.length) % backgroundImages.length);
-  };
-
   return (
-    <Section id="home" className="relative pt-24 pb-32 overflow-hidden">
-      {/* Sliding Background Images */}
-      <div className="absolute inset-0 -z-10">
-        {backgroundImages.map((image, index) => (
-          <motion.div
-            key={index}
-            className="absolute inset-0"
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: currentSlide === index ? 1 : 0,
-              scale: currentSlide === index ? 1 : 1.1
-            }}
-            transition={{ 
-              duration: 1.5, 
-              ease: "easeInOut" 
-            }}
-            style={{
-              backgroundImage: `url(${image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
-          />
-        ))}
-        
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#000000]/40 via-[#000000]/20 to-[#000000]/40"></div>
-        
-        {/* Gradient overlay for better text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#8AEA92]/20 to-white/30"></div>
-      </div>
+    <div id="home" className="relative h-screen overflow-hidden bg-black">
+      {/* Subtle brand accent overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#8AEA92]/10 to-[#80ADA0]/10"></div>
 
-      {/* Navigation Arrows */}
-      <div className="absolute inset-y-0 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
-        <button
-          onClick={prevSlide}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          className="pointer-events-auto group p-3 rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-sm transition-all duration-300 border border-white/20 hover:border-white/40"
-          aria-label="Previous slide"
-        >
-          <svg className="w-6 h-6 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        
-        <button
-          onClick={nextSlide}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          className="pointer-events-auto group p-3 rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-sm transition-all duration-300 border border-white/20 hover:border-white/40"
-          aria-label="Next slide"
-        >
-          <svg className="w-6 h-6 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-
-      {/* Navigation Dots */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
-        {backgroundImages.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              currentSlide === index 
-                ? 'bg-[#8AEA92] scale-125 shadow-lg shadow-[#8AEA92]/50' 
-                : 'bg-white/50 hover:bg-white/70 hover:scale-110'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
-
-      {/* Slide Counter */}
-      <div className="absolute top-8 right-8 z-20">
-        <div className="px-4 py-2 rounded-full bg-black/20 backdrop-blur-sm border border-white/20">
-          <span className="text-white text-sm font-medium">
-            {currentSlide + 1} / {backgroundImages.length}
-          </span>
-        </div>
-      </div>
-
-      {/* Progress Bar */}
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-black/20 z-20">
+      {/* Floating Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Large floating circles */}
         <motion.div
-          className="h-full bg-gradient-to-r from-[#8AEA92] to-[#80ADA0]"
-          initial={{ width: "0%" }}
-          animate={{ width: isPaused ? "100%" : "0%" }}
-          transition={{ 
-            duration: isPaused ? 0 : 5, 
-            ease: "linear",
-            repeat: isPaused ? 0 : Infinity
+          className="absolute w-32 h-32 border-2 border-[#8AEA92]/20 rounded-full"
+          style={{ top: '10%', left: '5%' }}
+          animate={{
+            rotate: 360,
+            scale: [1, 1.2, 1],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+            y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
           }}
         />
-      </div>
-
-      {/* Floating Particles Effect */}
-      <div className="absolute inset-0 pointer-events-none z-10">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white/30 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -100, 0],
-              opacity: [0, 1, 0],
-              scale: [0, 1, 0],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
-      </div>
-
-    <div className="mx-auto max-w-6xl px-4 relative z-10">
-      <motion.div
-        initial="hidden"
-        animate="show"
-        variants={fadeInUp}
-        className="text-center space-y-8"
-      >
-        {/* Profile Image */}
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8, type: "spring", stiffness: 100 }}
-          className="relative mx-auto w-32 h-32 mb-8"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-[#000000] to-[#333333] rounded-full"></div>
-          <div className="absolute inset-2 bg-[#8AEA92] rounded-full overflow-hidden">
-            <img 
-              src="/img/Bereket Fikre.webp" 
-              alt="Bereket Fikre - Creative Designer"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="absolute -inset-2 bg-gradient-to-br from-[#000000]/30 to-transparent rounded-full blur-xl"></div>
-        </motion.div>
-
-        <div className="space-y-6">
-          <motion.h1 
-            className="text-6xl md:text-8xl font-bold tracking-tight text-[#000000]"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 1 }}
-          >
-            {PROFILE.name.split(' ').map((word, index) => (
-              <motion.span
-                key={word}
-                className="inline-block"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 + index * 0.2, duration: 0.8 }}
-              >
-                {word}
-                {index < PROFILE.name.split(' ').length - 1 && ' '}
-              </motion.span>
-            ))}
-          </motion.h1>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
-            className="space-y-4"
-          >
-            <p className="text-2xl md:text-3xl text-[#000000]/80 max-w-3xl mx-auto font-light">
-              {PROFILE.title}
-            </p>
-            <div className="flex items-center justify-center gap-2 text-lg text-[#000000]/60">
-              <div className="w-2 h-2 bg-[#000000] rounded-full"></div>
-              <span>{PROFILE.location}</span>
-            </div>
-          </motion.div>
-        </div>
         
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6, duration: 0.8 }}
-          className="flex flex-wrap justify-center gap-4 pt-8"
-        >
-          {PROFILE.socials.map((social, index) => (
-            <motion.a
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-6 py-3 rounded-full bg-[#000000]/10 hover:bg-[#000000]/20 transition-all duration-300 border border-[#000000]/20 hover:border-[#000000]/40"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.8 + index * 0.1, duration: 0.6 }}
-            >
-              <social.icon className="w-4 h-4 text-[#000000] group-hover:scale-110 transition-transform" />
-              <span className="text-sm font-medium text-[#000000]">{social.label}</span>
-            </motion.a>
-          ))}
-        </motion.div>
+          className="absolute w-24 h-24 bg-gradient-to-br from-[#8AEA92]/15 to-[#80ADA0]/15 rounded-full blur-sm"
+          style={{ top: '20%', right: '10%' }}
+          animate={{
+            y: [0, -40, 0],
+            x: [0, 20, 0],
+            rotate: -360,
+          }}
+          transition={{
+            y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+            x: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+            rotate: { duration: 15, repeat: Infinity, ease: "linear" }
+          }}
+        />
+
+        {/* Floating squares */}
+        <motion.div
+          className="absolute w-16 h-16 border border-[#8AEA92]/30 rotate-45"
+          style={{ bottom: '20%', left: '8%' }}
+          animate={{
+            rotate: [45, 405, 45],
+            scale: [1, 1.3, 1],
+            y: [0, -25, 0],
+          }}
+          transition={{
+            rotate: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+            scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+            y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+          }}
+        />
 
         <motion.div
+          className="absolute w-12 h-12 bg-[#80ADA0]/20 rounded-lg"
+          style={{ bottom: '30%', right: '15%' }}
+          animate={{
+            rotate: [0, 180, 360],
+            y: [0, -20, 0],
+            x: [0, 15, 0],
+          }}
+          transition={{
+            rotate: { duration: 10, repeat: Infinity, ease: "linear" },
+            y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+            x: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+          }}
+        />
+
+        {/* Floating particles */}
+        <motion.div
+          className="absolute w-3 h-3 bg-[#8AEA92]/40 rounded-full"
+          style={{ top: '15%', left: '20%' }}
+          animate={{
+            y: [0, -50, 0],
+            opacity: [0.4, 1, 0.4],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+
+        <motion.div
+          className="absolute w-2 h-2 bg-[#80ADA0]/50 rounded-full"
+          style={{ top: '60%', left: '15%' }}
+          animate={{
+            y: [0, -40, 0],
+            opacity: [0.3, 0.8, 0.3],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
+
+        <motion.div
+          className="absolute w-4 h-4 bg-[#8AEA92]/30 rounded-full"
+          style={{ top: '40%', right: '20%' }}
+          animate={{
+            y: [0, -35, 0],
+            opacity: [0.2, 0.7, 0.2],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5
+          }}
+        />
+
+        {/* Gradient orbs */}
+          <motion.div
+          className="absolute w-64 h-64 bg-gradient-to-br from-[#8AEA92]/5 to-[#80ADA0]/5 rounded-full blur-3xl"
+          style={{ top: '-10%', left: '-10%' }}
+            animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.6, 0.3],
+            rotate: [0, 180, 360],
+            }}
+            transition={{ 
+            duration: 12,
+            repeat: Infinity,
+              ease: "easeInOut" 
+            }}
+        />
+
+        <motion.div
+          className="absolute w-48 h-48 bg-gradient-to-br from-[#80ADA0]/8 to-[#8AEA92]/8 rounded-full blur-2xl"
+          style={{ bottom: '-5%', right: '-5%' }}
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.4, 0.7, 0.4],
+            rotate: [360, 180, 0],
+          }}
+          transition={{ 
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+
+        {/* Animated lines */}
+        <motion.div
+          className="absolute w-1 h-32 bg-gradient-to-b from-transparent via-[#8AEA92]/30 to-transparent"
+          style={{ top: '25%', left: '12%' }}
+          animate={{
+            scaleY: [0.5, 1.5, 0.5],
+            opacity: [0.3, 0.8, 0.3],
+          }}
+          transition={{ 
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5
+          }}
+        />
+
+          <motion.div
+          className="absolute w-1 h-24 bg-gradient-to-b from-transparent via-[#80ADA0]/40 to-transparent"
+          style={{ bottom: '35%', right: '25%' }}
+            animate={{
+            scaleY: [1, 0.3, 1],
+            opacity: [0.4, 0.9, 0.4],
+            }}
+            transition={{
+            duration: 5,
+              repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2.5
+            }}
+          />
+      </div>
+
+      {/* Content Overlay */}
+      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+      <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="max-w-4xl mx-auto space-y-8"
+        >
+          {/* Welcome Badge */}
+        <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
+          >
+            <div className="w-2 h-2 bg-[#8AEA92] rounded-full animate-pulse"></div>
+            <span className="text-white/90 text-sm font-medium">Welcome to my portfolio</span>
+        </motion.div>
+
+          {/* Main Heading */}
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.7 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight px-4"
+          >
+            {PROFILE.name}
+          </motion.h1>
+          
+          {/* Professional Title */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="text-lg sm:text-xl md:text-2xl text-[#8AEA92] font-semibold max-w-2xl mx-auto px-4"
+          >
+              {PROFILE.title}
+          </motion.p>
+
+          {/* Location */}
+          <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.2, duration: 0.8 }}
-          className="pt-12"
-        >
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="text-base sm:text-lg text-white/80 flex items-center justify-center gap-2 px-4"
+          >
+            <div className="w-1.5 h-1.5 bg-[#8AEA92] rounded-full"></div>
+            {PROFILE.location}
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.3 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4"
+          >
+            <motion.a
+              href="#work"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button
+                size="lg"
+                className="px-8 py-4 rounded-2xl bg-[#8AEA92] text-[#000000] hover:bg-[#80ADA0] font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                View My Work
+              </Button>
+            </motion.a>
           <motion.a
             href="#contact"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Button size="lg" className="group rounded-2xl bg-[#000000] text-[#8AEA92] hover:bg-[#333333] px-12 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
-              Let's Work Together
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              <Button
+                size="lg"
+                variant="outline"
+                className="px-8 py-4 rounded-2xl border-2 border-[#8AEA92] text-[#8AEA92] hover:bg-[#8AEA92] hover:text-[#000000] font-semibold text-lg transition-all duration-300"
+              >
+                Get In Touch
             </Button>
           </motion.a>
+          </motion.div>
         </motion.div>
 
         {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2.6, duration: 1 }}
+          transition={{ duration: 1, delay: 1.5 }}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         >
           <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center gap-2 text-[#000000]/60"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center"
           >
-            <span className="text-xs font-medium">Scroll to explore</span>
-            <div className="w-6 h-10 border-2 border-[#000000]/30 rounded-full flex justify-center">
               <motion.div
                 animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-1 h-3 bg-[#000000] rounded-full mt-2"
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="w-1 h-3 bg-white/60 rounded-full mt-2"
               />
-            </div>
-          </motion.div>
         </motion.div>
       </motion.div>
     </div>
-  </Section>
+    </div>
+  );
+};
+
+const CountUpNumber = ({ target }) => {
+  const [count, setCount] = React.useState(0);
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const element = document.getElementById('count-up-trigger');
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, [isVisible]);
+
+  React.useEffect(() => {
+    if (isVisible) {
+      const duration = 2000; // 2 seconds
+      const increment = target / (duration / 16); // 60fps
+      let current = 0;
+
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          setCount(target);
+          clearInterval(timer);
+        } else {
+          setCount(Math.floor(current));
+        }
+      }, 16);
+
+      return () => clearInterval(timer);
+    }
+  }, [isVisible, target]);
+
+  return (
+    <div id="count-up-trigger" className="text-3xl font-bold text-[#8AEA92] mb-2">
+      {count}+
+    </div>
   );
 };
 
 const About = () => (
-  <Section id="about" className="relative py-24 bg-gradient-to-b from-white to-[#8AEA92] overflow-hidden">
-    {/* Background Pattern */}
-    <div className="absolute inset-0 opacity-10">
-      <div className="absolute inset-0" style={{
-        backgroundImage: `radial-gradient(circle at 25% 25%, #000000 2px, transparent 2px),
-                         radial-gradient(circle at 75% 75%, #000000 2px, transparent 2px)`,
-        backgroundSize: '60px 60px'
-      }}></div>
-    </div>
-
-    <div className="mx-auto max-w-6xl px-4 relative z-10">
-      <motion.div
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-        variants={fadeInUp}
-        className="text-center space-y-12"
-      >
+  <Section id="about" className="relative py-24 bg-white">
+    <div className="mx-auto max-w-6xl px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="space-y-4"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#000000]/20 text-[#8AEA92] text-sm font-medium">
+        className="space-y-16"
+      >
+        {/* Header */}
+        <div className="text-center space-y-6">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#8AEA92]/10 border border-[#8AEA92]/20"
+          >
             <div className="w-2 h-2 bg-[#8AEA92] rounded-full"></div>
-            About Me
-          </div>
-          <h2 className="text-5xl md:text-6xl font-bold text-[#000000]">Creative Vision</h2>
+            <span className="text-[#8AEA92] font-medium text-sm">About Me</span>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-4xl md:text-5xl font-bold text-[#000000]"
+          >
+            My Story & Approach
+          </motion.h2>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-lg text-[#000000]/70 max-w-3xl mx-auto"
+          >
+            With over 5 years of experience in graphic design and brand building, I help businesses create meaningful connections through strategic design.
+          </motion.p>
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          {/* Left Column - Image and Stats */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-6 text-lg text-[#000000]/90 leading-relaxed"
+            className="space-y-8"
           >
-            <p className="text-xl">
-              I'm a creative designer passionate about crafting meaningful experiences through thoughtful design. 
-              With expertise in UI/UX, branding, and graphic design, I help businesses tell their stories in 
-              compelling and visually striking ways.
-            </p>
-            <p>
-              Based in Addis Ababa, Ethiopia, I work with clients globally to create designs that not only 
-              look beautiful but also drive results. My approach combines strategic thinking with creative 
-              execution to deliver solutions that resonate with audiences and achieve business goals.
-            </p>
-            
-            {/* Skills/Stats */}
-            <div className="grid grid-cols-2 gap-6 pt-8">
+            {/* Profile Image */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#8AEA92] to-[#80ADA0] rounded-3xl transform rotate-3"></div>
+              <div className="relative bg-white rounded-3xl p-8 shadow-2xl">
+                <img 
+                  src="./img/Bereket Fikre.webp" 
+                  alt="Bereket Fikre"
+                  className="w-full h-80 object-contain rounded-2xl"
+                />
+              </div>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-center p-4 rounded-2xl bg-[#000000]/20 border border-[#000000]/30"
+                className="text-center p-6 bg-[#8AEA92]/5 rounded-2xl border border-[#8AEA92]/10"
               >
-                <div className="text-3xl font-bold text-[#8AEA92] mb-2">50+</div>
-                <div className="text-sm text-[#000000]/80">Projects Completed</div>
+                <CountUpNumber target={50} />
+                <div className="text-sm text-[#000000]/70 font-medium mt-2">Projects Completed</div>
               </motion.div>
+              
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="text-center p-4 rounded-2xl bg-[#000000]/20 border border-[#000000]/30"
+                className="text-center p-6 bg-[#8AEA92]/5 rounded-2xl border border-[#8AEA92]/10"
               >
-                <div className="text-3xl font-bold text-[#8AEA92] mb-2">3+</div>
-                <div className="text-sm text-[#000000]/80">Years Experience</div>
+                <div className="text-4xl font-bold text-[#8AEA92]">5+</div>
+                <div className="text-sm text-[#000000]/70 font-medium mt-2">Years Experience</div>
               </motion.div>
             </div>
           </motion.div>
 
+          {/* Right Column - Content */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative"
+            className="space-y-8"
           >
-            {/* Decorative Elements */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-[#000000]/20 to-transparent rounded-full blur-xl"></div>
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-tr from-[#000000]/10 to-transparent rounded-full blur-xl"></div>
-            
-            {/* Main Content Card */}
-            <div className="relative bg-[#8AEA92] rounded-3xl p-8 shadow-2xl border border-[#000000]/20">
+            {/* Main Description */}
               <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-[#000000] to-[#333333] rounded-xl flex items-center justify-center">
-                    <Palette className="w-6 h-6 text-[#8AEA92]" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-[#000000]">Design Philosophy</h3>
-                    <p className="text-sm text-[#000000]/70">Minimalism meets functionality</p>
+              <h3 className="text-2xl font-bold text-[#000000]">Design Philosophy</h3>
+              <div className="space-y-4 text-[#000000]/80 leading-relaxed">
+                <p>
+                  I believe great design is more than just aesthetics—it's about creating meaningful connections between brands and their audiences. Every project I work on is approached with strategic thinking and creative excellence.
+                </p>
+                <p>
+                  My process combines deep understanding of your business goals with innovative design solutions. Whether it's a complete brand identity, digital marketing materials, or print design, I ensure every element serves a purpose and tells your story effectively.
+                </p>
+                <p>
+                  I work closely with clients to understand their vision, then translate that into compelling visual experiences that resonate with their target audience and drive real business results.
+                </p>
                   </div>
                 </div>
                 
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#000000] rounded-full"></div>
-                    <span className="text-[#000000]/80">User-centered design approach</span>
+            {/* Skills & Services */}
+              <div className="space-y-6">
+              <h3 className="text-2xl font-bold text-[#000000]">What I Do</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="flex items-center gap-3 p-4 bg-[#8AEA92]/5 rounded-xl">
+                  <div className="w-8 h-8 bg-[#8AEA92] rounded-lg flex items-center justify-center">
+                    <Palette className="w-4 h-4 text-white" />
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#000000] rounded-full"></div>
-                    <span className="text-[#000000]/80">Strategic brand development</span>
+                  <span className="text-[#000000] font-medium">Brand Identity</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#000000] rounded-full"></div>
-                    <span className="text-[#000000]/80">Modern, clean aesthetics</span>
+                <div className="flex items-center gap-3 p-4 bg-[#8AEA92]/5 rounded-xl">
+                  <div className="w-8 h-8 bg-[#8AEA92] rounded-lg flex items-center justify-center">
+                    <LayoutGrid className="w-4 h-4 text-white" />
+                </div>
+                  <span className="text-[#000000] font-medium">UI/UX Design</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#000000] rounded-full"></div>
-                    <span className="text-[#000000]/80">Results-driven solutions</span>
+                <div className="flex items-center gap-3 p-4 bg-[#8AEA92]/5 rounded-xl">
+                  <div className="w-8 h-8 bg-[#8AEA92] rounded-lg flex items-center justify-center">
+                    <PenTool className="w-4 h-4 text-white" />
                   </div>
+                  <span className="text-[#000000] font-medium">Print Design</span>
+                  </div>
+                <div className="flex items-center gap-3 p-4 bg-[#8AEA92]/5 rounded-xl">
+                  <div className="w-8 h-8 bg-[#8AEA92] rounded-lg flex items-center justify-center">
+                    <Rocket className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="text-[#000000] font-medium">Digital Marketing</span>
                 </div>
               </div>
             </div>
+
+            {/* Social Media Icons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="space-y-4"
+            >
+              <h4 className="text-lg font-semibold text-[#000000]">Connect With Me</h4>
+              <div className="flex flex-wrap gap-3">
+                {PROFILE.socials.map((social, index) => (
+                  <motion.a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-2 px-4 py-2 rounded-full bg-[#8AEA92]/10 hover:bg-[#8AEA92]/20 border border-[#8AEA92]/20 hover:border-[#8AEA92]/40 transition-all duration-300"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
+                  >
+                    <social.icon className="w-4 h-4 text-[#8AEA92] group-hover:scale-110 transition-transform" />
+                    <span className="text-sm font-medium text-[#000000]">{social.label}</span>
+                  </motion.a>
+                ))}
+            </div>
+            </motion.div>
+
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="pt-4"
+            >
+              <motion.a
+                href="#contact"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Button 
+                  size="lg" 
+                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#8AEA92] text-[#000000] hover:bg-[#80ADA0] font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  Let's Work Together
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </motion.a>
+            </motion.div>
           </motion.div>
         </div>
+
       </motion.div>
     </div>
   </Section>
@@ -721,7 +1078,7 @@ const Services = () => (
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {SERVICES.map((service, index) => (
             <motion.div
               key={service.title}
@@ -826,7 +1183,7 @@ const Work = () => (
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {PROJECTS.map((project, index) => (
             <motion.div
               key={project.id}
@@ -895,7 +1252,9 @@ const Work = () => (
           className="text-center pt-8"
         >
           <motion.a
-            href="#contact"
+            href="https://heyzine.com/flip-book/2e51bd7d15.html"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-[#000000] text-[#8AEA92] hover:bg-[#333333] transition-colors font-semibold shadow-lg hover:shadow-xl"
@@ -909,7 +1268,25 @@ const Work = () => (
   </Section>
 );
 
-const Testimonials = () => (
+const Testimonials = () => {
+  const [currentPage, setCurrentPage] = React.useState(0);
+  const testimonialsPerPage = 3;
+  const totalPages = Math.ceil(TESTIMONIALS.length / testimonialsPerPage);
+  
+  const currentTestimonials = TESTIMONIALS.slice(
+    currentPage * testimonialsPerPage,
+    (currentPage + 1) * testimonialsPerPage
+  );
+
+  const nextPage = () => {
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+  };
+
+  const prevPage = () => {
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+
+  return (
   <Section id="testimonials" className="relative py-24 bg-gradient-to-b from-[#8AEA92] to-white overflow-hidden">
     {/* Background Elements */}
     <div className="absolute inset-0">
@@ -942,8 +1319,8 @@ const Testimonials = () => (
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {TESTIMONIALS.map((testimonial, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {currentTestimonials.map((testimonial, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -1003,6 +1380,56 @@ const Testimonials = () => (
           ))}
         </div>
 
+        {/* Navigation Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="flex justify-center items-center gap-4 pt-8"
+        >
+          <motion.button
+            onClick={prevPage}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="p-3 rounded-full bg-[#000000]/10 hover:bg-[#000000]/20 transition-all duration-300 border border-[#000000]/20 hover:border-[#000000]/40"
+            disabled={currentPage === 0}
+          >
+            <svg className="w-6 h-6 text-[#000000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </motion.button>
+          
+          {/* Page Indicators */}
+          <div className="flex gap-2">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <motion.button
+                key={index}
+                onClick={() => setCurrentPage(index)}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  currentPage === index 
+                    ? 'bg-[#000000] scale-125' 
+                    : 'bg-[#000000]/30 hover:bg-[#000000]/50'
+                }`}
+              />
+            ))}
+          </div>
+          
+          <motion.button
+            onClick={nextPage}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="p-3 rounded-full bg-[#000000]/10 hover:bg-[#000000]/20 transition-all duration-300 border border-[#000000]/20 hover:border-[#000000]/40"
+            disabled={currentPage === totalPages - 1}
+          >
+            <svg className="w-6 h-6 text-[#000000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </motion.button>
+        </motion.div>
+
         {/* Trust Indicators */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -1012,88 +1439,236 @@ const Testimonials = () => (
           className="text-center pt-12"
         >
           <div className="bg-[#8AEA92] rounded-3xl p-8 border border-[#000000]/20">
-            <h3 className="text-2xl font-bold text-[#000000] mb-6">Trusted by</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-70">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white rounded-xl mx-auto mb-2 flex items-center justify-center p-2 shadow-sm">
+              <h3 className="text-2xl font-bold text-[#000000] mb-6">Trusted by the famous brands</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-8 items-center opacity-70">
+              <motion.div 
+                className="text-center"
+                whileHover={{ 
+                  scale: 1.1, 
+                  y: -10,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <motion.div 
+                  className="w-16 h-16 bg-[#80ADA0] rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-[#8AEA92]/20 hover:shadow-xl hover:shadow-[#8AEA92]/30 transition-all duration-300"
+                  whileHover={{
+                    boxShadow: "0 20px 40px rgba(138, 234, 146, 0.4)",
+                    transition: { duration: 0.3 }
+                  }}
+                >
                   <img 
-                    src="/img/Andegna Logo Outline copy.webp" 
+                    src="./img/Andegna Logo Outline copy.webp" 
                     alt="Andegna Furniture" 
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'flex';
                     }}
                   />
                   <div 
-                    className="w-full h-full bg-[#000000]/20 rounded-lg flex items-center justify-center"
+                    className="w-full h-full bg-[#000000]/20 flex items-center justify-center"
                     style={{ display: 'none' }}
                   >
                     <span className="text-[#000000] font-bold text-lg">A</span>
                   </div>
-                </div>
+                </motion.div>
                 <p className="text-sm text-[#000000]/80">Andegna Furniture</p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white rounded-xl mx-auto mb-2 flex items-center justify-center p-2 shadow-sm">
+              </motion.div>
+              <motion.div 
+                className="text-center"
+                whileHover={{ 
+                  scale: 1.1, 
+                  y: -10,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <motion.div 
+                  className="w-16 h-16 bg-[#80ADA0] rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-[#8AEA92]/20 hover:shadow-xl hover:shadow-[#8AEA92]/30 transition-all duration-300"
+                  whileHover={{
+                    boxShadow: "0 20px 40px rgba(138, 234, 146, 0.4)",
+                    transition: { duration: 0.3 }
+                  }}
+                >
                   <img 
-                    src="/img/Niqat.webp" 
+                    src="./img/Niqat.webp" 
                     alt="Niqat Coffee" 
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'flex';
                     }}
                   />
                   <div 
-                    className="w-full h-full bg-gradient-to-br from-[#8B4513] to-[#D2691E] rounded-lg flex items-center justify-center"
+                    className="w-full h-full bg-gradient-to-br from-[#8B4513] to-[#D2691E] flex items-center justify-center"
                     style={{ display: 'none' }}
                   >
                     <span className="text-white font-bold text-lg">N</span>
                   </div>
-                </div>
+                </motion.div>
                 <p className="text-sm text-[#000000]/80">Niqat Coffee</p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white rounded-xl mx-auto mb-2 flex items-center justify-center p-2 shadow-sm">
+              </motion.div>
+              <motion.div 
+                className="text-center"
+                whileHover={{ 
+                  scale: 1.1, 
+                  y: -10,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <motion.div 
+                  className="w-16 h-16 bg-[#80ADA0] rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-[#8AEA92]/20 hover:shadow-xl hover:shadow-[#8AEA92]/30 transition-all duration-300"
+                  whileHover={{
+                    boxShadow: "0 20px 40px rgba(138, 234, 146, 0.4)",
+                    transition: { duration: 0.3 }
+                  }}
+                >
                   <img 
-                    src="/img/Prime All.webp" 
+                    src="./img/Prime All.webp" 
                     alt="Prime All Trading" 
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'flex';
                     }}
                   />
                   <div 
-                    className="w-full h-full bg-gradient-to-br from-[#000000] to-[#333333] rounded-lg flex items-center justify-center"
+                    className="w-full h-full bg-gradient-to-br from-[#000000] to-[#333333] flex items-center justify-center"
                     style={{ display: 'none' }}
                   >
                     <span className="text-white font-bold text-lg">P</span>
                   </div>
-                </div>
+                </motion.div>
                 <p className="text-sm text-[#000000]/80">Prime All Trading</p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white rounded-xl mx-auto mb-2 flex items-center justify-center p-2 shadow-sm">
+              </motion.div>
+              <motion.div 
+                className="text-center"
+                whileHover={{ 
+                  scale: 1.1, 
+                  y: -10,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <motion.div 
+                  className="w-16 h-16 bg-[#80ADA0] rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-[#8AEA92]/20 hover:shadow-xl hover:shadow-[#8AEA92]/30 transition-all duration-300"
+                  whileHover={{
+                    boxShadow: "0 20px 40px rgba(138, 234, 146, 0.4)",
+                    transition: { duration: 0.3 }
+                  }}
+                >
                   <img 
-                    src="/img/Medavail logo.webp" 
+                    src="./img/Medavail logo.webp" 
                     alt="Medavail Pharmaceutical" 
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'flex';
                     }}
                   />
                   <div 
-                    className="w-full h-full bg-gradient-to-br from-[#8AEA92] to-[#000000] rounded-lg flex items-center justify-center"
+                    className="w-full h-full bg-gradient-to-br from-[#8AEA92] to-[#000000] flex items-center justify-center"
                     style={{ display: 'none' }}
                   >
                     <span className="text-white font-bold text-lg">M</span>
                   </div>
-                </div>
+                </motion.div>
                 <p className="text-sm text-[#000000]/80">Medavail Pharmaceutical</p>
+              </motion.div>
+              <motion.div 
+                className="text-center"
+                whileHover={{ 
+                  scale: 1.1, 
+                  y: -10,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                <motion.div 
+                  className="w-16 h-16 bg-[#80ADA0] rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-[#8AEA92]/20 hover:shadow-xl hover:shadow-[#8AEA92]/30 transition-all duration-300"
+                  whileHover={{
+                    boxShadow: "0 20px 40px rgba(138, 234, 146, 0.4)",
+                    transition: { duration: 0.3 }
+                  }}
+                >
+                  <img 
+                    src="./img/Gedylaw.webp" 
+                    alt="GEDY-LAW" 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div 
+                    className="w-full h-full bg-gradient-to-br from-[#000000] to-[#8AEA92] flex items-center justify-center"
+                    style={{ display: 'none' }}
+                  >
+                    <span className="text-white font-bold text-lg">G</span>
               </div>
+                </motion.div>
+                <p className="text-sm text-[#000000]/80">GEDY-LAW</p>
+              </motion.div>
+              <motion.div 
+                className="text-center"
+                whileHover={{ 
+                  scale: 1.1, 
+                  y: -10,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                <motion.div 
+                  className="w-16 h-16 bg-[#80ADA0] rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-[#8AEA92]/20 hover:shadow-xl hover:shadow-[#8AEA92]/30 transition-all duration-300"
+                  whileHover={{
+                    boxShadow: "0 20px 40px rgba(138, 234, 146, 0.4)",
+                    transition: { duration: 0.3 }
+                  }}
+                >
+                  <img 
+                    src="./img/PDC Logo.webp" 
+                    alt="Pioneer Diagnostic Center" 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div 
+                    className="w-full h-full bg-gradient-to-br from-[#000000] to-[#8AEA92] flex items-center justify-center"
+                    style={{ display: 'none' }}
+                  >
+                    <span className="text-white font-bold text-lg">P</span>
+                  </div>
+                </motion.div>
+                <p className="text-sm text-[#000000]/80">Pioneer Diagnostic Center</p>
+              </motion.div>
             </div>
           </div>
         </motion.div>
@@ -1101,6 +1676,7 @@ const Testimonials = () => (
     </div>
   </Section>
 );
+};
 
 const ContactForm = () => {
   const [state, handleSubmit] = useForm("mwpnwagb");
@@ -1257,7 +1833,7 @@ const Contact = () => (
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -1316,7 +1892,7 @@ const Contact = () => (
 
             <div className="bg-[#8AEA92]/10 backdrop-blur-sm rounded-3xl p-8 border border-[#8AEA92]/20">
               <h3 className="text-2xl font-bold text-[#8AEA92] mb-6">Follow Me</h3>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {PROFILE.socials.map((social) => (
                   <motion.a
                     key={social.label}
@@ -1349,7 +1925,7 @@ const Contact = () => (
   </Section>
 );
 
-const Footer = () => (
+const Footer = ({ onPrivacyClick, onTermsClick }) => (
   <footer className="relative bg-black text-[#8AEA92] overflow-hidden">
     {/* Background Elements */}
     <div className="absolute inset-0">
@@ -1361,7 +1937,7 @@ const Footer = () => (
     <div className="mx-auto max-w-6xl px-4 relative z-10">
       {/* Main Footer Content */}
       <div className="py-16">
-        <div className="grid md:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12">
           {/* Brand Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1373,7 +1949,7 @@ const Footer = () => (
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-gradient-to-br from-[#8AEA92] to-[#80ADA0] rounded-xl overflow-hidden">
                 <img 
-                  src="/img/Bereket Fikre.webp" 
+                  src="./img/Bereket Fikre.webp" 
                   alt="Bereket Fikre"
                   className="w-full h-full object-cover"
                 />
@@ -1384,7 +1960,7 @@ const Footer = () => (
               </div>
             </div>
             <p className="text-[#8AEA92]/80 leading-relaxed max-w-md">
-              Creating meaningful experiences through thoughtful design. Let's bring your vision to life with exceptional creativity and strategic thinking.
+              With 5+ years of experience in graphic design and digital marketing, I've helped numerous businesses transform their brands and achieve remarkable growth.
             </p>
             <div className="flex items-center gap-2 text-[#8AEA92]/60">
               <div className="w-2 h-2 bg-[#8AEA92]/40 rounded-full"></div>
@@ -1446,6 +2022,16 @@ const Footer = () => (
                 <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span className="text-sm">{PROFILE.phone}</span>
               </motion.a>
+              <motion.a
+                href="https://t.me/Believeandforward"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-[#8AEA92]/70 hover:text-[#8AEA92] transition-colors group"
+                whileHover={{ x: 5 }}
+              >
+                <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span className="text-sm">@Believeandforward</span>
+              </motion.a>
             </div>
           </motion.div>
         </div>
@@ -1497,7 +2083,7 @@ const Footer = () => (
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <p className="text-sm text-[#8AEA92]/80">
-              © 2024 {PROFILE.name}. All rights reserved.
+              © 2025 {PROFILE.name}. All rights reserved.
             </p>
             <div className="w-1 h-1 bg-[#8AEA92]/40 rounded-full"></div>
             <p className="text-sm text-[#8AEA92]/80">
@@ -1506,20 +2092,20 @@ const Footer = () => (
           </div>
           
           <div className="flex items-center gap-6">
-            <motion.a
-              href="#home"
-              className="text-sm text-[#8AEA92]/60 hover:text-[#8AEA92] transition-colors group"
+            <motion.button
+              onClick={onPrivacyClick}
+              className="text-sm text-[#8AEA92]/60 hover:text-[#8AEA92] transition-colors group cursor-pointer"
               whileHover={{ y: -2 }}
             >
               <span className="group-hover:underline">Privacy Policy</span>
-            </motion.a>
-            <motion.a
-              href="#contact"
-              className="text-sm text-[#8AEA92]/60 hover:text-[#8AEA92] transition-colors group"
+            </motion.button>
+            <motion.button
+              onClick={onTermsClick}
+              className="text-sm text-[#8AEA92]/60 hover:text-[#8AEA92] transition-colors group cursor-pointer"
               whileHover={{ y: -2 }}
             >
               <span className="group-hover:underline">Terms of Service</span>
-            </motion.a>
+            </motion.button>
           </div>
         </div>
       </motion.div>
@@ -1543,46 +2129,16 @@ const Footer = () => (
           <ChevronUp className="w-5 h-5 text-[#8AEA92] group-hover:scale-110 transition-transform" />
         </motion.a>
       </motion.div>
+
     </div>
   </footer>
 );
 
-const ScrollToTop = () => {
-  const [isVisible, setIsVisible] = React.useState(false);
-
-  React.useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
-  if (!isVisible) return null;
-
-  return (
-    <button
-      onClick={scrollToTop}
-      className="fixed bottom-8 right-8 p-3 rounded-full bg-[#000000] text-[#8AEA92] hover:bg-[#333333] transition-colors shadow-lg z-50"
-    >
-      <ChevronUp className="w-5 h-5" />
-    </button>
-  );
-};
 
 export default function CreativeDesignerPortfolio() {
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [isTermsOpen, setIsTermsOpen] = useState(false);
+
   React.useEffect(() => {
     const handler = (e) => {
       const target = e.target.closest('a[href^="#"]');
@@ -1606,8 +2162,20 @@ export default function CreativeDesignerPortfolio() {
       <Work />
       <Testimonials />
       <Contact />
-      <Footer />
-      <ScrollToTop />
+      <Footer 
+        onPrivacyClick={() => setIsPrivacyOpen(true)}
+        onTermsClick={() => setIsTermsOpen(true)}
+      />
+      
+      {/* Legal Modals */}
+      <PrivacyPolicy 
+        isOpen={isPrivacyOpen} 
+        onClose={() => setIsPrivacyOpen(false)} 
+      />
+      <TermsOfService 
+        isOpen={isTermsOpen} 
+        onClose={() => setIsTermsOpen(false)} 
+      />
     </main>
   );
 }
