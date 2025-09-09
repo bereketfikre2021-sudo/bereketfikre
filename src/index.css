@@ -17,28 +17,52 @@
 }
 
 @layer components {
+  /* High contrast button styles using Coolors palette */
   .btn-primary {
-    @apply bg-[#000F33] text-[#F8F4EF] hover:bg-[#000C29] transition-colors duration-300;
+    @apply bg-accent text-light hover:bg-accent-600 transition-colors duration-300 font-semibold;
   }
   
   .btn-secondary {
-    @apply bg-[#F8F4EF] text-[#000F33] hover:bg-[#F8E7D7] transition-colors duration-300;
+    @apply bg-secondary text-primary hover:bg-secondary-600 transition-colors duration-300 font-semibold;
   }
   
-  .text-primary {
-    @apply text-[#000F33];
+  .btn-accent {
+    @apply bg-accent text-light hover:bg-accent-700 transition-colors duration-300 font-semibold;
   }
   
-  .text-secondary {
-    @apply text-[#F8F4EF];
+  /* Hero buttons with high contrast */
+  .hero-btn {
+    @apply bg-accent text-light hover:bg-accent-600 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold;
   }
   
-  .bg-primary {
-    @apply bg-[#000F33];
+  .hero-btn-outline {
+    @apply border-2 border-accent text-accent hover:bg-accent hover:text-light transition-all duration-300 font-semibold;
   }
   
-  .bg-secondary {
-    @apply bg-[#F8F4EF];
+  /* High contrast text utilities */
+  .text-high-contrast {
+    @apply text-light;
+  }
+  
+  .text-medium-contrast {
+    @apply text-neutral-200;
+  }
+  
+  .text-low-contrast {
+    @apply text-neutral-400;
+  }
+  
+  /* Background utilities with proper contrast */
+  .bg-primary-dark {
+    @apply bg-primary;
+  }
+  
+  .bg-secondary-light {
+    @apply bg-secondary-50;
+  }
+  
+  .bg-accent-light {
+    @apply bg-accent-50;
   }
 }
 
