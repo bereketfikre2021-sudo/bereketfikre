@@ -39,9 +39,27 @@
     Cache-Control = "public, max-age=31536000"
 
 [[headers]]
-  for = "/*.webp"
+  for = "/img/*.webp"
   [headers.values]
     Content-Type = "image/webp"
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/img/*.svg"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/img/*.png"
+  [headers.values]
+    Content-Type = "image/png"
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/img/*.jpg"
+  [headers.values]
+    Content-Type = "image/jpeg"
     Cache-Control = "public, max-age=31536000"
 
 [[redirects]]

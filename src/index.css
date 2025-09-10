@@ -17,26 +17,26 @@
 }
 
 @layer components {
-  /* High contrast button styles using Coolors palette */
+  /* High contrast button styles using new Coolors palette */
   .btn-primary {
-    @apply bg-accent text-light hover:bg-accent-600 transition-colors duration-300 font-semibold;
+    @apply bg-accent text-primary hover:bg-accent-600 transition-colors duration-300 font-semibold shadow-lg;
   }
   
   .btn-secondary {
-    @apply bg-secondary text-primary hover:bg-secondary-600 transition-colors duration-300 font-semibold;
+    @apply bg-secondary text-light hover:bg-secondary-600 transition-colors duration-300 font-semibold shadow-lg;
   }
   
   .btn-accent {
-    @apply bg-accent text-light hover:bg-accent-700 transition-colors duration-300 font-semibold;
+    @apply bg-accent text-primary hover:bg-accent-700 transition-colors duration-300 font-semibold shadow-lg;
   }
   
   /* Hero buttons with high contrast */
   .hero-btn {
-    @apply bg-accent text-light hover:bg-accent-600 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold;
+    @apply bg-accent text-primary hover:bg-accent-600 transition-all duration-300 shadow-xl hover:shadow-2xl font-semibold;
   }
   
   .hero-btn-outline {
-    @apply border-2 border-accent text-accent hover:bg-accent hover:text-light transition-all duration-300 font-semibold;
+    @apply border-2 border-accent text-accent hover:bg-accent hover:text-primary transition-all duration-300 font-semibold;
   }
   
   /* High contrast text utilities */
@@ -45,7 +45,7 @@
   }
   
   .text-medium-contrast {
-    @apply text-neutral-200;
+    @apply text-neutral-300;
   }
   
   .text-low-contrast {
@@ -63,6 +63,22 @@
   
   .bg-accent-light {
     @apply bg-accent-50;
+  }
+  
+  /* Focus styles for accessibility */
+  .btn:focus,
+  .hero-btn:focus {
+    @apply outline-none ring-4 ring-accent/50 ring-offset-2 ring-offset-primary;
+  }
+  
+  /* High contrast card styles */
+  .card-high-contrast {
+    @apply bg-primary/90 border border-accent/30 backdrop-blur-sm;
+  }
+  
+  /* Enhanced contrast for text on accent backgrounds */
+  .text-on-accent {
+    @apply text-primary font-semibold;
   }
 }
 

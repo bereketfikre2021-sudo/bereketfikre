@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Coolors palette: #111111, #a78bfa, #7c3aed, #9ca3af, #ffffff
+        // Coolors palette: #111111, #d9ff2e, #9ca3af, #ffffff, #4f7a00
         primary: {
           DEFAULT: '#111111', // Dark background
           50: '#f8f8f8',
@@ -22,30 +22,30 @@ export default {
           900: '#050505',
         },
         secondary: {
-          DEFAULT: '#a78bfa', // Light purple
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#8b5cf6',
-          600: '#7c3aed',
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95',
+          DEFAULT: '#4f7a00', // Dark green
+          50: '#f0f9e8',
+          100: '#e1f3d1',
+          200: '#c3e7a3',
+          300: '#a5db75',
+          400: '#87cf47',
+          500: '#4f7a00',
+          600: '#3f6200',
+          700: '#2f4a00',
+          800: '#1f3200',
+          900: '#0f1a00',
         },
         accent: {
-          DEFAULT: '#7c3aed', // Darker purple
-          50: '#f3f0ff',
-          100: '#e9e5ff',
-          200: '#d6ceff',
-          300: '#b8a6ff',
-          400: '#9a7dff',
-          500: '#7c3aed',
-          600: '#6d28d9',
-          700: '#5b21b6',
-          800: '#4c1d95',
-          900: '#3b0764',
+          DEFAULT: '#d9ff2e', // Bright lime green
+          50: '#f9ffd6',
+          100: '#f3ffad',
+          200: '#edff84',
+          300: '#e7ff5b',
+          400: '#e1ff32',
+          500: '#d9ff2e',
+          600: '#aecc25',
+          700: '#83991c',
+          800: '#586613',
+          900: '#2d330a',
         },
         neutral: {
           DEFAULT: '#9ca3af', // Gray

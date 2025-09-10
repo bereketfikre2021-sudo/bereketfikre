@@ -10,30 +10,32 @@ import SEO from "./components/SEO";
 import { ArrowRight, Mail, Phone, ExternalLink, Palette, LayoutGrid, PenTool, Rocket, Instagram, Linkedin, Github, Dribbble, ChevronUp, MessageCircle, Eye, X } from "lucide-react";
 import { useForm, ValidationError } from '@formspree/react';
 
-// Import images as modules
-import swanClothing from '/img/swan-clothing.webp';
-import finix from '/img/Finix.webp';
-import maledaCoffee from '/img/Maleda Coffee.webp';
-import andegna from '/img/Andegna.webp';
-import yatConstruction from '/img/Y.A.T Construction PLC.webp';
-import alta from '/img/Alta.webp';
-import medavail from '/img/Medavail.webp';
-import andegnaTshirt from '/img/Andegna T-shirt.webp';
-import niqatMenu from '/img/Niqat Menu.webp';
-import rollupBanners from '/img/Rollup Banners.webp';
-import bereketFikre from '/img/Bereket Fikre.webp';
-import gedy from '/img/Gedy.webp';
-import dag from '/img/Dag.webp';
-import abenezer from '/img/Abenezer.webp';
-import kass from '/img/Kass.webp';
-import miko from '/img/Miko.webp';
-import hayle from '/img/Hayle.webp';
-import andegnaLogo from '/img/Andegna Logo Outline copy.webp';
-import niqat from '/img/Niqat.webp';
-import primeAll from '/img/Prime All.webp';
-import medavailLogo from '/img/Medavail logo.webp';
-import gedylaw from '/img/Gedylaw.webp';
-import pdcLogo from '/img/PDC Logo.webp';
+// Image paths for deployment
+const IMAGES = {
+  swanClothing: '/img/swan-clothing.webp',
+  finix: '/img/Finix.webp',
+  maledaCoffee: '/img/Maleda Coffee.webp',
+  andegna: '/img/Andegna.webp',
+  yatConstruction: '/img/Y.A.T Construction PLC.webp',
+  alta: '/img/Alta.webp',
+  medavail: '/img/Medavail.webp',
+  andegnaTshirt: '/img/Andegna T-shirt.webp',
+  niqatMenu: '/img/Niqat Menu.webp',
+  rollupBanners: '/img/Rollup Banners.webp',
+  bereketFikre: '/img/Bereket Fikre.webp',
+  gedy: '/img/Gedy.webp',
+  dag: '/img/Dag.webp',
+  abenezer: '/img/Abenezer.webp',
+  kass: '/img/Kass.webp',
+  miko: '/img/Miko.webp',
+  hayle: '/img/Hayle.webp',
+  andegnaLogo: '/img/Andegna Logo Outline copy.webp',
+  niqat: '/img/Niqat.webp',
+  primeAll: '/img/Prime All.webp',
+  medavailLogo: '/img/Medavail logo.webp',
+  gedylaw: '/img/Gedylaw.webp',
+  pdcLogo: '/img/PDC Logo.webp',
+};
 
 // ——————————————————————————————————————
 // Bereket Fikre — Creative Designer Portfolio (One Page)
@@ -86,9 +88,9 @@ const PROJECTS = [
     id: "p1",
     title: "Brand Identity - Swan Clothing",
     role: "Brand Identity · Fashion",
-    thumb: swanClothing,
+    thumb: IMAGES.swanClothing,
     images: [
-      swanClothing,
+      IMAGES.swanClothing,
     ],
     summary:
       "Complete brand identity package including logo design, product packaging mockups, and comprehensive brand guidelines for a modern fashion brand.",
@@ -103,9 +105,9 @@ const PROJECTS = [
     id: "p2",
     title: "Finix Web Asset Collection",
     role: "Web Design · Digital Marketing",
-    thumb: finix,
+    thumb: IMAGES.finix,
     images: [
-      finix,
+      IMAGES.finix,
     ],
     summary:
       "Comprehensive web asset collection including website banners, digital marketing materials, and promotional graphics for engaging online presence.",
@@ -120,9 +122,9 @@ const PROJECTS = [
     id: "p3",
     title: "Product Ad (Social Media Revamp) - Maleda Coffee",
     role: "Product Design · E-commerce",
-    thumb: maledaCoffee,
+    thumb: IMAGES.maledaCoffee,
     images: [
-      maledaCoffee,
+      IMAGES.maledaCoffee,
     ],
     summary:
       "Creative product advertisement design featuring coffee cup photography, packaging design, and compelling brand visuals for e-commerce marketing.",
@@ -137,9 +139,9 @@ const PROJECTS = [
     id: "p4",
     title: "Office Signage Design - Andegna Wood And Metal Works",
     role: "Environmental Design · Corporate",
-    thumb: andegna,
+    thumb: IMAGES.andegna,
     images: [
-      andegna,
+      IMAGES.andegna,
     ],
     summary:
       "Professional signage design including office wall graphics, roll-up banner displays, and environmental graphics for impactful corporate communication.",
@@ -154,9 +156,9 @@ const PROJECTS = [
     id: "p5",
     title: "Company Logo Rebranding - Y.A.T Construction PLC",
     role: "Logo Rebranding · Stationery Design · Corporate",
-    thumb: yatConstruction,
+    thumb: IMAGES.yatConstruction,
     images: [
-      yatConstruction,
+      IMAGES.yatConstruction,
     ],
     summary:
       "Complete logo rebranding and stationery design including professional letterheads, business cards, envelopes, and folders for cohesive corporate identity with modern brand transformation.",
@@ -171,9 +173,9 @@ const PROJECTS = [
     id: "p6",
     title: "Company Logo Rebranding - Alta Counseling",
     role: "Brand Identity · Corporate Rebranding",
-    thumb: alta,
+    thumb: IMAGES.alta,
     images: [
-      alta,
+      IMAGES.alta,
     ],
     summary:
       "Complete company logo rebranding including full stationery design, roll-up banners, and website banner. Comprehensive brand identity overhaul with modern design elements and cohesive visual system.",
@@ -188,9 +190,9 @@ const PROJECTS = [
     id: "p7",
     title: "Company Logo Rebranding - Medavail Pharmaceuticals",
     role: "Brand Identity · Corporate Rebranding",
-    thumb: medavail,
+    thumb: IMAGES.medavail,
     images: [
-      medavail,
+      IMAGES.medavail,
     ],
     summary:
       "Complete company logo rebranding including office signage, stationery design, and social media templates. Comprehensive brand identity transformation with modern design elements and cohesive visual system for pharmaceutical company.",
@@ -205,9 +207,9 @@ const PROJECTS = [
     id: "p8",
     title: "Corporate Apparel Design – Driver's T-Shirt for Andegna Furniture",
     role: "Apparel Design · Corporate Branding",
-    thumb: andegnaTshirt,
+    thumb: IMAGES.andegnaTshirt,
     images: [
-      andegnaTshirt,
+      IMAGES.andegnaTshirt,
     ],
     summary:
       "Branded t-shirt design for Andegna Furniture's delivery team, created to reflect professionalism, brand consistency, and day-to-day wearability. Corporate apparel design that enhances brand visibility while maintaining comfort and functionality for delivery personnel.",
@@ -222,9 +224,9 @@ const PROJECTS = [
     id: "p9",
     title: "Restaurant Menu & Brochure Design - Niqat Coffee",
     role: "Menu Design · Digital Integration · Print Design",
-    thumb: niqatMenu,
+    thumb: IMAGES.niqatMenu,
     images: [
-      niqatMenu,
+      IMAGES.niqatMenu,
     ],
     summary:
       "Complete restaurant menu design including trifold layout, QR code integration for digital menus, and modern typography. Professional menu design that enhances customer experience with both traditional print and digital accessibility options.",
@@ -239,9 +241,9 @@ const PROJECTS = [
     id: "p10",
     title: "Rollup Banners for Different Companies",
     role: "Banner Design · Print Design",
-    thumb: rollupBanners,
+    thumb: IMAGES.rollupBanners,
     images: [
-      rollupBanners,
+      IMAGES.rollupBanners,
     ],
     summary:
       "Professional rollup banner designs for various companies, featuring modern layouts, compelling visuals, and brand-consistent messaging. High-quality print-ready designs that effectively communicate company information and enhance brand visibility at events and exhibitions.",
@@ -260,42 +262,42 @@ const TESTIMONIALS = [
       "Working with Bereket Fikre was a game-changer for our non-profit. He created compelling visuals that helped us double donations during our annual campaign. Passionate and mission-aligned!",
     author: "Gedyon Megersa",
     role: "Non-Profit Director",
-    avatar: gedy,
+    avatar: IMAGES.gedy,
   },
   {
     quote:
       "From event posters to digital ads, Bereket Fikre made our product launch unforgettable. His designs grabbed attention and drove ticket sales. Will definitely work with him again!",
     author: "Dagmawi Yeshiwas",
     role: "Creative Director",
-    avatar: dag,
+    avatar: IMAGES.dag,
   },
   {
     quote:
       "Professional, quick, and always on point. He captured exactly what we envisioned and more!",
     author: "Abenezer A",
     role: "Digital Marketer",
-    avatar: abenezer,
+    avatar: IMAGES.abenezer,
   },
   {
     quote:
       "As a small business, we needed affordable yet high-quality designs. Bereket Fikre delivered stunning flyers and social media graphics that boosted our local visibility. Professional and budget-friendly!",
     author: "Kassaye Getachew",
     role: "Business Owner",
-    avatar: kass,
+    avatar: IMAGES.kass,
   },
   {
     quote:
       "We hired Bereket Fikre to revamp our corporate branding, and the results exceeded expectations. His strategic approach and attention to detail gave us a cohesive identity across all platforms. A+ service!",
     author: "Micky",
     role: "Digital Artist",
-    avatar: miko,
+    avatar: IMAGES.miko,
   },
   {
     quote:
       "Bereket understood my personal brand instantly and created a logo that reflects my values. The process was collaborative, and the result was uniquely 'me.' Exceptional talent!",
     author: "Hayleyesus",
     role: "Web Developer",
-    avatar: hayle,
+    avatar: IMAGES.hayle,
   },
 ];
 
@@ -672,8 +674,8 @@ const Header = () => {
   return (
     <header className="fixed top-0 inset-x-0 z-50 backdrop-blur bg-primary-dark/95 border-b border-accent/20 shadow-lg">
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-        <a href="#home" className="font-bold tracking-tight text-light text-xl hover:text-accent transition-colors">
-          BF
+        <a href="#home" className="flex items-center hover:opacity-80 transition-opacity">
+          <img src="/img/Logo.svg" alt="Logo" className="h-12 w-auto" />
         </a>
         <nav className="hidden md:flex items-center gap-6">
           {NAV.map((item) => (
@@ -881,7 +883,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 backdrop-blur-sm border border-secondary/30"
           >
-            <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
+            <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
             <span className="text-accent text-sm font-medium">Welcome to my portfolio</span>
         </motion.div>
 
@@ -930,7 +932,7 @@ const Hero = () => {
             >
               <Button
                 size="lg"
-                className="px-8 py-4 rounded-2xl bg-accent text-light hover:bg-accent-600 font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 focus:ring-offset-primary-dark"
+                className="px-8 py-4 rounded-2xl bg-accent text-primary hover:bg-accent-600 font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 focus:ring-offset-primary-dark"
               >
                 View My Work
               </Button>
@@ -943,7 +945,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="px-8 py-4 rounded-2xl border-2 border-accent text-accent hover:bg-accent hover:text-light font-semibold text-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 focus:ring-offset-primary-dark"
+                className="px-8 py-4 rounded-2xl border-2 border-accent text-accent hover:bg-accent hover:text-primary font-semibold text-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 focus:ring-offset-primary-dark"
               >
                 Get In Touch
             </Button>
@@ -1003,7 +1005,7 @@ const CountUpNumber = ({ target }) => {
 
   React.useEffect(() => {
     if (isVisible) {
-      const duration = 2000; // 2 seconds
+      const duration = 800; // 0.8 seconds
       const increment = target / (duration / 16); // 60fps
       let current = 0;
 
@@ -1087,7 +1089,7 @@ const About = () => (
               <div className="absolute inset-0 bg-accent rounded-3xl transform rotate-3"></div>
               <div className="relative bg-light rounded-3xl p-8 shadow-2xl">
                 <img 
-                  src={bereketFikre} 
+                  src={IMAGES.bereketFikre} 
                   alt="Bereket Fikre"
                   className="w-full h-80 object-contain rounded-2xl"
                 />
@@ -1264,7 +1266,7 @@ const Services = () => (
             What I Do
           </div>
           <h2 className="text-5xl md:text-6xl font-bold text-accent">Services</h2>
-          <p className="text-xl text-secondary max-w-2xl mx-auto">
+          <p className="text-xl text-neutral-300 max-w-2xl mx-auto">
             Comprehensive design solutions tailored to your unique needs
           </p>
         </motion.div>
@@ -1280,26 +1282,26 @@ const Services = () => (
               whileHover={{ y: -5 }}
               className="group"
             >
-              <Card className="h-full border-primary/20 hover:border-primary/40 transition-all duration-300 group-hover:shadow-xl bg-accent/30 backdrop-blur-sm">
+              <Card className="h-full border-accent/20 hover:border-accent/40 transition-all duration-300 group-hover:shadow-xl bg-primary/90 backdrop-blur-sm">
                 <CardHeader className="pb-4">
                   <motion.div
-                    className="w-16 h-16 bg-gradient-to-br from-primary to-primary-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+                    className="w-16 h-16 bg-gradient-to-br from-accent to-accent-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
                     whileHover={{ rotate: 5 }}
                   >
-                    <service.icon className="w-8 h-8 text-accent" />
+                    <service.icon className="w-8 h-8 text-primary" />
                   </motion.div>
-                  <CardTitle className="text-xl group-hover:text-primary transition-colors text-primary">
+                  <CardTitle className="text-xl group-hover:text-accent transition-colors text-light">
                     {service.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-secondary mb-6 leading-relaxed">{service.desc}</p>
+                  <p className="text-neutral-300 mb-6 leading-relaxed">{service.desc}</p>
                   <div className="flex flex-wrap gap-2">
                     {service.tags.map((tag) => (
                       <Badge 
                         key={tag} 
                         variant="outline" 
-                        className="text-xs border-primary/30 text-secondary hover:bg-primary/10 transition-colors"
+                        className="text-xs border-accent/30 text-accent hover:bg-accent/10 transition-colors"
                       >
                         {tag}
                       </Badge>
@@ -1321,7 +1323,7 @@ const Services = () => (
         >
           <div className="bg-primary rounded-3xl p-8 text-center text-accent">
             <h3 className="text-2xl font-bold mb-4">Ready to Start Your Project?</h3>
-            <p className="text-secondary mb-6 max-w-2xl mx-auto">
+            <p className="text-neutral-300 mb-6 max-w-2xl mx-auto">
               Let's discuss how I can help bring your vision to life with exceptional design solutions.
             </p>
             <motion.a
@@ -1329,7 +1331,7 @@ const Services = () => (
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button size="lg" className="bg-secondary text-primary hover:bg-secondary/80 px-8 py-3 rounded-2xl font-semibold focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:ring-offset-2 focus:ring-offset-primary">
+              <Button size="lg" className="bg-secondary text-light hover:bg-secondary/80 px-8 py-3 rounded-2xl font-semibold focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:ring-offset-2 focus:ring-offset-primary">
                 Get Started Today
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
@@ -1356,14 +1358,14 @@ const Work = () => {
   };
 
   return (
-  <Section id="work" className="relative py-24 bg-accent overflow-hidden">
+  <Section id="work" className="relative py-24 bg-neutral overflow-hidden">
     {/* Magical Background Elements */}
     <div className="absolute inset-0 pointer-events-none">
       {/* Floating Sparkles */}
       {[...Array(30)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 bg-primary rounded-full"
+          className="absolute w-1 h-1 bg-accent rounded-full"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
@@ -1385,7 +1387,7 @@ const Work = () => {
 
       {/* Magical Orbs */}
       <motion.div
-        className="absolute w-96 h-96 bg-gradient-to-r from-primary/15 via-secondary/10 to-primary/15 rounded-full blur-3xl"
+        className="absolute w-96 h-96 bg-gradient-to-r from-accent/15 via-secondary/10 to-accent/15 rounded-full blur-3xl"
         style={{ top: '10%', right: '-10%' }}
         animate={{
           scale: [1, 1.3, 1],
@@ -1400,7 +1402,7 @@ const Work = () => {
       />
 
       <motion.div
-        className="absolute w-80 h-80 bg-gradient-to-l from-secondary/15 via-primary/10 to-secondary/15 rounded-full blur-3xl"
+        className="absolute w-80 h-80 bg-gradient-to-l from-secondary/15 via-accent/10 to-secondary/15 rounded-full blur-3xl"
         style={{ bottom: '10%', left: '-10%' }}
         animate={{
           scale: [1.2, 1, 1.2],
@@ -1520,7 +1522,7 @@ const Work = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 text-accent text-sm font-medium border border-primary/30 shadow-lg"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-accent/20 via-accent/30 to-accent/20 text-primary text-sm font-medium border border-accent/30 shadow-lg"
           >
             <motion.div
               className="w-2 h-2 bg-primary rounded-full"
@@ -1542,7 +1544,7 @@ const Work = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary-dark via-accent to-primary-dark bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl font-bold text-primary"
           >
             Featured Work
           </motion.h2>
@@ -1552,7 +1554,7 @@ const Work = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6 }}
-            className="text-xl text-neutral-600 max-w-2xl mx-auto"
+            className="text-xl text-primary/80 max-w-2xl mx-auto"
           >
             A showcase of my recent projects and creative solutions
           </motion.p>
@@ -1570,9 +1572,9 @@ const Work = () => {
               className="group relative"
             >
               {/* Magical Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-accent/20 via-secondary/20 to-accent/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
               
-              <Card className="relative overflow-hidden border-2 border-primary/20 hover:border-primary/60 transition-all duration-500 group-hover:shadow-2xl bg-gradient-to-br from-accent/40 via-accent/20 to-accent/40 backdrop-blur-sm group-hover:bg-gradient-to-br group-hover:from-accent/60 group-hover:via-accent/40 group-hover:to-accent/60">
+              <Card className="relative overflow-hidden border-2 border-primary/20 hover:border-accent/60 transition-all duration-500 group-hover:shadow-2xl bg-gradient-to-br from-light/90 via-light/80 to-light/90 backdrop-blur-sm group-hover:bg-gradient-to-br group-hover:from-light group-hover:via-light/90 group-hover:to-light">
                 {/* Shimmer Effect */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100"
@@ -1595,7 +1597,7 @@ const Work = () => {
                   />
                   
                   {/* Magical Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-accent/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
                   {/* Floating Sparkles on Hover */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -1624,11 +1626,11 @@ const Work = () => {
                   
                   <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110">
                     <motion.div
-                      className="w-12 h-12 bg-gradient-to-br from-primary to-primary-600 rounded-full flex items-center justify-center shadow-lg"
+                      className="w-12 h-12 bg-gradient-to-br from-accent to-accent-600 rounded-full flex items-center justify-center shadow-lg"
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.5 }}
                     >
-                      <ExternalLink className="w-5 h-5 text-accent" />
+                      <ExternalLink className="w-5 h-5 text-primary" />
                     </motion.div>
                   </div>
                 </div>
@@ -1637,14 +1639,14 @@ const Work = () => {
                   <div className="space-y-4">
                     <div>
                       <motion.h3
-                        className="font-bold text-xl text-primary-dark group-hover:text-accent transition-colors duration-300"
+                        className="font-bold text-xl text-primary group-hover:text-accent transition-colors duration-300"
                         whileHover={{ x: 5 }}
                       >
                         {project.title}
                       </motion.h3>
-                      <p className="text-sm text-neutral-600 font-medium">{project.role}</p>
+                      <p className="text-sm text-primary/70 font-medium">{project.role}</p>
                     </div>
-                    <p className="text-neutral-600 leading-relaxed">{project.summary}</p>
+                    <p className="text-primary/80 leading-relaxed">{project.summary}</p>
                     <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag, tagIndex) => (
                         <motion.div
@@ -1657,7 +1659,7 @@ const Work = () => {
                         >
                           <Badge 
                           variant="outline" 
-                            className="text-xs border-primary/40 text-primary hover:bg-primary/10 hover:border-primary/60 transition-all duration-300 cursor-pointer"
+                            className="text-xs border-accent/40 text-primary hover:bg-accent/10 hover:border-accent/60 transition-all duration-300 cursor-pointer"
                         >
                           {tag}
                         </Badge>
@@ -1666,7 +1668,7 @@ const Work = () => {
                     </div>
                     <motion.button
                       onClick={() => openProjectModal(project)}
-                      className="inline-flex items-center gap-2 text-sm font-medium text-primary-dark hover:text-accent group/link transition-colors duration-300 cursor-pointer"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-accent group/link transition-colors duration-300 cursor-pointer"
                       whileHover={{ x: 8, scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -1699,11 +1701,11 @@ const Work = () => {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05, y: -3 }}
             whileTap={{ scale: 0.95 }}
-            className="group relative inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-gradient-to-r from-primary via-primary-600 to-primary text-accent hover:from-primary-600 hover:via-primary hover:to-primary-600 transition-all duration-300 font-semibold shadow-2xl hover:shadow-3xl focus:outline-none focus:ring-4 focus:ring-primary/20 focus:ring-offset-2 focus:ring-offset-accent overflow-hidden"
+            className="group relative inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-gradient-to-r from-accent via-accent-600 to-accent text-primary hover:from-accent-600 hover:via-accent hover:to-accent-600 transition-all duration-300 font-semibold shadow-2xl hover:shadow-3xl focus:outline-none focus:ring-4 focus:ring-accent/20 focus:ring-offset-2 focus:ring-offset-neutral overflow-hidden"
           >
             {/* Animated Background */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-secondary via-primary to-secondary opacity-0 group-hover:opacity-20"
+              className="absolute inset-0 bg-gradient-to-r from-secondary via-accent to-secondary opacity-0 group-hover:opacity-20"
               animate={{
                 x: ['-100%', '100%'],
               }}
@@ -1783,7 +1785,7 @@ const Testimonials = () => {
             Testimonials
           </div>
           <h2 className="text-5xl md:text-6xl font-bold text-accent">What Clients Say</h2>
-          <p className="text-xl text-secondary max-w-2xl mx-auto">
+          <p className="text-xl text-neutral-300 max-w-2xl mx-auto">
             Hear from the amazing people I've had the pleasure to work with
           </p>
         </motion.div>
@@ -1799,24 +1801,24 @@ const Testimonials = () => {
               whileHover={{ y: -5 }}
               className="group"
             >
-              <Card className="h-full border-primary/20 hover:border-primary/40 transition-all duration-300 group-hover:shadow-xl bg-accent/30 backdrop-blur-sm">
+              <Card className="h-full border-accent/20 hover:border-accent/40 transition-all duration-300 group-hover:shadow-xl bg-primary/90 backdrop-blur-sm">
                 <CardContent className="p-8">
                   <div className="space-y-6">
                     {/* Quote Icon */}
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-600 rounded-xl flex items-center justify-center">
-                      <svg className="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                    <div className="w-12 h-12 bg-gradient-to-br from-accent to-accent-600 rounded-xl flex items-center justify-center">
+                      <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
                       </svg>
                     </div>
                     
-                    <blockquote className="text-secondary text-lg leading-relaxed">
+                    <blockquote className="text-light text-lg leading-relaxed">
                       "{testimonial.quote}"
                     </blockquote>
                     
-                    <div className="pt-4 border-t border-primary/20">
+                    <div className="pt-4 border-t border-accent/20">
                       <div className="flex items-center gap-4">
                         {/* Avatar Image */}
-                        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary flex-shrink-0">
+                        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-accent flex-shrink-0">
                           <img 
                             src={testimonial.avatar} 
                             alt={`${testimonial.author} avatar`}
@@ -1828,7 +1830,7 @@ const Testimonials = () => {
                             }}
                           />
                           <div 
-                            className="w-full h-full bg-gradient-to-br from-primary to-primary-600 flex items-center justify-center text-accent font-semibold text-sm"
+                            className="w-full h-full bg-gradient-to-br from-accent to-accent-600 flex items-center justify-center text-primary font-semibold text-sm"
                             style={{ display: 'none' }}
                           >
                             {testimonial.author.split(' ').map(n => n[0]).join('')}
@@ -1837,8 +1839,8 @@ const Testimonials = () => {
                         
                         {/* Author Info */}
                         <div>
-                          <p className="font-semibold text-primary text-lg">{testimonial.author}</p>
-                          <p className="text-sm text-secondary">{testimonial.role}</p>
+                          <p className="font-semibold text-light text-lg">{testimonial.author}</p>
+                          <p className="text-sm text-accent">{testimonial.role}</p>
                         </div>
                       </div>
                     </div>
@@ -1861,10 +1863,10 @@ const Testimonials = () => {
             onClick={prevPage}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="p-3 rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-300 border border-primary/20 hover:border-primary/40"
+            className="p-3 rounded-full bg-accent/10 hover:bg-accent/20 transition-all duration-300 border border-accent/20 hover:border-accent/40"
             disabled={currentPage === 0}
           >
-            <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </motion.button>
@@ -1879,8 +1881,8 @@ const Testimonials = () => {
                 whileTap={{ scale: 0.9 }}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   currentPage === index 
-                    ? 'bg-primary scale-125' 
-                    : 'bg-primary/30 hover:bg-primary/50'
+                    ? 'bg-accent scale-125' 
+                    : 'bg-accent/30 hover:bg-accent/50'
                 }`}
               />
             ))}
@@ -1890,10 +1892,10 @@ const Testimonials = () => {
             onClick={nextPage}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="p-3 rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-300 border border-primary/20 hover:border-primary/40"
+            className="p-3 rounded-full bg-accent/10 hover:bg-accent/20 transition-all duration-300 border border-accent/20 hover:border-accent/40"
             disabled={currentPage === totalPages - 1}
           >
-            <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </motion.button>
@@ -2056,7 +2058,7 @@ const Testimonials = () => {
                   }}
                 >
                   <img 
-                    src={andegnaLogo} 
+                    src={IMAGES.andegnaLogo} 
                     alt="Andegna Furniture" 
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -2097,7 +2099,7 @@ const Testimonials = () => {
                   }}
                 >
                   <img 
-                    src={niqat} 
+                    src={IMAGES.niqat} 
                     alt="Niqat Coffee" 
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -2138,7 +2140,7 @@ const Testimonials = () => {
                   }}
                 >
                   <img 
-                    src={primeAll} 
+                    src={IMAGES.primeAll} 
                     alt="Prime All Trading" 
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -2176,7 +2178,7 @@ const Testimonials = () => {
                   }}
                 >
                   <img 
-                    src={medavailLogo} 
+                    src={IMAGES.medavailLogo} 
                     alt="Medavail Pharmaceutical" 
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -2217,7 +2219,7 @@ const Testimonials = () => {
                   }}
                 >
                   <img 
-                    src={gedylaw} 
+                    src={IMAGES.gedylaw} 
                     alt="GEDY-LAW" 
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -2258,7 +2260,7 @@ const Testimonials = () => {
                   }}
                 >
                   <img 
-                    src={pdcLogo} 
+                    src={IMAGES.pdcLogo} 
                     alt="Pioneer Diagnostic Center" 
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -2299,7 +2301,7 @@ const ContactForm = () => {
           {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-secondary rounded-full"
+              className="absolute w-2 h-2 bg-accent rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -2858,7 +2860,7 @@ const Contact = () => (
 );
 
 const Footer = ({ onPrivacyClick, onTermsClick }) => (
-  <footer className="relative bg-primary text-secondary overflow-hidden">
+  <footer className="relative bg-primary text-neutral-300 overflow-hidden">
     {/* Background Elements */}
     <div className="absolute inset-0">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
@@ -2879,23 +2881,23 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
             className="md:col-span-2 space-y-6"
           >
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-600 rounded-xl overflow-hidden">
+              <div className="w-12 h-12 bg-gradient-to-br from-accent to-accent-600 rounded-xl overflow-hidden">
                 <img 
-                  src={bereketFikre} 
+                  src={IMAGES.bereketFikre} 
                   alt="Bereket Fikre"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-secondary">{PROFILE.name}</h3>
-                <p className="text-secondary/70 text-sm">Creative Designer</p>
+                <h3 className="text-xl font-bold text-light">{PROFILE.name}</h3>
+                <p className="text-neutral-400 text-sm">Creative Designer</p>
               </div>
             </div>
-            <p className="text-secondary/80 leading-relaxed max-w-md">
+            <p className="text-neutral-300 leading-relaxed max-w-md">
               With 5+ years of experience in graphic design and digital marketing, I've helped numerous businesses transform their brands and achieve remarkable growth.
             </p>
-            <div className="flex items-center gap-2 text-secondary/60">
-              <div className="w-2 h-2 bg-secondary/60 rounded-full"></div>
+            <div className="flex items-center gap-2 text-neutral-400">
+              <div className="w-2 h-2 bg-accent rounded-full"></div>
               <span className="text-sm">{PROFILE.location}</span>
             </div>
           </motion.div>
@@ -2908,7 +2910,7 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
             transition={{ duration: 0.6, delay: 0.1 }}
             className="space-y-6"
           >
-            <h4 className="text-lg font-semibold text-secondary">Quick Links</h4>
+            <h4 className="text-lg font-semibold text-light">Quick Links</h4>
             <div className="space-y-3">
               {[
                 { label: "About", href: "#about" },
@@ -2919,7 +2921,7 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
                 <motion.a
                   key={link.label}
                   href={link.href}
-                  className="block text-secondary/70 hover:text-secondary transition-colors group"
+                  className="block text-neutral-400 hover:text-accent transition-colors group"
                   whileHover={{ x: 5 }}
                 >
                   <span className="group-hover:underline">{link.label}</span>
@@ -2936,11 +2938,11 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-6"
           >
-            <h4 className="text-lg font-semibold text-secondary">Get In Touch</h4>
+            <h4 className="text-lg font-semibold text-light">Get In Touch</h4>
             <div className="space-y-4">
               <motion.a
                 href={`mailto:${PROFILE.email}`}
-                className="flex items-center gap-3 text-secondary/70 hover:text-secondary transition-colors group"
+                className="flex items-center gap-3 text-neutral-400 hover:text-accent transition-colors group"
                 whileHover={{ x: 5 }}
               >
                 <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
@@ -2948,7 +2950,7 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
               </motion.a>
               <motion.a
                 href={`tel:${PROFILE.phone}op `}
-                className="flex items-center gap-3 text-secondary/70 hover:text-secondary transition-colors group"
+                className="flex items-center gap-3 text-neutral-400 hover:text-accent transition-colors group"
                 whileHover={{ x: 5 }}
               >
                 <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
@@ -2958,7 +2960,7 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
                 href="https://t.me/Believeandforward"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-secondary/70 hover:text-secondary transition-colors group"
+                className="flex items-center gap-3 text-neutral-400 hover:text-accent transition-colors group"
                 whileHover={{ x: 5 }}
               >
                 <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
@@ -2979,8 +2981,8 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
       >
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <h4 className="text-lg font-semibold text-secondary mb-4">Follow My Journey</h4>
-            <p className="text-secondary/70 text-sm">Stay updated with my latest work and creative insights</p>
+            <h4 className="text-lg font-semibold text-light mb-4">Follow My Journey</h4>
+            <p className="text-neutral-400 text-sm">Stay updated with my latest work and creative insights</p>
           </div>
           <div className="flex items-center gap-4">
             {PROFILE.socials.map((social, index) => (
@@ -2989,7 +2991,7 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group p-3 rounded-2xl bg-primary/5 hover:bg-primary/10 transition-all duration-300 border border-primary/10 hover:border-primary/20"
+                className="group p-3 rounded-2xl bg-accent/5 hover:bg-accent/10 transition-all duration-300 border border-accent/10 hover:border-accent/20"
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
@@ -2997,7 +2999,7 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
               >
-                <social.icon className="w-5 h-5 text-secondary group-hover:scale-110 transition-transform" />
+                <social.icon className="w-5 h-5 text-accent group-hover:scale-110 transition-transform" />
               </motion.a>
             ))}
           </div>
@@ -3014,11 +3016,11 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
       >
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <p className="text-sm text-secondary/80">
+            <p className="text-sm text-neutral-400">
               © 2025 {PROFILE.name}. All rights reserved.
             </p>
-            <div className="w-1 h-1 bg-secondary/60 rounded-full"></div>
-            <p className="text-sm text-secondary/80">
+            <div className="w-1 h-1 bg-accent rounded-full"></div>
+            <p className="text-sm text-neutral-400">
               Made with ❤️ in {PROFILE.location}
             </p>
           </div>
@@ -3026,14 +3028,14 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
           <div className="flex items-center gap-6">
             <motion.button
               onClick={onPrivacyClick}
-              className="text-sm text-secondary/60 hover:text-secondary transition-colors group cursor-pointer"
+              className="text-sm text-neutral-400 hover:text-accent transition-colors group cursor-pointer"
               whileHover={{ y: -2 }}
             >
               <span className="group-hover:underline">Privacy Policy</span>
             </motion.button>
             <motion.button
               onClick={onTermsClick}
-              className="text-sm text-secondary/60 hover:text-secondary transition-colors group cursor-pointer"
+              className="text-sm text-neutral-400 hover:text-accent transition-colors group cursor-pointer"
               whileHover={{ y: -2 }}
             >
               <span className="group-hover:underline">Terms of Service</span>
@@ -3052,13 +3054,13 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
       >
         <motion.a
           href="#home"
-          className="group flex items-center justify-center w-12 h-12 rounded-full bg-secondary/10 hover:bg-secondary/20 transition-all duration-300 border border-secondary/20 hover:border-secondary/40 backdrop-blur-sm"
+          className="group flex items-center justify-center w-12 h-12 rounded-full bg-accent/10 hover:bg-accent/20 transition-all duration-300 border border-accent/20 hover:border-accent/40 backdrop-blur-sm"
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.95 }}
           animate={{ y: [0, -5, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronUp className="w-5 h-5 text-secondary group-hover:scale-110 transition-transform" />
+          <ChevronUp className="w-5 h-5 text-accent group-hover:scale-110 transition-transform" />
         </motion.a>
       </motion.div>
 
