@@ -7,8 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import SEO from "./components/SEO";
-import { ArrowRight, Mail, Phone, ExternalLink, Palette, LayoutGrid, PenTool, Rocket, Instagram, Linkedin, Github, Dribbble, ChevronUp, MessageCircle, Eye, X, Send } from "lucide-react";
-import { useForm, ValidationError } from '@formspree/react';
+import { ArrowRight, Mail, Phone, ExternalLink, Palette, LayoutGrid, PenTool, Rocket, Instagram, Linkedin, Github, Dribbble, ChevronUp, MessageCircle, Eye, X } from "lucide-react";
 
 // Image paths for deployment
 const IMAGES = {
@@ -59,39 +58,27 @@ const PROFILE = {
 const SERVICES = [
   {
     icon: Palette,
-    title: "Branding & Visual Identity Design",
-    desc: "Complete brand identity solutions including logo design, brand guidelines, business cards, and brand collateral templates.",
-    tags: ["Logo Design", "Brand Guidelines", "Business Cards", "Brand Collateral"],
+    title: "Branding & Identity",
+    desc: "Logos, style guides, typography systems, and brand kits that feel timeless and distinct.",
+    tags: ["Logo", "Guidelines", "Packaging"],
   },
   {
     icon: LayoutGrid,
-    title: "Marketing & Social Media Design",
-    desc: "Engaging social media graphics, digital ads, flyers, posters, and campaign visuals that drive results.",
-    tags: ["Social Media", "Digital Ads", "Flyers", "Campaign Visuals"],
+    title: "UI/UX Design",
+    desc: "Elegant product interfaces with an emphasis on clarity, accessibility, and conversion.",
+    tags: ["Web", "Mobile", "Prototyping"],
   },
   {
     icon: PenTool,
-    title: "Web & UI/UX Design",
-    desc: "Modern website layouts, app interfaces, landing pages, and custom icon sets with user-centered design.",
-    tags: ["Website UI", "App Design", "Landing Pages", "Icons"],
+    title: "Graphic Design",
+    desc: "Campaign visuals, posters, social media content, and motion graphics that captivate.",
+    tags: ["Social", "Print", "Motion"],
   },
   {
     icon: Rocket,
-    title: "Packaging & Label Design",
-    desc: "Eye-catching product packaging concepts, label designs, and professional mockups for presentation.",
-    tags: ["Packaging", "Labels", "Mockups", "Product Design"],
-  },
-  {
-    icon: MessageCircle,
-    title: "Motion & Multimedia Graphics",
-    desc: "Dynamic animated social media posts, video thumbnails, presentation templates, and infographic animations.",
-    tags: ["Animation", "Video Graphics", "Presentations", "Infographics"],
-  },
-  {
-    icon: Eye,
-    title: "Custom Graphic Design",
-    desc: "Tailored infographics, pitch decks, event branding, and custom templates for your specific needs.",
-    tags: ["Infographics", "Pitch Decks", "Event Branding", "Templates"],
+    title: "Web Design",
+    desc: "Fast, responsive websites built with modern tooling and a minimalist aesthetic.",
+    tags: ["React", "Tailwind", "SEO"],
   },
 ];
 
@@ -675,7 +662,6 @@ const TermsOfService = ({ isOpen, onClose }) => {
 
 const Header = () => {
   const [isOverLightBackground, setIsOverLightBackground] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const NAV = [
     { label: "Home", href: "#home" },
@@ -733,10 +719,8 @@ const Header = () => {
     }`}>
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
         <a href="#home" className="flex items-center hover:opacity-80 transition-opacity">
-          <img src="/img/Logo.svg" alt="Logo" className="h-8 sm:h-10 w-auto brightness-0 saturate-100" style={{filter: 'brightness(0) saturate(100%) invert(67%) sepia(78%) saturate(2476%) hue-rotate(86deg) brightness(101%) contrast(101%)'}} />
+          <img src="/img/Logo.svg" alt="Logo" className="h-10 w-auto brightness-0 saturate-100" style={{filter: 'brightness(0) saturate(100%) invert(67%) sepia(78%) saturate(2476%) hue-rotate(86deg) brightness(101%) contrast(101%)'}} />
         </a>
-        
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
           {NAV.map((item) => (
             <a 
@@ -752,49 +736,7 @@ const Header = () => {
             </a>
           ))}
         </nav>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden p-2 rounded-md text-accent hover:text-light focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 focus:ring-offset-primary transition-colors"
-          aria-label="Toggle mobile menu"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {isMobileMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
       </div>
-
-      {/* Mobile Navigation Menu */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="md:hidden bg-primary/95 backdrop-blur border-t border-accent/20"
-        >
-          <nav className="px-4 py-4 space-y-2">
-            {NAV.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`block px-3 py-2 text-sm font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                  isOverLightBackground
-                    ? 'text-accent hover:text-light hover:bg-accent/10 focus:ring-accent/20 focus:ring-offset-primary'
-                    : 'text-accent hover:text-light hover:bg-accent/10 focus:ring-accent/20 focus:ring-offset-primary'
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-        </motion.div>
-      )}
     </header>
   );
 };
@@ -1264,37 +1206,25 @@ const About = () => (
                   <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                     <Palette className="w-4 h-4 text-accent" />
                   </div>
-                  <span className="text-primary font-medium">Branding & Identity</span>
+                  <span className="text-primary font-medium">Brand Identity</span>
                   </div>
                 <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-xl">
                   <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                     <LayoutGrid className="w-4 h-4 text-accent" />
                 </div>
-                  <span className="text-primary font-medium">Marketing & Social Media</span>
+                  <span className="text-primary font-medium">UI/UX Design</span>
                   </div>
                 <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-xl">
                   <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                     <PenTool className="w-4 h-4 text-accent" />
                   </div>
-                  <span className="text-primary font-medium">Web & UI/UX Design</span>
+                  <span className="text-primary font-medium">Print Design</span>
                   </div>
                 <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-xl">
                   <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                     <Rocket className="w-4 h-4 text-accent" />
                   </div>
-                  <span className="text-primary font-medium">Packaging & Labels</span>
-                </div>
-                <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-xl">
-                  <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                    <MessageCircle className="w-4 h-4 text-accent" />
-                  </div>
-                  <span className="text-primary font-medium">Motion & Multimedia</span>
-                </div>
-                <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-xl">
-                  <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                    <Eye className="w-4 h-4 text-accent" />
-                  </div>
-                  <span className="text-primary font-medium">Custom Graphic Design</span>
+                  <span className="text-primary font-medium">Digital Marketing</span>
                 </div>
               </div>
             </div>
@@ -1393,7 +1323,7 @@ const Services = () => (
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {SERVICES.map((service, index) => (
             <motion.div
               key={service.title}
@@ -2409,115 +2339,409 @@ const Testimonials = () => {
 );
 };
 
-const ContactForm = () => {
-  const [state, handleSubmit] = useForm("mandzwvb");
-  const [focusedField, setFocusedField] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  
-  if (state.succeeded) {
-    return (
-      <div className="relative overflow-hidden">
-        {/* Animated Success Background */}
-        <div className="absolute inset-0">
-          {/* Floating celebration particles */}
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-accent rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ 
-                opacity: [0, 1, 0],
-                scale: [0, 1, 0],
-                y: [0, -100, -200],
-                x: [0, (Math.random() - 0.5) * 100],
-              }}
-              transition={{
-                duration: 2,
-                delay: i * 0.1,
-                repeat: Infinity,
-                repeatDelay: 3,
-              }}
-            />
-          ))}
-          
-          {/* Gradient orbs */}
+const Contact = () => (
+  <Section id="contact" className="relative py-24 bg-primary overflow-hidden">
+    {/* Background Elements */}
+    <div className="absolute inset-0">
+      <div className="absolute top-20 left-10 w-40 h-40 bg-accent/10 rounded-full blur-2xl"></div>
+      <div className="absolute bottom-20 right-10 w-48 h-48 bg-accent/10 rounded-full blur-2xl"></div>
+    </div>
+
+    <div className="mx-auto max-w-6xl px-4 relative z-10">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+        className="space-y-16"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center space-y-4"
+        >
+          <h2 className="text-5xl md:text-6xl font-bold text-accent">Let's Work Together</h2>
+          <p className="text-xl text-light max-w-3xl mx-auto">
+            Ready to bring your ideas to life? I'd love to hear about your project and discuss how we can create something amazing together.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="bg-primary/90 backdrop-blur-sm border-2 border-accent/20 rounded-2xl p-8 shadow-2xl">
+            <div className="text-center space-y-2 mb-6">
+              <h3 className="text-2xl font-bold text-accent">Let's Create Something Amazing</h3>
+              <p className="text-accent/70">Share your vision and let's bring it to life together</p>
+            </div>
+            <form action="https://formspree.io/f/mandzwvb" method="POST" className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="firstName" className="block text-sm font-medium text-accent mb-2">
+                    First Name *
+                  </label>
+                  <Input 
+                    id="firstName"
+                    name="firstName"
+                    placeholder="Enter your first name"
+                    className="w-full px-4 py-3 border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-neutral/60 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/20 transition-all duration-300 rounded-xl"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="lastName" className="block text-sm font-medium text-accent mb-2">
+                    Last Name *
+                  </label>
+                  <Input 
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Enter your last name"
+                    className="w-full px-4 py-3 border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-neutral/60 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/20 transition-all duration-300 rounded-xl"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-accent mb-2">
+                  Email Address *
+                </label>
+                <Input 
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="Enter your email address"
+                  className="w-full px-4 py-3 border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-neutral/60 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/20 transition-all duration-300 rounded-xl"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="subject" className="block text-sm font-medium text-accent mb-2">
+                  Project Subject *
+                </label>
+                <Input 
+                  id="subject"
+                  name="subject"
+                  placeholder="What's your project about?"
+                  className="w-full px-4 py-3 border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-neutral/60 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/20 transition-all duration-300 rounded-xl"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-accent mb-2">
+                  Message *
+                </label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  placeholder="Tell me about your project, goals, and how I can help..."
+                  className="w-full min-h-[140px] px-4 py-3 border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-neutral/60 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/20 transition-all duration-300 rounded-xl resize-none"
+                  required
+                />
+              </div>
+              <div className="pt-4">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full px-8 py-4 rounded-2xl bg-accent text-primary hover:bg-accent-600 font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 focus:ring-offset-primary"
+                >
+                  <div className="flex items-center gap-2">
+                    Send Message
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                </Button>
+              </div>
+            </form>
+          </div>
+        </motion.div>
+      </motion.div>
+    </div>
+  </Section>
+);
+
+const Footer = ({ onPrivacyClick, onTermsClick }) => (
+  <div className="relative bg-primary text-neutral-300 overflow-hidden">
+    {/* Background Elements */}
+    <div className="absolute inset-0">
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+      <div className="absolute top-10 left-1/4 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-2xl"></div>
+      <div className="absolute bottom-10 right-1/4 w-40 h-40 bg-gradient-to-tl from-primary/10 to-transparent rounded-full blur-2xl"></div>
+    </div>
+
+    <div className="mx-auto max-w-6xl px-4 relative z-10">
+      {/* Main Footer Content */}
+      <div className="py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12">
+          {/* Brand Section */}
           <motion.div
-            className="absolute w-64 h-64 bg-gradient-to-r from-green-400/20 to-blue-400/20 rounded-full blur-3xl"
-            style={{ top: '-50%', left: '-50%' }}
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3],
-              rotate: [0, 180, 360],
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="space-y-4"
+          >
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                <Palette className="w-6 h-6 text-accent" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-accent">Creative Design</h3>
+                <p className="text-neutral-400 text-sm">Brand Identity & Visual Solutions</p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="space-y-4"
+          >
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                <LayoutGrid className="w-6 h-6 text-accent" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-accent">UI/UX Design</h3>
+                <p className="text-neutral-400 text-sm">User-Centered Digital Experiences</p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-4"
+          >
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                <PenTool className="w-6 h-6 text-accent" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-accent">Graphic Design</h3>
+                <p className="text-neutral-400 text-sm">Print & Digital Graphics</p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="space-y-4"
+          >
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                <Rocket className="w-6 h-6 text-accent" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-accent">Brand Strategy</h3>
+                <p className="text-neutral-400 text-sm">Strategic Brand Development</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Contact Information */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-12 pt-8 border-t border-primary/20"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start space-x-3 mb-3">
+                <Mail className="w-5 h-5 text-accent" />
+                <span className="text-accent font-medium">Email</span>
+              </div>
+              <a 
+                href="mailto:bereketfikre2021@gmail.com" 
+                className="text-neutral-300 hover:text-accent transition-colors"
+              >
+                bereketfikre2021@gmail.com
+              </a>
+            </div>
+            
+            <div className="text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start space-x-3 mb-3">
+                <Phone className="w-5 h-5 text-accent" />
+                <span className="text-accent font-medium">Phone</span>
+              </div>
+              <a 
+                href="tel:+251911234567" 
+                className="text-neutral-300 hover:text-accent transition-colors"
+              >
+                +251 911 234 567
+              </a>
+            </div>
+            
+            <div className="text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start space-x-3 mb-3">
+                <ExternalLink className="w-5 h-5 text-accent" />
+                <span className="text-accent font-medium">Location</span>
+              </div>
+              <span className="text-neutral-300">Addis Ababa, Ethiopia</span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Social Links */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-8 pt-8 border-t border-primary/20"
+        >
+          <div className="flex justify-center space-x-6">
+            <a 
+              href="https://www.linkedin.com/in/bereket-fikre" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center hover:bg-accent/20 transition-colors group"
+            >
+              <Linkedin className="w-5 h-5 text-accent group-hover:scale-110 transition-transform" />
+            </a>
+            <a 
+              href="https://www.instagram.com/bereket_fikre" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center hover:bg-accent/20 transition-colors group"
+            >
+              <Instagram className="w-5 h-5 text-accent group-hover:scale-110 transition-transform" />
+            </a>
+            <a 
+              href="https://github.com/bereketfikre" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center hover:bg-accent/20 transition-colors group"
+            >
+              <Github className="w-5 h-5 text-accent group-hover:scale-110 transition-transform" />
+            </a>
+            <a 
+              href="https://dribbble.com/bereketfikre" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center hover:bg-accent/20 transition-colors group"
+            >
+              <Dribbble className="w-5 h-5 text-accent group-hover:scale-110 transition-transform" />
+            </a>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Bottom Bar */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        className="py-6 border-t border-primary/20"
+      >
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div className="text-center md:text-left">
+            <p className="text-neutral-400 text-sm">
+              © 2024 Bereket Fikre. All rights reserved.
+            </p>
+          </div>
+          
+          <div className="flex space-x-6 text-sm">
+            <button 
+              onClick={onPrivacyClick}
+              className="text-neutral-400 hover:text-accent transition-colors"
+            >
+              Privacy Policy
+            </button>
+            <button 
+              onClick={onTermsClick}
+              className="text-neutral-400 hover:text-accent transition-colors"
+            >
+              Terms of Service
+            </button>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Back to Top Button */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.7 }}
+        className="fixed bottom-8 right-8 z-50"
+      >
+        <motion.a
+          href="#hero"
+          className="w-12 h-12 bg-accent/10 backdrop-blur-sm border border-accent/20 rounded-full flex items-center justify-center hover:bg-accent/20 transition-colors group"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          animate={{ 
+            y: [0, -5, 0],
+          }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronUp className="w-5 h-5 text-accent group-hover:scale-110 transition-transform" />
+        </motion.a>
+      </motion.div>
+
+      {/* Floating Particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-accent/20 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ 
+              opacity: [0, 1, 0],
+              scale: [0, 1, 0],
+              y: [0, -50, -100],
             }}
             transition={{
-              duration: 4,
+              duration: 3,
+              delay: i * 0.1,
               repeat: Infinity,
-              ease: "easeInOut"
+              repeatDelay: 2,
             }}
           />
-            </div>
-
-        <Card className="relative border-2 border-green-400/30 bg-gradient-to-br from-green-500/10 via-primary/10 to-blue-500/10 backdrop-blur-sm shadow-2xl">
-          <CardContent className="p-8 text-center relative z-10">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              className="space-y-6"
-            >
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg"
-              >
-                <motion.svg
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ delay: 0.4, duration: 0.8 }}
-                  className="w-10 h-10 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                </motion.svg>
-              </motion.div>
-              
-              <motion.h3
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="text-2xl font-bold text-accent"
-              >
-                Message Sent Successfully! 🎉
-              </motion.h3>
-              
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="text-accent/80 text-lg"
-              >
-                Thank you for reaching out! I'll get back to you within 24 hours.
-              </motion.p>
-            </motion.div>
-        </CardContent>
-      </Card>
+        ))}
       </div>
-    );
-  }
+    </div>
+  );
+};
+
+export default function CreativeDesignerPortfolio() {
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [isTermsOpen, setIsTermsOpen] = useState(false);
+
+  React.useEffect(() => {
+    const handler = (e) => {
+      const target = e.target.closest('a[href^="#"]');
+      if (!target) return;
+      const id = target.getAttribute('href');
+      const el = id && document.querySelector(id);
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+    document.addEventListener('click', handler);
+    return () => document.removeEventListener('click', handler);
+  }, []);
 
   return (
     <div className="relative overflow-hidden">
@@ -2676,7 +2900,7 @@ const ContactForm = () => {
             </motion.div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4">
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -2689,18 +2913,18 @@ const ContactForm = () => {
                 name="firstName"
                 value={formData.firstName}
                 onChange={(e) => setFormData({...formData, firstName: e.target.value})}
-                      placeholder=""
-                      className="peer border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-transparent focus:border-primary/60 focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 rounded-xl py-4 pl-4 pr-4"
-                      onFocus={() => setFocusedField('firstName')}
-                      onBlur={() => setFocusedField(null)}
+                placeholder=""
+                className="peer border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-transparent focus:border-primary/60 focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 rounded-xl py-4 pl-4 pr-4"
+                onFocus={() => setFocusedField('firstName')}
+                onBlur={() => setFocusedField(null)}
                 required
               />
                     <label 
                       htmlFor="firstName"
                       className={`absolute left-4 transition-all duration-300 pointer-events-none ${
                         focusedField === 'firstName' || formData.firstName
-                          ? 'opacity-0' 
-                          : 'top-4 text-accent/60'
+                          ? 'top-2 text-xs text-primary font-medium' 
+                          : 'top-4 text-accent/60 group-hover:top-2 group-hover:text-xs group-hover:text-primary'
                       }`}
                     >
                       First Name
@@ -2732,18 +2956,18 @@ const ContactForm = () => {
                 name="lastName"
                 value={formData.lastName}
                 onChange={(e) => setFormData({...formData, lastName: e.target.value})}
-                      placeholder=""
-                      className="peer border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-transparent focus:border-primary/60 focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 rounded-xl py-4 pl-4 pr-4"
-                      onFocus={() => setFocusedField('lastName')}
-                      onBlur={() => setFocusedField(null)}
+                placeholder=""
+                className="peer border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-transparent focus:border-primary/60 focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 rounded-xl py-4 pl-4 pr-4"
+                onFocus={() => setFocusedField('lastName')}
+                onBlur={() => setFocusedField(null)}
                 required
               />
                     <label 
                       htmlFor="lastName"
                       className={`absolute left-4 transition-all duration-300 pointer-events-none ${
                         focusedField === 'lastName' || formData.lastName
-                          ? 'opacity-0' 
-                          : 'top-4 text-accent/60'
+                          ? 'top-2 text-xs text-primary font-medium' 
+                          : 'top-4 text-accent/60 group-hover:top-2 group-hover:text-xs group-hover:text-primary'
                       }`}
                     >
                       Last Name
@@ -2771,28 +2995,28 @@ const ContactForm = () => {
                 className="relative group"
               >
                 <div className="relative">
-            <Input 
-              id="email"
-              name="email"
-              type="email" 
+              <Input 
+                id="email"
+                name="email"
+                type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    placeholder=""
-                    className="peer border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-transparent focus:border-primary/60 focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 rounded-xl py-4 pl-4 pr-4"
-                    onFocus={() => setFocusedField('email')}
-                    onBlur={() => setFocusedField(null)}
-              required
-            />
-                  <label 
-                    htmlFor="email"
-                    className={`absolute left-4 transition-all duration-300 pointer-events-none ${
+                placeholder=""
+                className="peer border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-transparent focus:border-primary/60 focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 rounded-xl py-4 pl-4 pr-4"
+                onFocus={() => setFocusedField('email')}
+                onBlur={() => setFocusedField(null)}
+                required
+              />
+                    <label 
+                      htmlFor="email"
+                      className={`absolute left-4 transition-all duration-300 pointer-events-none ${
                         focusedField === 'email' || formData.email
-                          ? 'opacity-0' 
-                          : 'top-4 text-accent/60'
-                    }`}
-                  >
-                    Email Address
-                  </label>
+                          ? 'top-2 text-xs text-primary font-medium' 
+                          : 'top-4 text-accent/60 group-hover:top-2 group-hover:text-xs group-hover:text-primary'
+                      }`}
+                    >
+                      Email Address
+                    </label>
                   <motion.div
                     className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary to-secondary"
                     initial={{ width: 0 }}
@@ -2815,27 +3039,27 @@ const ContactForm = () => {
                 className="relative group"
               >
                 <div className="relative">
-            <Input 
-              id="subject"
-              name="subject"
+              <Input 
+                id="subject"
+                name="subject"
                 value={formData.subject}
                 onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                    placeholder=""
-                    className="peer border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-transparent focus:border-primary/60 focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 rounded-xl py-4 pl-4 pr-4"
-                    onFocus={() => setFocusedField('subject')}
-                    onBlur={() => setFocusedField(null)}
-              required
-            />
-                  <label 
-                    htmlFor="subject"
-                    className={`absolute left-4 transition-all duration-300 pointer-events-none ${
+                placeholder=""
+                className="peer border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-transparent focus:border-primary/60 focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 rounded-xl py-4 pl-4 pr-4"
+                onFocus={() => setFocusedField('subject')}
+                onBlur={() => setFocusedField(null)}
+                required
+              />
+                    <label 
+                      htmlFor="subject"
+                      className={`absolute left-4 transition-all duration-300 pointer-events-none ${
                         focusedField === 'subject' || formData.subject
-                          ? 'opacity-0' 
-                          : 'top-4 text-accent/60'
-                    }`}
-                  >
-                    Project Subject
-                  </label>
+                          ? 'top-2 text-xs text-primary font-medium' 
+                          : 'top-4 text-accent/60 group-hover:top-2 group-hover:text-xs group-hover:text-primary'
+                      }`}
+                    >
+                      Project Subject
+                    </label>
                   <motion.div
                     className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary to-secondary"
                     initial={{ width: 0 }}
@@ -2863,18 +3087,18 @@ const ContactForm = () => {
               name="message"
               value={formData.message}
               onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    placeholder=""
-                    className="peer min-h-[140px] border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-transparent focus:border-primary/60 focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 rounded-xl py-4 pl-4 pr-4 resize-none"
-                    onFocus={() => setFocusedField('message')}
-                    onBlur={() => setFocusedField(null)}
+              placeholder=""
+              className="peer min-h-[140px] border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-transparent focus:border-primary/60 focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 rounded-xl py-4 pl-4 pr-4 resize-none"
+              onFocus={() => setFocusedField('message')}
+              onBlur={() => setFocusedField(null)}
               required
             />
                   <label 
                     htmlFor="message"
                     className={`absolute left-4 transition-all duration-300 pointer-events-none ${
                       focusedField === 'message' || formData.message
-                        ? 'opacity-0' 
-                        : 'top-4 text-accent/60'
+                        ? 'top-2 text-xs text-primary font-medium' 
+                        : 'top-4 text-accent/60 group-hover:top-2 group-hover:text-xs group-hover:text-primary'
                     }`}
                   >
                     Tell me about your project...
@@ -2991,41 +3215,123 @@ const Contact = () => (
             transition={{ duration: 0.8, delay: 0.2 }}
           className="max-w-4xl mx-auto"
           >
-            <ContactForm />
+            <div className="bg-primary/90 backdrop-blur-sm border-2 border-accent/20 rounded-2xl p-8 shadow-2xl">
+              <div className="text-center space-y-2 mb-6">
+                <h3 className="text-2xl font-bold text-accent">Let's Create Something Amazing</h3>
+                <p className="text-accent/70">Share your vision and let's bring it to life together</p>
+              </div>
+              <form action="https://formspree.io/f/mandzwvb" method="POST" className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="firstName" className="block text-sm font-medium text-accent mb-2">
+                      First Name *
+                    </label>
+                    <Input 
+                      id="firstName"
+                      name="firstName"
+                      placeholder="Enter your first name"
+                      className="w-full px-4 py-3 border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-neutral/60 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/20 transition-all duration-300 rounded-xl"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="lastName" className="block text-sm font-medium text-accent mb-2">
+                      Last Name *
+                    </label>
+                    <Input 
+                      id="lastName"
+                      name="lastName"
+                      placeholder="Enter your last name"
+                      className="w-full px-4 py-3 border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-neutral/60 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/20 transition-all duration-300 rounded-xl"
+                      required
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-accent mb-2">
+                    Email Address *
+                  </label>
+                  <Input 
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Enter your email address"
+                    className="w-full px-4 py-3 border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-neutral/60 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/20 transition-all duration-300 rounded-xl"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="subject" className="block text-sm font-medium text-accent mb-2">
+                    Project Subject *
+                  </label>
+                  <Input 
+                    id="subject"
+                    name="subject"
+                    placeholder="What's your project about?"
+                    className="w-full px-4 py-3 border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-neutral/60 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/20 transition-all duration-300 rounded-xl"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-accent mb-2">
+                    Message *
+                  </label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    placeholder="Tell me about your project, goals, and how I can help..."
+                    className="w-full min-h-[140px] px-4 py-3 border-2 border-primary/20 bg-primary/5 text-accent placeholder:text-neutral/60 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/20 transition-all duration-300 rounded-xl resize-none"
+                    required
+                  />
+                </div>
+                <div className="pt-4">
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="w-full px-8 py-4 rounded-2xl bg-accent text-primary hover:bg-accent-600 font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 focus:ring-offset-primary"
+                  >
+                    <div className="flex items-center gap-2">
+                      Send Message
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </Button>
+                </div>
+              </form>
+            </div>
           </motion.div>
       </motion.div>
     </div>
   </Section>
 );
+      }
+    };
+    document.addEventListener('click', handler);
+    return () => document.removeEventListener('click', handler);
+  }, []);
 
-const Footer = ({ onPrivacyClick, onTermsClick }) => (
-  <footer className="relative bg-primary text-neutral-300 overflow-hidden">
-     {/* Subtle Background Elements */}
-    <div className="absolute inset-0">
-       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
-       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
+  return (
+    <div className="relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Floating geometric shapes */}
+        <motion.div
+          className="absolute w-32 h-32 border-2 border-primary/20 rounded-full"
     </div>
 
     <div className="mx-auto max-w-6xl px-4 relative z-10">
-       {/* Main Content */}
+      {/* Main Footer Content */}
+      <div className="py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12">
+          {/* Brand Section */}
           <motion.div
-         initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-         transition={{ duration: 0.8 }}
-         className="py-16"
-       >
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
-           {/* Brand Section */}
-           <motion.div
-             initial={{ opacity: 0, x: -20 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true }}
-             transition={{ duration: 0.6, delay: 0.1 }}
-             className="space-y-6"
-           >
-             <div className="flex items-center gap-4">
-               <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent-600 rounded-2xl overflow-hidden shadow-lg">
+            transition={{ duration: 0.6 }}
+            className="md:col-span-2 space-y-6"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-gradient-to-br from-accent to-accent-600 rounded-xl overflow-hidden">
                 <img 
                   src={IMAGES.bereketFikre} 
                   alt="Bereket Fikre"
@@ -3034,56 +3340,41 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
               </div>
               <div>
                 <h3 className="text-xl font-bold text-light">{PROFILE.name}</h3>
-                 <p className="text-accent font-medium">Graphic Designer, Brand Builder & Educator</p>
+                <p className="text-neutral-400 text-sm">Creative Designer</p>
               </div>
             </div>
-             
-             <p className="text-neutral-300 leading-relaxed">
-               Creating meaningful connections through strategic design. Let's bring your vision to life.
-             </p>
-             
-             {/* Logo */}
-             <motion.div
-               initial={{ opacity: 0, scale: 0.8 }}
-               whileInView={{ opacity: 1, scale: 1 }}
-               viewport={{ once: true }}
-               transition={{ duration: 0.6, delay: 0.2 }}
-               className="flex items-center"
-             >
-               <img 
-                 src="/img/Logo.webp" 
-                 alt="Logo"
-                 className="h-12 w-auto"
-               />
-             </motion.div>
+            <p className="text-neutral-300 leading-relaxed max-w-md">
+              With 5+ years of experience in graphic design and digital marketing, I've helped numerous businesses transform their brands and achieve remarkable growth.
+            </p>
+            <div className="flex items-center gap-2 text-neutral-400">
+              <div className="w-2 h-2 bg-accent rounded-full"></div>
+              <span className="text-sm">{PROFILE.location}</span>
+            </div>
           </motion.div>
 
-           {/* Social Links */}
+          {/* Quick Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-             transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6 text-center"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="space-y-6"
           >
-             <h4 className="text-lg font-semibold text-light">Let's Connect</h4>
-             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-center">
-               {PROFILE.socials.map((social, index) => (
+            <h4 className="text-lg font-semibold text-light">Quick Links</h4>
+            <div className="space-y-3">
+              {[
+                { label: "About", href: "#about" },
+                { label: "Services", href: "#services" },
+                { label: "Work", href: "#work" },
+                { label: "Contact", href: "#contact" },
+              ].map((link) => (
                 <motion.a
-                   key={social.label}
-                   href={social.href}
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   className="group flex items-center justify-center gap-3 p-3 rounded-xl bg-accent/10 hover:bg-accent/20 transition-all duration-300 border border-accent/20 hover:border-accent/40 w-full h-16"
-                   whileHover={{ scale: 1.02, y: -2 }}
-                   whileTap={{ scale: 0.98 }}
-                   initial={{ opacity: 0, y: 20 }}
-                   whileInView={{ opacity: 1, y: 0 }}
-                   viewport={{ once: true }}
-                   transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                 >
-                   <social.icon className="w-5 h-5 text-accent group-hover:scale-110 transition-transform" />
-                   <span className="text-sm text-neutral-300 group-hover:text-accent transition-colors">{social.label}</span>
+                  key={link.label}
+                  href={link.href}
+                  className="block text-neutral-400 hover:text-accent transition-colors group"
+                  whileHover={{ x: 5 }}
+                >
+                  <span className="group-hover:underline">{link.label}</span>
                 </motion.a>
               ))}
             </div>
@@ -3091,60 +3382,77 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
 
           {/* Contact Info */}
           <motion.div
-             initial={{ opacity: 0, x: 20 }}
-             whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-             transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-6 text-right"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-6"
           >
             <h4 className="text-lg font-semibold text-light">Get In Touch</h4>
-            <div className="space-y-4 flex flex-col items-end">
+            <div className="space-y-4">
               <motion.a
                 href={`mailto:${PROFILE.email}`}
-                 className="flex items-center gap-3 text-neutral-300 hover:text-accent transition-colors group"
+                className="flex items-center gap-3 text-neutral-400 hover:text-accent transition-colors group"
                 whileHover={{ x: 5 }}
               >
-                 <Mail className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span className="text-sm">{PROFILE.email}</span>
               </motion.a>
               <motion.a
-                href={`tel:${PROFILE.phone}`}
-                 className="flex items-center gap-3 text-neutral-300 hover:text-accent transition-colors group"
+                href={`tel:${PROFILE.phone}op `}
+                className="flex items-center gap-3 text-neutral-400 hover:text-accent transition-colors group"
                 whileHover={{ x: 5 }}
               >
-                 <Phone className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span className="text-sm">{PROFILE.phone}</span>
               </motion.a>
               <motion.a
-                href="https://t.me/yourusername"
+                href="https://t.me/Believeandforward"
                 target="_blank"
                 rel="noopener noreferrer"
-                 className="flex items-center gap-3 text-neutral-300 hover:text-accent transition-colors group"
+                className="flex items-center gap-3 text-neutral-400 hover:text-accent transition-colors group"
                 whileHover={{ x: 5 }}
               >
-                 <Send className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span className="text-sm">Telegram</span>
+                <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span className="text-sm">@Believeandforward</span>
               </motion.a>
-              
-              {/* Legal Links */}
-              <div className="flex items-center gap-4 pt-4">
-            <motion.button
-              onClick={onPrivacyClick}
-                  className="text-xs text-neutral-400 hover:text-accent transition-colors group cursor-pointer"
-              whileHover={{ y: -2 }}
-            >
-              <span className="group-hover:underline">Privacy Policy</span>
-            </motion.button>
-            <motion.button
-              onClick={onTermsClick}
-                  className="text-xs text-neutral-400 hover:text-accent transition-colors group cursor-pointer"
-              whileHover={{ y: -2 }}
-            >
-              <span className="group-hover:underline">Terms of Service</span>
-            </motion.button>
-          </div>
             </div>
           </motion.div>
+        </div>
+      </div>
+
+      {/* Social Media Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="py-8 border-t border-primary/10"
+      >
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="text-center md:text-left">
+            <h4 className="text-lg font-semibold text-light mb-4">Follow My Journey</h4>
+            <p className="text-neutral-400 text-sm">Stay updated with my latest work and creative insights</p>
+          </div>
+          <div className="flex items-center gap-4">
+            {PROFILE.socials.map((social, index) => (
+              <motion.a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group p-3 rounded-2xl bg-accent/5 hover:bg-accent/10 transition-all duration-300 border border-accent/10 hover:border-accent/20"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+              >
+                <social.icon className="w-5 h-5 text-accent group-hover:scale-110 transition-transform" />
+              </motion.a>
+            ))}
+          </div>
         </div>
       </motion.div>
 
@@ -3153,52 +3461,63 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="pb-8 border-t border-primary/10"
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="py-8 border-t border-primary/10"
       >
-        <div className="flex items-center justify-center text-center">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
             <p className="text-sm text-neutral-400">
               © 2025 {PROFILE.name}. All rights reserved.
             </p>
-         </div>
+            <div className="w-1 h-1 bg-accent rounded-full"></div>
+            <p className="text-sm text-neutral-400">
+              Made with ❤️ in {PROFILE.location}
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-6">
+            <motion.button
+              onClick={onPrivacyClick}
+              className="text-sm text-neutral-400 hover:text-accent transition-colors group cursor-pointer"
+              whileHover={{ y: -2 }}
+            >
+              <span className="group-hover:underline">Privacy Policy</span>
+            </motion.button>
+            <motion.button
+              onClick={onTermsClick}
+              className="text-sm text-neutral-400 hover:text-accent transition-colors group cursor-pointer"
+              whileHover={{ y: -2 }}
+            >
+              <span className="group-hover:underline">Terms of Service</span>
+            </motion.button>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Back to Top Button */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        className="absolute bottom-8 right-8"
+      >
+        <motion.a
+          href="#home"
+          className="group flex items-center justify-center w-12 h-12 rounded-full bg-accent/10 hover:bg-accent/20 transition-all duration-300 border border-accent/20 hover:border-accent/40 backdrop-blur-sm"
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          animate={{ y: [0, -5, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronUp className="w-5 h-5 text-accent group-hover:scale-110 transition-transform" />
+        </motion.a>
       </motion.div>
 
     </div>
   </footer>
 );
-
-export default function CreativeDesignerPortfolio() {
-  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
-  const [isTermsOpen, setIsTermsOpen] = useState(false);
-
-  React.useEffect(() => {
-    const handler = (e) => {
-      const target = e.target.closest('a[href^="#"]');
-      if (!target) return;
-      const id = target.getAttribute('href');
-      const el = id && document.querySelector(id);
-      if (!el) return;
-      e.preventDefault();
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
-    document.addEventListener('click', handler);
-    return () => document.removeEventListener('click', handler);
-  }, []);
-
-  return (
-    <>
-      <SEO />
-      <main className="antialiased text-light bg-primary selection:bg-accent selection:text-primary">
-        <Header />
-        <Hero />
-      <About />
-      <Services />
-      <Work />
-      <Testimonials />
-      <Contact />
-      <Footer 
-        onPrivacyClick={() => setIsPrivacyOpen(true)}
-        onTermsClick={() => setIsTermsOpen(true)}
+};
       />
       
       {/* Legal Modals */}
@@ -3210,25 +3529,6 @@ export default function CreativeDesignerPortfolio() {
         isOpen={isTermsOpen} 
         onClose={() => setIsTermsOpen(false)} 
       />
-      
-      {/* Permanent Back to Top Button */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1 }}
-        className="fixed bottom-4 right-4 sm:bottom-8 z-50"
-      >
-        <motion.a
-          href="#home"
-          className="group flex items-center justify-center w-12 h-12 rounded-full bg-accent/10 hover:bg-accent/20 transition-all duration-300 border border-accent/20 hover:border-accent/40 backdrop-blur-sm shadow-lg"
-          whileHover={{ scale: 1.1, y: -2 }}
-          whileTap={{ scale: 0.95 }}
-          animate={{ y: [0, -5, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronUp className="w-5 h-5 text-accent group-hover:scale-110 transition-transform" />
-        </motion.a>
-      </motion.div>
     </main>
     </>
   );
