@@ -62,6 +62,21 @@
     Content-Type = "image/jpeg"
     Cache-Control = "public, max-age=31536000"
 
+[[headers]]
+  for = "/favicon*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/android-chrome*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/apple-touch-icon*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
