@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import SEO from "./components/SEO";
-import { ArrowRight, Mail, Phone, ExternalLink, Palette, LayoutGrid, PenTool, Rocket, Instagram, Linkedin, Github, Dribbble, ChevronUp, MessageCircle, Eye, X, Send } from "lucide-react";
+import { ArrowRight, Mail, Phone, ExternalLink, Palette, LayoutGrid, PenTool, Rocket, Instagram, Linkedin, Github, Dribbble, ChevronUp, MessageCircle, Eye, X, Send, MessageSquare } from "lucide-react";
 import { useForm, ValidationError } from '@formspree/react';
 
 // Image paths for deployment
@@ -3048,6 +3048,7 @@ const Contact = () => (
           >
             <ContactForm />
           </motion.div>
+
       </motion.div>
     </div>
   </Section>
@@ -3070,7 +3071,7 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
          transition={{ duration: 0.8 }}
          className="py-16"
        >
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 items-start">
            {/* Brand Section */}
            <motion.div
              initial={{ opacity: 0, x: -20 }}
@@ -3119,7 +3120,7 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
              transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6 text-center"
+            className="space-y-6 text-center ml-8"
           >
              <h4 className="text-lg font-semibold text-light">Let's Connect</h4>
              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-center">
@@ -3171,7 +3172,7 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
                 <span className="text-sm">{PROFILE.phone}</span>
               </motion.a>
               <motion.a
-                href="https://t.me/yourusername"
+                href="https://t.me/Believeandforward"
                 target="_blank"
                 rel="noopener noreferrer"
                  className="flex items-center gap-3 text-neutral-300 hover:text-accent transition-colors group"
