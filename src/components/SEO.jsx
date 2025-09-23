@@ -4,7 +4,7 @@ const SEO = ({
   title = "Bereket Fikre - Creative Designer & Brand Builder | UI/UX Expert | Addis Ababa",
   description = "Professional Creative Designer specializing in UI/UX design, brand identity, graphic design, and digital marketing. Based in Addis Ababa, Ethiopia. Transform your brand with stunning visual solutions.",
   keywords = "creative designer, UI/UX designer, brand designer, graphic designer, web designer, logo design, brand identity, digital marketing, Addis Ababa, Ethiopia, portfolio, freelance designer",
-  image = "https://bereketfikre.com/img/Bereket%20Fikre.webp",
+  image = "https://bereketfikre.com/img/Bereket-Fikre.webp",
   url = "https://bereketfikre.com",
   type = "website"
 }) => {
@@ -40,19 +40,24 @@ const SEO = ({
     updateMetaTag('og:title', title, true);
     updateMetaTag('og:description', description, true);
     updateMetaTag('og:image', image, true);
+    updateMetaTag('og:image:secure_url', image, true);
+    updateMetaTag('og:image:alt', 'Bereket Fikre - Professional Creative Designer', true);
+    updateMetaTag('og:image:width', '1200', true);
+    updateMetaTag('og:image:height', '630', true);
+    updateMetaTag('og:image:type', 'image/webp', true);
     updateMetaTag('og:url', url, true);
     updateMetaTag('og:type', type, true);
     updateMetaTag('og:site_name', 'Bereket Fikre Portfolio', true);
     updateMetaTag('og:locale', 'en_US', true);
     
-    // Update Twitter Card tags
-    updateMetaTag('twitter:card', 'summary_large_image', true);
-    updateMetaTag('twitter:title', title, true);
-    updateMetaTag('twitter:description', description, true);
-    updateMetaTag('twitter:image', image, true);
-    updateMetaTag('twitter:url', url, true);
-    updateMetaTag('twitter:creator', '@bereketfikre', true);
-    updateMetaTag('twitter:site', '@bereketfikre', true);
+    // Update Twitter Card tags (use name attribute, not property)
+    updateMetaTag('twitter:card', 'summary_large_image', false);
+    updateMetaTag('twitter:title', title, false);
+    updateMetaTag('twitter:description', description, false);
+    updateMetaTag('twitter:image', image, false);
+    updateMetaTag('twitter:url', url, false);
+    updateMetaTag('twitter:creator', '@bereketfikre', false);
+    updateMetaTag('twitter:site', '@bereketfikre', false);
     
     // Update canonical URL
     let canonical = document.querySelector('link[rel="canonical"]');

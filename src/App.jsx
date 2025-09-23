@@ -1369,7 +1369,7 @@ const About = () => (
             className="space-y-8"
           >
             {/* Main Description */}
-              <div className="space-y-6">
+              <div className="space-y-6 hidden lg:block">
               <h3 className="text-2xl font-bold text-primary">Design Philosophy</h3>
               <div className="space-y-4 text-primary leading-relaxed">
                 <p>
