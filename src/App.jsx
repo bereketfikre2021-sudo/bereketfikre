@@ -3120,10 +3120,10 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
              transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6 text-center ml-8"
+            className="space-y-6 text-center md:text-center text-left ml-0 md:ml-8"
           >
              <h4 className="text-lg font-semibold text-light">Let's Connect</h4>
-             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-center">
+             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-start md:justify-items-center">
                {PROFILE.socials.map((social, index) => (
                 <motion.a
                    key={social.label}
@@ -3151,10 +3151,10 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
              whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
              transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-6 text-right"
+            className="space-y-6 text-left md:text-right"
           >
             <h4 className="text-lg font-semibold text-light">Get In Touch</h4>
-            <div className="space-y-4 flex flex-col items-end">
+            <div className="space-y-4 flex flex-col items-start md:items-end">
               <motion.a
                 href={`mailto:${PROFILE.email}`}
                  className="flex items-center gap-3 text-neutral-300 hover:text-accent transition-colors group"
