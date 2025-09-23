@@ -10,31 +10,57 @@ import SEO from "./components/SEO";
 import { ArrowRight, Mail, Phone, ExternalLink, Palette, LayoutGrid, PenTool, Rocket, Instagram, Linkedin, Github, Dribbble, ChevronUp, MessageCircle, Eye, X, Send, MessageSquare } from "lucide-react";
 import { useForm, ValidationError } from '@formspree/react';
 
-// Image paths for deployment
+// Import images directly
+import logoImg from '/img/Logo.webp';
+import swanClothingImg from '/img/swan-clothing.webp';
+import finixImg from '/img/Finix.webp';
+import maledaCoffeeImg from '/img/Maleda-Coffee.webp';
+import andegnaImg from '/img/Andegna.webp';
+import yatConstructionImg from '/img/YAT-Construction-PLC.webp';
+import altaImg from '/img/Alta.webp';
+import medavailImg from '/img/Medavail.webp';
+import andegnaTshirtImg from '/img/Andegna-Tshirt.webp';
+import niqatMenuImg from '/img/Niqat-Menu.webp';
+import rollupBannersImg from '/img/Rollup-Banners.webp';
+import bereketFikreImg from '/img/Bereket-Fikre.webp';
+import gedyImg from '/img/Gedy.webp';
+import dagImg from '/img/Dag.webp';
+import abenezerImg from '/img/Abenezer.webp';
+import kassImg from '/img/Kass.webp';
+import mikoImg from '/img/Miko.webp';
+import hayleImg from '/img/Hayle.webp';
+import andegnaLogoImg from '/img/Andegna-Logo-Outline.webp';
+import niqatImg from '/img/Niqat.webp';
+import primeAllImg from '/img/Prime-All.webp';
+import medavailLogoImg from '/img/Medavail-logo.webp';
+import gedylawImg from '/img/Gedylaw.webp';
+import pdcLogoImg from '/img/PDC-Logo.webp';
+
+// Image paths for deployment - using imported images
 const IMAGES = {
-  swanClothing: '/img/swan-clothing.webp',
-  finix: '/img/Finix.webp',
-  maledaCoffee: '/img/Maleda-Coffee.webp',
-  andegna: '/img/Andegna.webp',
-  yatConstruction: '/img/YAT-Construction-PLC.webp',
-  alta: '/img/Alta.webp',
-  medavail: '/img/Medavail.webp',
-  andegnaTshirt: '/img/Andegna-Tshirt.webp',
-  niqatMenu: '/img/Niqat-Menu.webp',
-  rollupBanners: '/img/Rollup-Banners.webp',
-  bereketFikre: '/img/Bereket-Fikre.webp',
-  gedy: '/img/Gedy.webp',
-  dag: '/img/Dag.webp',
-  abenezer: '/img/Abenezer.webp',
-  kass: '/img/Kass.webp',
-  miko: '/img/Miko.webp',
-  hayle: '/img/Hayle.webp',
-  andegnaLogo: '/img/Andegna-Logo-Outline.webp',
-  niqat: '/img/Niqat.webp',
-  primeAll: '/img/Prime-All.webp',
-  medavailLogo: '/img/Medavail-logo.webp',
-  gedylaw: '/img/Gedylaw.webp',
-  pdcLogo: '/img/PDC-Logo.webp',
+  swanClothing: swanClothingImg,
+  finix: finixImg,
+  maledaCoffee: maledaCoffeeImg,
+  andegna: andegnaImg,
+  yatConstruction: yatConstructionImg,
+  alta: altaImg,
+  medavail: medavailImg,
+  andegnaTshirt: andegnaTshirtImg,
+  niqatMenu: niqatMenuImg,
+  rollupBanners: rollupBannersImg,
+  bereketFikre: bereketFikreImg,
+  gedy: gedyImg,
+  dag: dagImg,
+  abenezer: abenezerImg,
+  kass: kassImg,
+  miko: mikoImg,
+  hayle: hayleImg,
+  andegnaLogo: andegnaLogoImg,
+  niqat: niqatImg,
+  primeAll: primeAllImg,
+  medavailLogo: medavailLogoImg,
+  gedylaw: gedylawImg,
+  pdcLogo: pdcLogoImg,
 };
 
 // ——————————————————————————————————————
@@ -781,7 +807,7 @@ const Header = () => {
     }`}>
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
         <a href="#home" className="flex items-center hover:opacity-80 transition-opacity">
-          <img src="/img/Logo.webp" alt="Logo" className="h-8 sm:h-10 w-auto" />
+          <img src={logoImg} alt="Logo" className="h-8 sm:h-10 w-auto" />
         </a>
         
         {/* Desktop Navigation */}
@@ -3107,7 +3133,7 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
                className="flex items-center"
              >
                <img 
-                 src="/img/Logo.webp" 
+                 src={logoImg} 
                  alt="Logo"
                  className="h-12 w-auto"
                />
