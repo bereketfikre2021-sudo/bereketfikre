@@ -60,7 +60,7 @@ const SERVICES = [
   {
     icon: Palette,
     title: "Branding & Visual Identity Design",
-    desc: "Complete brand identity solutions including logo design, brand guidelines, business cards, and brand collateral templates.",
+    desc: "Brand identity solutions including logo design, guidelines, business cards & templates.",
     tags: ["Logo Design", "Brand Guidelines", "Business Cards", "Brand Collateral"],
   },
   {
@@ -234,20 +234,20 @@ const PROJECTS = [
   },
   {
     id: "p9",
-    title: "Restaurant Menu & Brochure Design - Niqat Coffee",
-    role: "Menu Design · Digital Integration · Print Design",
+    title: "Cafe Menu & Brochure Design - Niqat Coffee",
+    role: "Menu Design · Print Design",
     thumb: IMAGES.niqatMenu,
     images: [
       IMAGES.niqatMenu,
     ],
     summary:
-      "Complete restaurant menu design including trifold layout, QR code integration for digital menus, and modern typography. Professional menu design that enhances customer experience with both traditional print and digital accessibility options.",
-    tags: ["Menu Design", "QR Codes", "Trifold", "Restaurant", "Digital Integration"],
+      "Complete cafe menu design including trifold layout and modern typography. Professional menu design that enhances customer experience with elegant print presentation and clear visual hierarchy.",
+    tags: ["Menu Design", "Trifold", "Cafe", "Print Design"],
     link: "#",
-    description: "☕ Niqat Coffee's menu transformation became a culinary storytelling revolution that made every dish feel like a work of art. This wasn't just a menu design—it was a complete dining experience that bridges the gap between traditional hospitality and modern digital convenience. I crafted a sophisticated trifold layout that guides customers through a visual journey of flavors and aromas, complemented by seamless QR code integration that brings the menu to life on any device. Every typography choice and layout decision was designed to enhance the dining experience and make ordering feel effortless.",
-    challenges: "🎯 The ultimate restaurant branding challenge: How do you create a menu that works for both traditional diners and tech-savvy customers? How do you make food descriptions feel appetizing while maintaining readability? The challenge was designing for a coffee shop that serves both quick takeaway customers and those who want to linger and explore the full menu experience.",
-    solutions: "🚀 I engineered a dual-format solution that's both timeless and cutting-edge: a beautiful trifold print menu that works for traditional dining, seamless QR code integration for digital convenience, and a typography system that makes every dish description feel irresistible. The result? A menu system that doesn't just list food—it creates anticipation and enhances the entire dining experience.",
-    results: "🏆 The transformation was absolutely delicious: 30% increase in average order value, 50% reduction in wait times for digital orders, and a menu that became a conversation starter among customers. Niqat Coffee didn't just get a new menu—they got a dining experience that makes every visit feel special and every dish feel irresistible."
+    description: "☕ Niqat Coffee's menu transformation became a culinary storytelling revolution that made every dish feel like a work of art. This wasn't just a menu design—it was a complete dining experience that celebrates the art of coffee and food presentation. I crafted a sophisticated trifold layout that guides customers through a visual journey of flavors and aromas, with elegant typography and thoughtful spacing that makes every dish description feel irresistible. Every design choice was made to enhance the dining experience and make ordering feel effortless.",
+    challenges: "🎯 The ultimate cafe branding challenge: How do you create a menu that works for both quick takeaway customers and those who want to linger and explore? How do you make food descriptions feel appetizing while maintaining readability? The challenge was designing for a coffee shop that serves diverse customers with different dining preferences and time constraints.",
+    solutions: "🚀 I engineered a sophisticated print solution that's both timeless and elegant: a beautiful trifold menu layout that works perfectly for cafe dining, thoughtful typography hierarchy that guides the eye naturally, and a design system that makes every dish description feel irresistible. The result? A menu that doesn't just list food—it creates anticipation and enhances the entire dining experience.",
+    results: "🏆 The transformation was absolutely delicious: 30% increase in average order value, improved customer satisfaction with menu clarity, and a menu that became a conversation starter among customers. Niqat Coffee didn't just get a new menu—they got a dining experience that makes every visit feel special and every dish feel irresistible."
   },
   {
     id: "p10",
@@ -285,7 +285,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Professional, quick, and always on point. He captured exactly what we envisioned and more!",
+      "Professional, quick, and always on point. He captured exactly what we envisioned and more! His creative solutions and attention to detail helped us stand out in a crowded market.",
     author: "Abenezer A",
     role: "Digital Marketer",
     avatar: IMAGES.abenezer,
@@ -306,7 +306,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Bereket understood my personal brand instantly and created a logo that reflects my values. The process was collaborative, and the result was uniquely 'me.' Exceptional talent!",
+      "Bereket understood my personal brand instantly and created a logo that reflects my values. The process was collaborative, and the result was uniquely 'me.' Exceptional talent! Highly recommended!",
     author: "Hayleyesus",
     role: "Web Developer",
     avatar: IMAGES.hayle,
@@ -324,6 +324,22 @@ const Section = ({ id, children, className = "" }) => (
 
 // Privacy Policy Component
 const PrivacyPolicy = ({ isOpen, onClose }) => {
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscKey);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
@@ -427,6 +443,22 @@ const PrivacyPolicy = ({ isOpen, onClose }) => {
 
 // Project Detail Modal Component
 const ProjectModal = ({ project, isOpen, onClose }) => {
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscKey);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen || !project) return null;
 
   return (
@@ -559,6 +591,22 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
 // Terms of Service Component
 const TermsOfService = ({ isOpen, onClose }) => {
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscKey);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
@@ -733,7 +781,7 @@ const Header = () => {
     }`}>
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
         <a href="#home" className="flex items-center hover:opacity-80 transition-opacity">
-          <img src="/img/Logo.svg" alt="Logo" className="h-8 sm:h-10 w-auto brightness-0 saturate-100" style={{filter: 'brightness(0) saturate(100%) invert(67%) sepia(78%) saturate(2476%) hue-rotate(86deg) brightness(101%) contrast(101%)'}} />
+          <img src="/img/Logo.webp" alt="Logo" className="h-8 sm:h-10 w-auto" />
         </a>
         
         {/* Desktop Navigation */}
@@ -1185,8 +1233,8 @@ const About = () => (
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          {/* Left Column - Image and Stats */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+          {/* Left Column - Image and Connect Section */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -1206,13 +1254,44 @@ const About = () => (
               </div>
             </div>
 
+            {/* Connect With Me Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="space-y-4 pt-8"
+            >
+              <h4 className="text-lg font-semibold text-primary">Connect With Me</h4>
+              <div className="flex flex-wrap gap-3">
+                {PROFILE.socials.map((social, index) => (
+                  <motion.a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-primary/40 transition-all duration-300"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
+                  >
+                    <social.icon className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+                    <span className="text-sm font-medium text-primary">{social.label}</span>
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
                 className="text-center p-6 bg-primary/5 rounded-2xl border border-primary/10"
               >
                 <CountUpNumber target={50} />
@@ -1223,13 +1302,36 @@ const About = () => (
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.6 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
                 className="text-center p-6 bg-primary/5 rounded-2xl border border-primary/10"
               >
                 <div className="text-4xl font-bold text-primary">5+</div>
                 <div className="text-sm text-primary/80 font-medium mt-2">Years Experience</div>
               </motion.div>
             </div>
+
+            {/* Let's Work Together Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 1.0 }}
+              className="pt-2"
+            >
+              <motion.a
+                href="#contact"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Button 
+                  size="lg" 
+                  className="w-full px-8 py-4 rounded-2xl bg-primary text-accent hover:bg-primary/80 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2 focus:ring-offset-accent"
+                >
+                  Let's Work Together
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </motion.a>
+            </motion.div>
           </motion.div>
 
           {/* Right Column - Content */}
@@ -1257,7 +1359,7 @@ const About = () => (
                 </div>
                 
             {/* Skills & Services */}
-              <div className="space-y-6">
+              <div className="space-y-6 pt-16">
               <h3 className="text-2xl font-bold text-primary">What I Do</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-xl">
@@ -1299,59 +1401,7 @@ const About = () => (
               </div>
             </div>
 
-            {/* Social Media Icons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="space-y-4"
-            >
-              <h4 className="text-lg font-semibold text-primary">Connect With Me</h4>
-              <div className="flex flex-wrap gap-3">
-                {PROFILE.socials.map((social, index) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-primary/40 transition-all duration-300"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
-                  >
-                    <social.icon className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
-                    <span className="text-sm font-medium text-primary">{social.label}</span>
-                  </motion.a>
-                ))}
-            </div>
-            </motion.div>
 
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="pt-4"
-            >
-              <motion.a
-                href="#contact"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Button 
-                  size="lg" 
-                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-primary text-accent hover:bg-primary/80 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2 focus:ring-offset-accent"
-                >
-                  Let's Work Together
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </motion.a>
-            </motion.div>
           </motion.div>
         </div>
 
@@ -1407,7 +1457,7 @@ const Services = () => (
               <Card className="h-full border-accent/20 hover:border-accent/40 transition-all duration-300 group-hover:shadow-xl bg-primary/90 backdrop-blur-sm">
                 <CardHeader className="pb-4">
                   <motion.div
-                    className="w-16 h-16 bg-gradient-to-br from-accent to-accent-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+                    className="w-16 h-16 bg-gradient-to-br from-accent to-accent-600 rounded-2xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300"
                     whileHover={{ rotate: 5 }}
                   >
                     <service.icon className="w-8 h-8 text-primary" />
@@ -1418,7 +1468,7 @@ const Services = () => (
                 </CardHeader>
                 <CardContent>
                   <p className="text-neutral-300 mb-6 leading-relaxed">{service.desc}</p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 justify-center">
                     {service.tags.map((tag) => (
                       <Badge 
                         key={tag} 
@@ -1696,7 +1746,7 @@ const Work = () => {
               {/* Magical Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-accent/20 via-secondary/20 to-accent/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
               
-              <Card className="relative overflow-hidden border-2 border-primary/20 hover:border-accent/60 transition-all duration-500 group-hover:shadow-2xl bg-gradient-to-br from-light/90 via-light/80 to-light/90 backdrop-blur-sm group-hover:bg-gradient-to-br group-hover:from-light group-hover:via-light/90 group-hover:to-light">
+              <Card className="relative overflow-hidden border-2 border-primary/20 hover:border-accent/60 transition-all duration-500 group-hover:shadow-2xl bg-gradient-to-br from-light/90 via-light/80 to-light/90 backdrop-blur-sm group-hover:bg-gradient-to-br group-hover:from-light group-hover:via-light/90 group-hover:to-light h-full flex flex-col">
                 {/* Shimmer Effect */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100"
@@ -1757,8 +1807,8 @@ const Work = () => {
                   </div>
                 </div>
                 
-                <CardContent className="p-8 relative">
-                  <div className="space-y-4">
+                <CardContent className="p-8 relative flex-1 flex flex-col">
+                  <div className="space-y-4 flex-1 flex flex-col">
                     <div>
                       <motion.h3
                         className="font-bold text-xl text-primary group-hover:text-accent transition-colors duration-300"
@@ -1769,7 +1819,7 @@ const Work = () => {
                       <p className="text-sm text-primary/70 font-medium">{project.role}</p>
                     </div>
                     <p className="text-primary/80 leading-relaxed">{project.summary}</p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 justify-center">
                       {project.tags.map((tag, tagIndex) => (
                         <motion.div
                           key={tag} 
@@ -1790,16 +1840,16 @@ const Work = () => {
                     </div>
                     <motion.button
                       onClick={() => openProjectModal(project)}
-                      className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-accent group/link transition-colors duration-300 cursor-pointer"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-accent group/link transition-all duration-300 cursor-pointer mx-auto mt-auto px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-accent/40 shadow-sm hover:shadow-md"
                       whileHover={{ x: 8, scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       <span>View Project</span>
                       <motion.div
-                        animate={{ x: [0, 5, 0] }}
+                        animate={{ x: [0, 5, 0], scale: [1, 1.1, 1] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
                       >
-                        <Eye className="w-3 h-3 group-hover/link:translate-x-1 transition-transform" />
+                        <Eye className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                       </motion.div>
                     </motion.button>
                   </div>
@@ -2154,7 +2204,7 @@ const Testimonials = () => {
             
             {/* Content */}
             <div className="relative z-10">
-              <h3 className="text-2xl font-bold text-accent mb-6">Trusted by the famous brands</h3>
+              <h3 className="text-4xl font-bold text-accent mb-6">Trusted By</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-8 items-center opacity-70">
               <motion.a 
                 href="https://andegnafurniture.com/"
@@ -2183,6 +2233,11 @@ const Testimonials = () => {
                     src={IMAGES.andegnaLogo} 
                     alt="Andegna Furniture" 
                     className="w-full h-full object-cover"
+                    style={{ 
+                      filter: 'drop-shadow(0 0 4px #8AEA92) drop-shadow(0 0 8px #8AEA92)',
+                      border: '2px solid #8AEA92',
+                      borderRadius: '50%'
+                    }}
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'flex';
