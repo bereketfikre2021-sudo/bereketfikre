@@ -20,15 +20,18 @@ const PWAInstaller = () => {
       e.preventDefault();
       setDeferredPrompt(e);
       
-      // Show install prompt after 30 seconds if not dismissed
-      const timer = setTimeout(() => {
-        if (!localStorage.getItem('pwa-install-dismissed')) {
-          setShowInstallPrompt(true);
-        }
-      }, 30000);
-
-      return () => clearTimeout(timer);
+      // Show install prompt immediately if not dismissed
+      if (!localStorage.getItem('pwa-install-dismissed')) {
+        setShowInstallPrompt(true);
+      }
     };
+
+    // Show install prompt after a short delay if not dismissed and no deferredPrompt
+    const timer = setTimeout(() => {
+      if (!localStorage.getItem('pwa-install-dismissed') && !deferredPrompt) {
+        setShowInstallPrompt(true);
+      }
+    }, 5000); // Show after 5 seconds
 
     // Listen for app installed event
     const handleAppInstalled = () => {
@@ -47,6 +50,7 @@ const PWAInstaller = () => {
     window.addEventListener('offline', handleOffline);
 
     return () => {
+      clearTimeout(timer);
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
       window.removeEventListener('appinstalled', handleAppInstalled);
       window.removeEventListener('online', handleOnline);
@@ -55,19 +59,27 @@ const PWAInstaller = () => {
   }, []);
 
   const handleInstallClick = async () => {
-    if (!deferredPrompt) return;
-
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    
-    if (outcome === 'accepted') {
-      console.log('PWA installation accepted');
+    if (deferredPrompt) {
+      // Use the browser's install prompt
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      
+      if (outcome === 'accepted') {
+        console.log('PWA installation accepted');
+      } else {
+        console.log('PWA installation dismissed');
+      }
+      
+      setDeferredPrompt(null);
+      setShowInstallPrompt(false);
     } else {
-      console.log('PWA installation dismissed');
+      // Fallback: Show instructions for manual installation
+      alert('To install this app:\n\n' +
+            'Chrome/Edge: Click the install icon in the address bar\n' +
+            'Safari: Tap Share > Add to Home Screen\n' +
+            'Firefox: Click the install icon in the address bar\n\n' +
+            'Or look for the install option in your browser menu.');
     }
-    
-    setDeferredPrompt(null);
-    setShowInstallPrompt(false);
   };
 
   const handleDismiss = () => {
@@ -75,7 +87,7 @@ const PWAInstaller = () => {
     localStorage.setItem('pwa-install-dismissed', 'true');
   };
 
-  if (isInstalled || !deferredPrompt || !showInstallPrompt) {
+  if (isInstalled || !showInstallPrompt) {
     return null;
   }
 
