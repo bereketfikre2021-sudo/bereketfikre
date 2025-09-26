@@ -5,6 +5,13 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Calendar, Clock, ArrowRight, ExternalLink, Tag } from 'lucide-react';
 
+// BG images - using public folder paths that work in both dev and production
+const BG1 = '/img/BG.webp';
+const BG2 = '/img/BG-2.webp';
+const BG3 = '/img/BG-3.webp';
+const BG4 = '/img/BG-4.webp';
+const BG5 = '/img/BG-5.webp';
+
 const BLOG_POSTS = [
   {
     id: 1,
@@ -16,7 +23,7 @@ const BLOG_POSTS = [
     readTime: "8 min read",
     category: "Brand Design",
     tags: ["Color Psychology", "Brand Strategy", "Consumer Behavior"],
-    image: "/img/BG.webp",
+    image: BG1,
     featured: true,
     slug: "psychology-of-color-in-brand-design"
   },
@@ -30,7 +37,7 @@ const BLOG_POSTS = [
     readTime: "6 min read",
     category: "UI/UX Design",
     tags: ["UI/UX", "Design Principles", "User Experience"],
-    image: "/img/BG-2.webp",
+    image: BG2,
     featured: false,
     slug: "essential-ui-ux-design-principles"
   },
@@ -44,7 +51,7 @@ const BLOG_POSTS = [
     readTime: "10 min read",
     category: "Brand Identity",
     tags: ["Brand Identity", "Design Process", "Strategy"],
-    image: "/img/BG-3.webp",
+    image: BG3,
     featured: true,
     slug: "complete-brand-identity-design-process"
   },
@@ -58,7 +65,7 @@ const BLOG_POSTS = [
     readTime: "7 min read",
     category: "Design Trends",
     tags: ["Design Trends", "2024", "Industry Insights"],
-    image: "/img/BG-4.webp",
+    image: BG4,
     featured: false,
     slug: "design-trends-2024-whats-in-and-out"
   },
@@ -72,7 +79,7 @@ const BLOG_POSTS = [
     readTime: "9 min read",
     category: "Business",
     tags: ["Freelancing", "Business", "Ethiopia", "Entrepreneurship"],
-    image: "/img/BG-5.webp",
+    image: BG5,
     featured: false,
     slug: "building-successful-freelance-design-business-ethiopia"
   }
