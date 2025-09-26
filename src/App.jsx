@@ -47,33 +47,33 @@ import { ArrowRight, Mail, Phone, ExternalLink, Palette, LayoutGrid, PenTool, Ro
 import { useForm, ValidationError } from '@formspree/react';
 
 // Logo image path
-const logoImg = '/img/Logo.webp';
+const logoImg = '/bereketfikre/img/Logo.webp';
 
-// Image paths for deployment - using direct paths that work in production
+// Image paths for deployment - using correct base path for GitHub Pages
 const IMAGES = {
-  swanClothing: '/img/swan-clothing.webp',
-  finix: '/img/Finix.webp',
-  maledaCoffee: '/img/Maleda-Coffee.webp',
-  andegna: '/img/Andegna.webp',
-  yatConstruction: '/img/YAT-Construction-PLC.webp',
-  alta: '/img/Alta.webp',
-  medavail: '/img/Medavail.webp',
-  andegnaTshirt: '/img/Andegna-Tshirt.webp',
-  niqatMenu: '/img/Niqat-Menu.webp',
-  rollupBanners: '/img/Rollup-Banners.webp',
-  bereketFikre: '/img/Bereket-Fikre.webp',
-  gedy: '/img/Gedy.webp',
-  dag: '/img/Dag.webp',
-  abenezer: '/img/Abenezer.webp',
-  kass: '/img/Kass.webp',
-  miko: '/img/Miko.webp',
-  hayle: '/img/Hayle.webp',
-  andegnaLogo: '/img/Andegna-Logo-Outline.webp',
-  niqat: '/img/Niqat.webp',
-  primeAll: '/img/Prime-All.webp',
-  medavailLogo: '/img/Medavail-logo.webp',
-  gedylaw: '/img/Gedylaw.webp',
-  pdcLogo: '/img/PDC-Logo.webp',
+  swanClothing: '/bereketfikre/img/swan-clothing.webp',
+  finix: '/bereketfikre/img/Finix.webp',
+  maledaCoffee: '/bereketfikre/img/Maleda-Coffee.webp',
+  andegna: '/bereketfikre/img/Andegna.webp',
+  yatConstruction: '/bereketfikre/img/YAT-Construction-PLC.webp',
+  alta: '/bereketfikre/img/Alta.webp',
+  medavail: '/bereketfikre/img/Medavail.webp',
+  andegnaTshirt: '/bereketfikre/img/Andegna-Tshirt.webp',
+  niqatMenu: '/bereketfikre/img/Niqat-Menu.webp',
+  rollupBanners: '/bereketfikre/img/Rollup-Banners.webp',
+  bereketFikre: '/bereketfikre/img/Bereket-Fikre.webp',
+  gedy: '/bereketfikre/img/Gedy.webp',
+  dag: '/bereketfikre/img/Dag.webp',
+  abenezer: '/bereketfikre/img/Abenezer.webp',
+  kass: '/bereketfikre/img/Kass.webp',
+  miko: '/bereketfikre/img/Miko.webp',
+  hayle: '/bereketfikre/img/Hayle.webp',
+  andegnaLogo: '/bereketfikre/img/Andegna-Logo-Outline.webp',
+  niqat: '/bereketfikre/img/Niqat.webp',
+  primeAll: '/bereketfikre/img/Prime-All.webp',
+  medavailLogo: '/bereketfikre/img/Medavail-logo.webp',
+  gedylaw: '/bereketfikre/img/Gedylaw.webp',
+  pdcLogo: '/bereketfikre/img/PDC-Logo.webp',
 };
 
 // ——————————————————————————————————————

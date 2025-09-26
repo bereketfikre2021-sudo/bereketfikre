@@ -5,12 +5,12 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Calendar, Clock, ArrowRight, ExternalLink, Tag } from 'lucide-react';
 
-// BG images - using public folder paths that work in both dev and production
-const BG1 = '/img/BG.webp';
-const BG2 = '/img/BG-2.webp';
-const BG3 = '/img/BG-3.webp';
-const BG4 = '/img/BG-4.webp';
-const BG5 = '/img/BG-5.webp';
+// BG images - using correct base path for GitHub Pages
+const BG1 = '/bereketfikre/img/BG.webp';
+const BG2 = '/bereketfikre/img/BG-2.webp';
+const BG3 = '/bereketfikre/img/BG-3.webp';
+const BG4 = '/bereketfikre/img/BG-4.webp';
+const BG5 = '/bereketfikre/img/BG-5.webp';
 
 const BLOG_POSTS = [
   {
