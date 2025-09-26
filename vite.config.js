@@ -13,6 +13,14 @@ export default defineConfig({
   build: {
     assetsDir: 'assets',
     rollupOptions: {
+      external: [
+        // Exclude public folder images from bundling
+        '/img/BG.webp',
+        '/img/BG-2.webp',
+        '/img/BG-3.webp',
+        '/img/BG-4.webp',
+        '/img/BG-5.webp'
+      ],
       output: {
         assetFileNames: 'assets/[name]-[hash][extname]',
         chunkFileNames: 'assets/[name]-[hash].js',

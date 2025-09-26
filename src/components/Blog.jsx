@@ -5,12 +5,12 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Calendar, Clock, ArrowRight, ExternalLink, Tag } from 'lucide-react';
 
-// BG images - importing as modules to ensure proper bundling
-import BG1 from '/img/BG.webp';
-import BG2 from '/img/BG-2.webp';
-import BG3 from '/img/BG-3.webp';
-import BG4 from '/img/BG-4.webp';
-import BG5 from '/img/BG-5.webp';
+// BG images - using public folder paths that work in both dev and production
+const BG1 = '/img/BG.webp';
+const BG2 = '/img/BG-2.webp';
+const BG3 = '/img/BG-3.webp';
+const BG4 = '/img/BG-4.webp';
+const BG5 = '/img/BG-5.webp';
 
 const BLOG_POSTS = [
   {
