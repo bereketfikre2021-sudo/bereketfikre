@@ -167,6 +167,11 @@ const BlogPost = ({ post, isFeatured = false }) => {
             <Button 
               variant="outline" 
               className="w-full border-accent/30 text-accent hover:bg-accent hover:text-primary group"
+              onClick={() => {
+                // For now, show an alert with the article title
+                // In a real app, this would navigate to the full article
+                alert(`Opening article: "${post.title}"\n\nThis would normally open the full article at /blog/${post.slug}`);
+              }}
             >
               Read Article
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
