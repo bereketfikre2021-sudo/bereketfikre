@@ -1572,7 +1572,7 @@ const About = () => (
                 <img 
                   src={IMAGES.bereketFikre} 
                   alt="Bereket Fikre"
-                  className="w-full max-h-96 object-contain rounded-2xl"
+                  className="w-full h-80 object-contain rounded-2xl"
                 />
               </div>
             </div>
