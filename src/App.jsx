@@ -1619,13 +1619,12 @@ const About = () => (
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Button 
-                  size="lg" 
-                  className="w-full px-8 py-4 rounded-2xl bg-primary text-accent hover:bg-primary/80 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2 focus:ring-offset-accent"
+                <button 
+                  className="w-full px-8 py-4 rounded-2xl bg-accent text-primary hover:bg-accent/90 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 focus:ring-offset-primary flex items-center justify-center gap-2"
                 >
                   Let's Work Together
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
               </motion.a>
             </motion.div>
           </motion.div>
