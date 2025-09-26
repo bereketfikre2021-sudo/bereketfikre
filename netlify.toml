@@ -2,99 +2,31 @@
   publish = "dist"
   command = "npm run build"
 
-[[headers]]
-  for = "/assets/*.js"
-  [headers.values]
-    Content-Type = "application/javascript; charset=utf-8"
-    Cache-Control = "public, max-age=31536000"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 [[headers]]
-  for = "/assets/*.mjs"
+  for = "/img/*"
   [headers.values]
-    Content-Type = "application/javascript; charset=utf-8"
-    Cache-Control = "public, max-age=31536000"
-
-[[headers]]
-  for = "/assets/*.jsx"
-  [headers.values]
-    Content-Type = "application/javascript; charset=utf-8"
-    Cache-Control = "public, max-age=31536000"
-
-[[headers]]
-  for = "/assets/*.ts"
-  [headers.values]
-    Content-Type = "application/javascript; charset=utf-8"
-    Cache-Control = "public, max-age=31536000"
-
-[[headers]]
-  for = "/assets/*.tsx"
-  [headers.values]
-    Content-Type = "application/javascript; charset=utf-8"
-    Cache-Control = "public, max-age=31536000"
-
-[[headers]]
-  for = "/assets/*.css"
-  [headers.values]
-    Content-Type = "text/css; charset=utf-8"
-    Cache-Control = "public, max-age=31536000"
-
-[[headers]]
-  for = "/img/*.webp"
-  [headers.values]
-    Content-Type = "image/webp"
-    Cache-Control = "public, max-age=31536000"
-    Access-Control-Allow-Origin = "*"
-
-[[headers]]
-  for = "/img/*.svg"
-  [headers.values]
-    Content-Type = "image/svg+xml"
-    Cache-Control = "public, max-age=31536000"
-
-[[headers]]
-  for = "/img/*.png"
-  [headers.values]
-    Content-Type = "image/png"
-    Cache-Control = "public, max-age=31536000"
-
-[[headers]]
-  for = "/img/*.jpg"
-  [headers.values]
-    Content-Type = "image/jpeg"
-    Cache-Control = "public, max-age=31536000"
-
-[[headers]]
-  for = "/img/BG*.webp"
-  [headers.values]
-    Content-Type = "image/webp"
     Cache-Control = "public, max-age=31536000"
     Access-Control-Allow-Origin = "*"
 
 [[headers]]
   for = "/favicon*"
   [headers.values]
-    Content-Type = "image/x-icon"
     Cache-Control = "public, max-age=86400"
     Access-Control-Allow-Origin = "*"
 
 [[headers]]
-  for = "/favicon.svg"
+  for = "/*.js"
   [headers.values]
-    Content-Type = "image/svg+xml"
-    Cache-Control = "public, max-age=86400"
-    Access-Control-Allow-Origin = "*"
+    Content-Type = "application/javascript"
+    Cache-Control = "public, max-age=31536000"
 
 [[headers]]
-  for = "/android-chrome*"
+  for = "/*.css"
   [headers.values]
-    Cache-Control = "public, max-age=86400"
-
-[[headers]]
-  for = "/apple-touch-icon*"
-  [headers.values]
-    Cache-Control = "public, max-age=86400"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+    Content-Type = "text/css"
+    Cache-Control = "public, max-age=31536000"
