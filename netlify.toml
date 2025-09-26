@@ -73,7 +73,16 @@
 [[headers]]
   for = "/favicon*"
   [headers.values]
+    Content-Type = "image/x-icon"
     Cache-Control = "public, max-age=86400"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "/favicon.svg"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+    Cache-Control = "public, max-age=86400"
+    Access-Control-Allow-Origin = "*"
 
 [[headers]]
   for = "/android-chrome*"
