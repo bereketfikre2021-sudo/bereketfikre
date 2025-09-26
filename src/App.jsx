@@ -1572,7 +1572,7 @@ const About = () => (
                 <OptimizedImage 
                   src={IMAGES.bereketFikre} 
                   alt="Bereket Fikre"
-                  className="w-full h-80 object-contain rounded-2xl"
+                  className="w-full h-80 object-cover rounded-2xl"
                   priority={true}
                   placeholder="blur"
                   quality={90}
