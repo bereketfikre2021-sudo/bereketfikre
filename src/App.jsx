@@ -73,31 +73,31 @@ import medavailLogoImg from './assets/img/Medavail-logo.webp';
 import gedylawImg from './assets/img/Gedylaw.webp';
 import pdcLogoImg from './assets/img/PDC-Logo.webp';
 
-// Image paths for deployment - using imported images
+// Image paths for deployment - using direct paths that work in production
 const IMAGES = {
-  swanClothing: swanClothingImg,
-  finix: finixImg,
-  maledaCoffee: maledaCoffeeImg,
-  andegna: andegnaImg,
-  yatConstruction: yatConstructionImg,
-  alta: altaImg,
-  medavail: medavailImg,
-  andegnaTshirt: andegnaTshirtImg,
-  niqatMenu: niqatMenuImg,
-  rollupBanners: rollupBannersImg,
-  bereketFikre: bereketFikreImg,
-  gedy: gedyImg,
-  dag: dagImg,
-  abenezer: abenezerImg,
-  kass: kassImg,
-  miko: mikoImg,
-  hayle: hayleImg,
-  andegnaLogo: andegnaLogoImg,
-  niqat: niqatImg,
-  primeAll: primeAllImg,
-  medavailLogo: medavailLogoImg,
-  gedylaw: gedylawImg,
-  pdcLogo: pdcLogoImg,
+  swanClothing: '/img/swan-clothing.webp',
+  finix: '/img/Finix.webp',
+  maledaCoffee: '/img/Maleda-Coffee.webp',
+  andegna: '/img/Andegna.webp',
+  yatConstruction: '/img/YAT-Construction-PLC.webp',
+  alta: '/img/Alta.webp',
+  medavail: '/img/Medavail.webp',
+  andegnaTshirt: '/img/Andegna-Tshirt.webp',
+  niqatMenu: '/img/Niqat-Menu.webp',
+  rollupBanners: '/img/Rollup-Banners.webp',
+  bereketFikre: '/img/Bereket-Fikre.webp',
+  gedy: '/img/Gedy.webp',
+  dag: '/img/Dag.webp',
+  abenezer: '/img/Abenezer.webp',
+  kass: '/img/Kass.webp',
+  miko: '/img/Miko.webp',
+  hayle: '/img/Hayle.webp',
+  andegnaLogo: '/img/Andegna-Logo-Outline.webp',
+  niqat: '/img/Niqat.webp',
+  primeAll: '/img/Prime-All.webp',
+  medavailLogo: '/img/Medavail-logo.webp',
+  gedylaw: '/img/Gedylaw.webp',
+  pdcLogo: '/img/PDC-Logo.webp',
 };
 
 // ——————————————————————————————————————
@@ -1569,13 +1569,10 @@ const About = () => (
             <div className="relative">
               <div className="absolute inset-0 bg-accent rounded-3xl transform rotate-3"></div>
               <div className="relative bg-light rounded-3xl p-8 shadow-2xl">
-                <OptimizedImage 
+                <img 
                   src={IMAGES.bereketFikre} 
                   alt="Bereket Fikre"
                   className="w-full h-80 object-cover rounded-2xl"
-                  priority={true}
-                  placeholder="blur"
-                  quality={90}
                 />
               </div>
             </div>
