@@ -10,7 +10,6 @@ import Blog from "./components/Blog";
 import Analytics from "./components/Analytics";
 import ProjectGallery from "./components/ProjectGallery";
 import NewsletterSignup from "./components/NewsletterSignup";
-import OptimizedImage from "./components/OptimizedImage";
 import { ThemeProvider } from "./components/ThemeProvider";
 import ThemeToggle from "./components/ThemeToggle";
 import CaseStudy from "./components/CaseStudy";
@@ -47,31 +46,8 @@ import PWAInstaller, { OfflineIndicator, registerServiceWorker } from "./compone
 import { ArrowRight, Mail, Phone, ExternalLink, Palette, LayoutGrid, PenTool, Rocket, Instagram, Linkedin, Github, Dribbble, ChevronUp, MessageCircle, Eye, X, Send, MessageSquare, BarChart3, Play, Pause, Volume2, VolumeX, Maximize, Minimize, RotateCcw, Settings, Star, Quote, ChevronDown } from "lucide-react";
 import { useForm, ValidationError } from '@formspree/react';
 
-// Import images from src/assets
-import logoImg from './assets/img/Logo.webp';
-import swanClothingImg from './assets/img/swan-clothing.webp';
-import finixImg from './assets/img/Finix.webp';
-import maledaCoffeeImg from './assets/img/Maleda-Coffee.webp';
-import andegnaImg from './assets/img/Andegna.webp';
-import yatConstructionImg from './assets/img/YAT-Construction-PLC.webp';
-import altaImg from './assets/img/Alta.webp';
-import medavailImg from './assets/img/Medavail.webp';
-import andegnaTshirtImg from './assets/img/Andegna-Tshirt.webp';
-import niqatMenuImg from './assets/img/Niqat-Menu.webp';
-import rollupBannersImg from './assets/img/Rollup-Banners.webp';
-import bereketFikreImg from './assets/img/Bereket-Fikre.webp';
-import gedyImg from './assets/img/Gedy.webp';
-import dagImg from './assets/img/Dag.webp';
-import abenezerImg from './assets/img/Abenezer.webp';
-import kassImg from './assets/img/Kass.webp';
-import mikoImg from './assets/img/Miko.webp';
-import hayleImg from './assets/img/Hayle.webp';
-import andegnaLogoImg from './assets/img/Andegna-Logo-Outline.webp';
-import niqatImg from './assets/img/Niqat.webp';
-import primeAllImg from './assets/img/Prime-All.webp';
-import medavailLogoImg from './assets/img/Medavail-logo.webp';
-import gedylawImg from './assets/img/Gedylaw.webp';
-import pdcLogoImg from './assets/img/PDC-Logo.webp';
+// Logo image path
+const logoImg = '/img/Logo.webp';
 
 // Image paths for deployment - using direct paths that work in production
 const IMAGES = {
@@ -610,13 +586,10 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
           {/* Project Image */}
           <div className="relative">
             <div className="aspect-video bg-gradient-to-br from-primary/10 to-primary-600/10 rounded-2xl overflow-hidden">
-              <OptimizedImage
+              <img
                 src={project.thumb}
                 alt={project.title}
                 className="w-full h-full object-cover"
-                priority={false}
-                placeholder="blur"
-                quality={80}
               />
             </div>
           </div>
@@ -1002,7 +975,7 @@ const Header = ({
     }`}>
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
         <a href="#home" className="flex items-center hover:opacity-80 transition-opacity">
-          <OptimizedImage src={logoImg} alt="Logo" className="h-8 sm:h-10 w-auto" priority={true} placeholder="none" />
+          <img src={logoImg} alt="Logo" className="h-8 sm:h-10 w-auto" />
         </a>
         
         {/* Desktop Navigation */}
@@ -2000,13 +1973,10 @@ const Work = () => {
                 />
 
                 <div className="relative aspect-video bg-gradient-to-br from-primary/10 to-primary-600/10 overflow-hidden">
-                  <OptimizedImage
+                  <img
                     src={project.thumb}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    priority={false}
-                    placeholder="blur"
-                    quality={80}
                   />
                   
                   {/* Magical Overlay */}
@@ -2293,13 +2263,10 @@ const Testimonials = () => {
                       <div className="flex items-center gap-4">
                         {/* Avatar Image */}
                         <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-accent flex-shrink-0">
-                          <OptimizedImage 
+                          <img 
                             src={testimonial.avatar} 
                             alt={`${testimonial.author} avatar`}
                             className="w-full h-full object-cover"
-                            priority={false}
-                            placeholder="skeleton"
-                            quality={70}
                           />
                           <div 
                             className="w-full h-full bg-gradient-to-br from-accent to-accent-600 flex items-center justify-center text-primary font-semibold text-sm"
@@ -3544,12 +3511,10 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
            >
              <div className="flex items-center gap-4">
                <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent-600 rounded-2xl overflow-hidden shadow-lg">
-                <OptimizedImage 
+                <img 
                   src={IMAGES.bereketFikre} 
                   alt="Bereket Fikre"
                   className="w-full h-full object-cover"
-                  priority={false}
-                  placeholder="skeleton"
                 />
               </div>
               <div>
@@ -3570,12 +3535,10 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => (
                transition={{ duration: 0.6, delay: 0.2 }}
                className="flex items-center"
              >
-               <OptimizedImage 
+               <img 
                  src={logoImg} 
                  alt="Logo"
                  className="h-12 w-auto"
-                 priority={false}
-                 placeholder="none"
                />
              </motion.div>
           </motion.div>
