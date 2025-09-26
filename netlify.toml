@@ -43,6 +43,7 @@
   [headers.values]
     Content-Type = "image/webp"
     Cache-Control = "public, max-age=31536000"
+    Access-Control-Allow-Origin = "*"
 
 [[headers]]
   for = "/img/*.svg"
@@ -61,6 +62,13 @@
   [headers.values]
     Content-Type = "image/jpeg"
     Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/img/BG*.webp"
+  [headers.values]
+    Content-Type = "image/webp"
+    Cache-Control = "public, max-age=31536000"
+    Access-Control-Allow-Origin = "*"
 
 [[headers]]
   for = "/favicon*"
