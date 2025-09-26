@@ -18,9 +18,8 @@ import { LanguageProvider } from "./components/LanguageProvider";
 import LanguageToggle from "./components/LanguageToggle";
 import { LazyTools, LazyAI, LazyPWA, LazyPerformance, preloadCriticalComponents } from "./components/LazyWrapper";
 import { registerAdvancedServiceWorker } from "./components/AdvancedPWA";
-// Disabled utilities to reduce console noise
-// import performanceOptimizer from "./utils/performanceOptimizer";
-// import advancedCache from "./utils/advancedCache";
+import performanceOptimizer from "./utils/performanceOptimizer";
+import advancedCache from "./utils/advancedCache";
 import scrollAnimations from "./utils/scrollAnimations";
 import ScrollProgress, { CircularScrollProgress, ScrollToTop } from "./components/ScrollProgress";
 import ParallaxSection, { RevealOnScroll, StaggeredReveal } from "./components/ParallaxSection";
@@ -28,17 +27,17 @@ import accessibilityManager from "./utils/accessibility";
 import AccessibilitySettings from "./components/AccessibilitySettings";
 import pageTransitions from "./utils/pageTransitions";
 import AdvancedAnimations from "./components/AdvancedAnimations";
-// Removed AdvancedContactForm - using simpler ContactForm instead
-// Removed duplicate sections - ClientLogosCarousel, AwardsSection, StatisticsSection
-// import advancedAnalytics from "./utils/advancedAnalytics";
-// import CriticalResourceHints from "./components/CriticalResourceHints";
+import AdvancedContactForm from "./components/AdvancedContactForm";
+import ClientLogosCarousel, { AwardsSection, StatisticsSection } from "./components/ClientLogosCarousel";
+import advancedAnalytics from "./utils/advancedAnalytics";
+import CriticalResourceHints from "./components/CriticalResourceHints";
 import PerformanceDashboard from "./components/PerformanceDashboard";
-// import performanceMonitor from "./utils/performanceMonitor";
-// import EnhancedSEO from "./components/EnhancedSEO";
+import performanceMonitor from "./utils/performanceMonitor";
+import EnhancedSEO from "./components/EnhancedSEO";
 import SEOManager from "./components/SEOManager";
 import sitemapGenerator from "./utils/sitemapGenerator";
 import SecurityDashboard from "./components/SecurityDashboard";
-// import securityManager from "./utils/securityManager";
+import securityManager from "./utils/securityManager";
 import AIContentGenerator from "./components/AIContentGenerator";
 import SmartRecommendations from "./components/SmartRecommendations";
 import CRMIntegration from "./components/CRMIntegration";
@@ -1389,7 +1388,7 @@ const Hero = () => {
           </motion.p>
 
           {/* Location */}
-          <motion.div
+          <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.1 }}
@@ -1397,7 +1396,7 @@ const Hero = () => {
           >
             <div className="w-1.5 h-1.5 bg-accent rounded-full"></div>
             {PROFILE.location}
-          </motion.div>
+          </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
@@ -1505,14 +1504,14 @@ const CountUpNumber = ({ target }) => {
   }, [isVisible, target]);
 
   return (
-    <div id="count-up-trigger" className="text-4xl font-bold text-accent">
+    <div id="count-up-trigger" className="text-3xl font-bold text-primary mb-2">
       {count}+
     </div>
   );
 };
 
 const About = () => (
-  <Section id="about" className="relative py-24 bg-primary overflow-hidden">
+  <Section id="about" className="relative py-24 bg-light">
     <div className="mx-auto max-w-6xl px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -1539,7 +1538,7 @@ const About = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-5xl font-bold text-light"
+            className="text-4xl md:text-5xl font-bold text-primary"
           >
             My Story & Approach
           </motion.h2>
@@ -1549,7 +1548,7 @@ const About = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg text-accent/80 max-w-3xl mx-auto"
+            className="text-lg text-primary max-w-3xl mx-auto"
           >
             With over 5 years of experience in graphic design and brand building, I help businesses create meaningful connections through strategic design.
           </motion.p>
@@ -1588,7 +1587,7 @@ const About = () => (
               transition={{ duration: 0.8, delay: 0.4 }}
               className="space-y-4 pt-8"
             >
-              <h4 className="text-lg font-semibold text-light">Connect With Me</h4>
+              <h4 className="text-lg font-semibold text-primary">Connect With Me</h4>
               <div className="flex flex-wrap gap-3">
                 {PROFILE.socials.map((social, index) => (
                   <motion.a
@@ -1596,7 +1595,7 @@ const About = () => (
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 hover:bg-accent/20 border border-accent/20 hover:border-accent/40 transition-all duration-300"
+                    className="group flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-primary/40 transition-all duration-300"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0, y: 20 }}
@@ -1604,8 +1603,8 @@ const About = () => (
                     viewport={{ once: true }}
                     transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
                   >
-                    <social.icon className="w-4 h-4 text-accent group-hover:scale-110 transition-transform" />
-                    <span className="text-sm font-medium text-accent">{social.label}</span>
+                    <social.icon className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+                    <span className="text-sm font-medium text-primary">{social.label}</span>
                   </motion.a>
                 ))}
               </div>
@@ -1618,10 +1617,10 @@ const About = () => (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="text-center p-6 bg-accent/10 rounded-2xl border border-accent/20"
+                className="text-center p-6 bg-primary/5 rounded-2xl border border-primary/10"
               >
                 <CountUpNumber target={50} />
-                <div className="text-sm text-accent/80 font-medium mt-2">Projects Completed</div>
+                <div className="text-sm text-primary/80 font-medium mt-2">Projects Completed</div>
               </motion.div>
               
               <motion.div
@@ -1629,10 +1628,10 @@ const About = () => (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.8 }}
-                className="text-center p-6 bg-accent/10 rounded-2xl border border-accent/20"
+                className="text-center p-6 bg-primary/5 rounded-2xl border border-primary/10"
               >
-                <div className="text-4xl font-bold text-accent">5+</div>
-                <div className="text-sm text-accent/80 font-medium mt-2">Years Experience</div>
+                <div className="text-4xl font-bold text-primary">5+</div>
+                <div className="text-sm text-primary/80 font-medium mt-2">Years Experience</div>
               </motion.div>
             </div>
 
@@ -1670,8 +1669,8 @@ const About = () => (
           >
             {/* Main Description */}
               <div className="space-y-6 hidden lg:block">
-              <h3 className="text-2xl font-bold text-light">Design Philosophy</h3>
-              <div className="space-y-4 text-accent/80 leading-relaxed">
+              <h3 className="text-2xl font-bold text-primary">Design Philosophy</h3>
+              <div className="space-y-4 text-primary leading-relaxed">
                 <p>
                   I believe great design is more than just aesthetics—it's about creating meaningful connections between brands and their audiences. Every project I work on is approached with strategic thinking and creative excellence.
                 </p>
@@ -1686,39 +1685,39 @@ const About = () => (
                 
             {/* Skills & Services */}
               <div className="space-y-6 pt-16">
-              <h3 className="text-2xl font-bold text-light">What I Do</h3>
+              <h3 className="text-2xl font-bold text-primary">What I Do</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <div className="flex items-center gap-3 p-4 bg-accent/10 rounded-xl">
+                <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-xl">
                   <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                     <Palette className="w-4 h-4 text-accent" />
                   </div>
-                  <span className="text-accent font-medium">Branding & Identity</span>
+                  <span className="text-primary font-medium">Branding & Identity</span>
                   </div>
-                <div className="flex items-center gap-3 p-4 bg-accent/10 rounded-xl">
+                <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-xl">
                   <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                     <LayoutGrid className="w-4 h-4 text-accent" />
                 </div>
-                  <span className="text-accent font-medium">Marketing & Social Media</span>
+                  <span className="text-primary font-medium">Marketing & Social Media</span>
                   </div>
-                <div className="flex items-center gap-3 p-4 bg-accent/10 rounded-xl">
+                <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-xl">
                   <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                     <PenTool className="w-4 h-4 text-accent" />
                   </div>
-                  <span className="text-accent font-medium">Web & UI/UX Design</span>
+                  <span className="text-primary font-medium">Web & UI/UX Design</span>
                   </div>
-                <div className="flex items-center gap-3 p-4 bg-accent/10 rounded-xl">
+                <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-xl">
                   <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                     <Rocket className="w-4 h-4 text-accent" />
                   </div>
-                  <span className="text-accent font-medium">Packaging & Labels</span>
+                  <span className="text-primary font-medium">Packaging & Labels</span>
                 </div>
-                <div className="flex items-center gap-3 p-4 bg-accent/10 rounded-xl">
+                <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-xl">
                   <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                     <MessageCircle className="w-4 h-4 text-accent" />
                   </div>
-                  <span className="text-accent font-medium">Motion & Multimedia</span>
+                  <span className="text-primary font-medium">Motion & Multimedia</span>
                 </div>
-                <div className="flex items-center gap-3 p-4 bg-accent/10 rounded-xl">
+                <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-xl">
                   <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                     <Eye className="w-4 h-4 text-accent" />
                   </div>
@@ -1856,7 +1855,7 @@ const Work = () => {
   };
 
   return (
-  <Section id="work" className="relative py-24 bg-primary overflow-hidden">
+  <Section id="work" className="relative py-24 bg-neutral overflow-hidden">
     {/* Magical Background Elements */}
     <div className="absolute inset-0 pointer-events-none">
       {/* Floating Sparkles */}
@@ -2866,7 +2865,7 @@ const Testimonials = () => {
               className="w-full h-full"
               controls
               poster={selectedVideo.thumbnail}
-              onLoadStart={() => {/* Video loading started */}}
+              onLoadStart={() => console.log('Video loading started')}
             >
               <source src={selectedVideo.videoUrl} type="video/mp4" />
               Your browser does not support the video tag.
@@ -2916,7 +2915,35 @@ const Testimonials = () => {
 );
 };
 
-// SocialProof section removed - was duplicate content
+// Social Proof Section
+const SocialProof = () => (
+  <Section id="social-proof" className="relative py-24 bg-primary overflow-hidden">
+    {/* Background Elements */}
+    <div className="absolute inset-0">
+      <div className="absolute top-20 left-20 w-32 h-32 bg-accent/10 rounded-full blur-2xl"></div>
+      <div className="absolute bottom-20 right-20 w-40 h-40 bg-accent/10 rounded-full blur-2xl"></div>
+    </div>
+
+    <div className="mx-auto max-w-6xl px-4 relative z-10">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+        className="space-y-24"
+      >
+        {/* Statistics Section */}
+        <StatisticsSection />
+        
+        {/* Client Logos Carousel */}
+        <ClientLogosCarousel />
+        
+        {/* Awards Section */}
+        <AwardsSection />
+      </motion.div>
+    </div>
+  </Section>
+);
 
 const ContactForm = () => {
   const [state, handleSubmit] = useForm("mandzwvb");
@@ -3500,7 +3527,7 @@ const Contact = () => (
             transition={{ duration: 0.8, delay: 0.2 }}
           className="max-w-4xl mx-auto"
           >
-            <ContactForm />
+            <AdvancedContactForm />
           </motion.div>
 
           {/* Newsletter Signup */}
@@ -3712,28 +3739,29 @@ export default function CreativeDesignerPortfolio() {
 
   React.useEffect(() => {
     // Register service worker for PWA functionality
-    // Service workers disabled to reduce console noise
-    // registerServiceWorker();
-    // registerAdvancedServiceWorker();
-    // preloadCriticalComponents();
-    // Initialize performance optimizations - DISABLED to reduce console noise
-    // performanceOptimizer.init();
-    // Initialize advanced caching - DISABLED to reduce console noise
-    // advancedCache.init();
+    registerServiceWorker();
+    // Register advanced service worker for enhanced features
+    registerAdvancedServiceWorker();
+    // Preload critical components for better performance
+    preloadCriticalComponents();
+    // Initialize performance optimizations
+    performanceOptimizer.init();
+    // Initialize advanced caching
+    advancedCache.init();
     // Initialize scroll animations
     scrollAnimations.init();
     // Initialize accessibility features
     accessibilityManager.init();
     // Initialize page transitions
     pageTransitions.init();
-      // Initialize advanced analytics - DISABLED to reduce console noise
-      // advancedAnalytics.init();
-      // Initialize performance monitoring - DISABLED to reduce console noise
-      // performanceMonitor.init();
-      // Initialize sitemap generator - DISABLED to reduce console noise
-      // sitemapGenerator.init(window.location.origin);
-      // Initialize security manager - DISABLED to reduce console noise
-      // securityManager.init();
+      // Initialize advanced analytics
+      advancedAnalytics.init();
+      // Initialize performance monitoring
+      performanceMonitor.init();
+      // Initialize sitemap generator
+      sitemapGenerator.init(window.location.origin);
+      // Initialize security manager
+      securityManager.init();
     const handler = (e) => {
       const target = e.target.closest('a[href^="#"]');
       if (!target) return;
@@ -3776,6 +3804,7 @@ export default function CreativeDesignerPortfolio() {
       <CaseStudy />
       <Blog />
       <Testimonials />
+      <SocialProof />
       <Contact />
       <Footer 
         onPrivacyClick={() => setIsPrivacyOpen(true)}
@@ -3792,6 +3821,24 @@ export default function CreativeDesignerPortfolio() {
         onClose={() => setIsTermsOpen(false)} 
       />
       
+      {/* Permanent Back to Top Button */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 1 }}
+        className="fixed bottom-4 right-4 sm:bottom-8 z-50"
+      >
+        <motion.a
+          href="#home"
+          className="group flex items-center justify-center w-12 h-12 rounded-full bg-accent/10 hover:bg-accent/20 transition-all duration-300 border border-accent/20 hover:border-accent/40 backdrop-blur-sm shadow-lg"
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          animate={{ y: [0, -5, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronUp className="w-5 h-5 text-accent group-hover:scale-110 transition-transform" />
+        </motion.a>
+      </motion.div>
     </main>
     
     {/* PWA Components */}
@@ -3830,8 +3877,7 @@ export default function CreativeDesignerPortfolio() {
       onClose={() => setIsPerformanceDashboardOpen(false)}
     />
 
-    {/* CriticalResourceHints disabled to fix preload warnings */}
-    {/* <CriticalResourceHints /> */}
+    <CriticalResourceHints />
 
     <SEOManager
       isOpen={isSEOManagerOpen}
@@ -3863,15 +3909,14 @@ export default function CreativeDesignerPortfolio() {
       onClose={() => setIsEmailMarketingOpen(false)}
     />
 
-    {/* EnhancedSEO disabled to fix Helmet nesting issue */}
-    {/* <EnhancedSEO 
+    <EnhancedSEO 
       pageType="homepage"
       customData={{
         title: "Bereket Fikre - Creative Designer & Brand Strategist",
         description: "Professional creative designer specializing in brand identity, UI/UX design, and digital marketing. Transform your vision into compelling visual experiences.",
         keywords: ["creative designer", "brand identity", "UI/UX design", "portfolio", "Bereket Fikre"]
       }}
-    /> */}
+    />
     </ThemeProvider>
     </LanguageProvider>
   );

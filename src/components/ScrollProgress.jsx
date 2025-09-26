@@ -1,0 +1,311 @@
+import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+
+const ScrollProgress = ({ 
+  position = 'top',
+  height = '4px',
+  color = '#8AEA92',
+  backgroundColor = 'rgba(255, 255, 255, 0.1)',
+  showPercentage = false,
+  className = '',
+  ...props 
+}) => {
+  const [scrollPercentage, setScrollPercentage] = useState(0);
+  const { scrollYProgress } = useScroll();
+  
+  // Smooth spring animation for progress bar
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  useEffect(() => {
+    const updateScrollPercentage = () => {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      setScrollPercentage(Math.round(scrollPercent));
+    };
+
+    window.addEventListener('scroll', updateScrollPercentage, { passive: true });
+    updateScrollPercentage(); // Initial call
+
+    return () => {
+      window.removeEventListener('scroll', updateScrollPercentage);
+    };
+  }, []);
+
+  const getPositionStyles = () => {
+    switch (position) {
+      case 'top':
+        return { top: 0, left: 0, right: 0 };
+      case 'bottom':
+        return { bottom: 0, left: 0, right: 0 };
+      case 'left':
+        return { top: 0, left: 0, bottom: 0, width: height, height: '100vh' };
+      case 'right':
+        return { top: 0, right: 0, bottom: 0, width: height, height: '100vh' };
+      default:
+        return { top: 0, left: 0, right: 0 };
+    }
+  };
+
+  const getProgressBarStyles = () => {
+    if (position === 'left' || position === 'right') {
+      return {
+        height: scaleX,
+        width: '100%',
+        backgroundColor: color,
+        transformOrigin: position === 'left' ? 'bottom' : 'top'
+      };
+    }
+    
+    return {
+      width: scaleX,
+      height: '100%',
+      backgroundColor: color,
+      transformOrigin: 'left'
+    };
+  };
+
+  return (
+    <div
+      className={`fixed z-50 ${className}`}
+      style={{
+        ...getPositionStyles(),
+        height: position === 'left' || position === 'right' ? '100vh' : height,
+        backgroundColor: position === 'left' || position === 'right' ? backgroundColor : 'transparent'
+      }}
+      {...props}
+    >
+      {/* Background bar for horizontal progress */}
+      {(position === 'top' || position === 'bottom') && (
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor }}
+        />
+      )}
+      
+      {/* Progress bar */}
+      <motion.div
+        className="absolute"
+        style={getProgressBarStyles()}
+      />
+      
+      {/* Percentage display */}
+      {showPercentage && (
+        <motion.div
+          className="absolute top-2 right-2 bg-primary/80 text-accent text-xs px-2 py-1 rounded-full backdrop-blur-sm"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          {scrollPercentage}%
+        </motion.div>
+      )}
+    </div>
+  );
+};
+
+// Circular scroll progress
+export const CircularScrollProgress = ({ 
+  size = 60,
+  strokeWidth = 4,
+  color = '#8AEA92',
+  backgroundColor = 'rgba(255, 255, 255, 0.1)',
+  showPercentage = true,
+  className = '',
+  ...props 
+}) => {
+  const [scrollPercentage, setScrollPercentage] = useState(0);
+  const { scrollYProgress } = useScroll();
+  
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  useEffect(() => {
+    const updateScrollPercentage = () => {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      setScrollPercentage(Math.round(scrollPercent));
+    };
+
+    window.addEventListener('scroll', updateScrollPercentage, { passive: true });
+    updateScrollPercentage();
+
+    return () => {
+      window.removeEventListener('scroll', updateScrollPercentage);
+    };
+  }, []);
+
+  const radius = (size - strokeWidth) / 2;
+  const circumference = radius * 2 * Math.PI;
+  const strokeDasharray = circumference;
+  const strokeDashoffset = circumference - (scrollPercentage / 100 * circumference);
+
+  return (
+    <div
+      className={`fixed bottom-4 right-4 z-50 ${className}`}
+      {...props}
+    >
+      <svg
+        width={size}
+        height={size}
+        className="transform -rotate-90"
+      >
+        {/* Background circle */}
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          stroke={backgroundColor}
+          strokeWidth={strokeWidth}
+          fill="none"
+        />
+        
+        {/* Progress circle */}
+        <motion.circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          stroke={color}
+          strokeWidth={strokeWidth}
+          fill="none"
+          strokeLinecap="round"
+          strokeDasharray={strokeDasharray}
+          style={{ strokeDashoffset }}
+        />
+      </svg>
+      
+      {/* Percentage text */}
+      {showPercentage && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-xs font-medium text-accent">
+            {scrollPercentage}%
+          </span>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Reading progress for articles
+export const ReadingProgress = ({ 
+  target,
+  color = '#8AEA92',
+  height = '3px',
+  className = '',
+  ...props 
+}) => {
+  const [progress, setProgress] = useState(0);
+  const { scrollYProgress } = useScroll();
+
+  useEffect(() => {
+    const targetElement = target ? document.querySelector(target) : document.body;
+    if (!targetElement) return;
+
+    const updateProgress = () => {
+      const rect = targetElement.getBoundingClientRect();
+      const scrollTop = window.pageYOffset;
+      const docHeight = targetElement.offsetHeight;
+      const winHeight = window.innerHeight;
+      const scrollPercent = scrollTop / (docHeight - winHeight);
+      const progress = Math.min(100, Math.max(0, scrollPercent * 100));
+      setProgress(progress);
+    };
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    return () => {
+      window.removeEventListener('scroll', updateProgress);
+    };
+  }, [target]);
+
+  return (
+    <div
+      className={`fixed top-0 left-0 right-0 z-50 ${className}`}
+      style={{ height }}
+      {...props}
+    >
+      <motion.div
+        className="h-full"
+        style={{ 
+          backgroundColor: color,
+          width: `${progress}%`
+        }}
+        initial={{ width: 0 }}
+        animate={{ width: `${progress}%` }}
+        transition={{ duration: 0.1 }}
+      />
+    </div>
+  );
+};
+
+// Scroll to top button
+export const ScrollToTop = ({ 
+  threshold = 300,
+  className = '',
+  ...props 
+}) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const { scrollYProgress } = useScroll();
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > threshold) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', toggleVisibility);
+    };
+  }, [threshold]);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  return (
+    <motion.button
+      className={`fixed bottom-4 left-4 z-50 p-3 bg-accent/20 text-accent rounded-full backdrop-blur-sm border border-accent/30 hover:bg-accent/30 transition-colors ${className}`}
+      onClick={scrollToTop}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ 
+        opacity: isVisible ? 1 : 0,
+        scale: isVisible ? 1 : 0.8
+      }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      {...props}
+    >
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M5 10l7-7m0 0l7 7m-7-7v18"
+        />
+      </svg>
+    </motion.button>
+  );
+};
+
+export default ScrollProgress;
