@@ -43,6 +43,7 @@ import SmartRecommendations from "./components/SmartRecommendations";
 import CRMIntegration from "./components/CRMIntegration";
 import EmailMarketing from "./components/EmailMarketing";
 import PWAInstaller, { OfflineIndicator, registerServiceWorker } from "./components/PWAInstaller";
+
 import { ArrowRight, Mail, Phone, ExternalLink, Palette, LayoutGrid, PenTool, Rocket, Instagram, Linkedin, Github, Dribbble, ChevronUp, MessageCircle, Eye, X, Send, MessageSquare, BarChart3, Play, Pause, Volume2, VolumeX, Maximize, Minimize, RotateCcw, Settings, Star, Quote, ChevronDown } from "lucide-react";
 import { useForm, ValidationError } from '@formspree/react';
 
@@ -837,6 +838,42 @@ const Header = ({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   
+  // Handle install app functionality
+  const handleInstallApp = async () => {
+    try {
+      // Check if we have a deferred prompt
+      if (window.deferredPrompt) {
+        window.deferredPrompt.prompt();
+        const { outcome } = await window.deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          console.log('PWA installation accepted');
+        } else {
+          console.log('PWA installation dismissed');
+        }
+        window.deferredPrompt = null;
+      } else {
+        // Show browser-specific instructions
+        const userAgent = navigator.userAgent.toLowerCase();
+        let instructions = '';
+        
+        if (userAgent.includes('chrome') || userAgent.includes('edge')) {
+          instructions = 'Chrome/Edge: Look for the install icon (⊕) in the address bar and click it, or go to Menu > Install App';
+        } else if (userAgent.includes('safari')) {
+          instructions = 'Safari: Tap the Share button (□↗) and select "Add to Home Screen"';
+        } else if (userAgent.includes('firefox')) {
+          instructions = 'Firefox: Look for the install icon in the address bar or go to Menu > Install';
+        } else {
+          instructions = 'Look for an install option in your browser menu or address bar';
+        }
+        
+        alert(`To install this app:\n\n${instructions}\n\nThis will add the app to your home screen or desktop for quick access.`);
+      }
+    } catch (error) {
+      console.error('Install error:', error);
+      alert('Installation failed. Please try using your browser\'s install option manually.');
+    }
+  };
+
   // Handle tool actions
   const handleToolAction = (action) => {
     switch (action) {
@@ -887,6 +924,10 @@ const Header = ({
           languageToggleButton.click();
         }
         break;
+      case 'install-app':
+        // Handle install app functionality
+        handleInstallApp();
+        break;
       default:
         break;
     }
@@ -910,6 +951,7 @@ const Header = ({
     { 
       label: "Tools", 
       dropdown: [
+        { label: "Install App", action: "install-app" },
         { label: "Analytics Dashboard", action: "analytics" },
         { label: "AI Insights", action: "ai-insights" },
         { label: "PWA Features", action: "pwa-features" },
@@ -1814,6 +1856,19 @@ const Work = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Handle ESC key to close modal
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape' && isModalOpen) {
+        setIsModalOpen(false);
+        setSelectedProject(null);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscKey);
+    return () => document.removeEventListener('keydown', handleEscKey);
+  }, [isModalOpen]);
+
   const openProjectModal = (project) => {
     setSelectedProject(project);
     setIsModalOpen(true);
@@ -2135,6 +2190,19 @@ const Testimonials = () => {
   const [activeTab, setActiveTab] = React.useState('written');
   const [selectedVideo, setSelectedVideo] = React.useState(null);
   const [isVideoModalOpen, setIsVideoModalOpen] = React.useState(false);
+
+  // Handle ESC key to close video modal
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape' && isVideoModalOpen) {
+        setIsVideoModalOpen(false);
+        setSelectedVideo(null);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscKey);
+    return () => document.removeEventListener('keydown', handleEscKey);
+  }, [isVideoModalOpen]);
   
   const testimonialsPerPage = 3;
   const totalPages = Math.ceil(TESTIMONIALS.length / testimonialsPerPage);
@@ -2550,256 +2618,495 @@ const Testimonials = () => {
             {/* Content */}
             <div className="relative z-10">
               <h3 className="text-4xl font-bold text-accent mb-6">Trusted By</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-8 items-center opacity-70">
-              <motion.a 
-                href="https://andegnafurniture.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-center block"
-                whileHover={{ 
-                  scale: 1.1, 
-                  y: -10,
-                  transition: { duration: 0.3, ease: "easeOut" }
-                }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                <motion.div 
-                  className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
-                  whileHover={{
-                    boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
-                    transition: { duration: 0.3 }
+              
+              {/* Scrolling Logos Container */}
+              <div className="relative overflow-hidden">
+                {/* Gradient overlays for smooth fade effect */}
+                <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-primary to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-primary to-transparent z-10 pointer-events-none" />
+                
+                {/* Scrolling logos */}
+                <motion.div
+                  className="flex items-center gap-12 py-8"
+                  animate={{
+                    x: [0, -800]
                   }}
+                  transition={{
+                    x: {
+                      repeat: Infinity,
+                      repeatType: "loop",
+                      duration: 30,
+                      ease: "linear",
+                    },
+                  }}
+                  style={{ width: '1600px' }}
                 >
-                  <img 
-                    src={IMAGES.andegnaLogo} 
-                    alt="Andegna Furniture" 
-                    className="w-full h-full object-cover"
-                    style={{ 
-                      filter: 'drop-shadow(0 0 4px #8AEA92) drop-shadow(0 0 8px #8AEA92)',
-                      border: '2px solid #8AEA92',
-                      borderRadius: '50%'
+                  {/* First set of logos */}
+                  {/* Andegna Furniture */}
+                  <motion.a 
+                    href="https://andegnafurniture.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0 text-center block"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      y: -10,
+                      transition: { duration: 0.3, ease: "easeOut" }
                     }}
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
-                    }}
-                  />
-                  <div 
-                    className="w-full h-full bg-primary/20 flex items-center justify-center"
-                    style={{ display: 'none' }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <span className="text-primary font-bold text-lg">A</span>
-                  </div>
+                    <motion.div 
+                      className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                      whileHover={{
+                        boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <img 
+                        src={IMAGES.andegnaLogo} 
+                        alt="Andegna Furniture" 
+                        className="w-full h-full object-cover"
+                        style={{ 
+                          filter: 'drop-shadow(0 0 4px #8AEA92) drop-shadow(0 0 8px #8AEA92)',
+                          border: '2px solid #8AEA92',
+                          borderRadius: '50%'
+                        }}
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div 
+                        className="w-full h-full bg-primary/20 flex items-center justify-center"
+                        style={{ display: 'none' }}
+                      >
+                        <span className="text-primary font-bold text-lg">A</span>
+                      </div>
+                    </motion.div>
+                    <p className="text-sm text-accent/80">Andegna Furniture</p>
+                  </motion.a>
+                  {/* Niqat Coffee */}
+                  <motion.a 
+                    href="https://linktr.ee/Niqatcoffee"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0 text-center block"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      y: -10,
+                      transition: { duration: 0.3, ease: "easeOut" }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.div 
+                      className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                      whileHover={{
+                        boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <img 
+                        src={IMAGES.niqat} 
+                        alt="Niqat Coffee" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div 
+                        className="w-full h-full bg-gradient-to-br from-accent to-secondary flex items-center justify-center"
+                        style={{ display: 'none' }}
+                      >
+                        <span className="text-white font-bold text-lg">N</span>
+                      </div>
+                    </motion.div>
+                    <p className="text-sm text-accent/80">Niqat Coffee</p>
+                  </motion.a>
+                  {/* Prime All Trading */}
+                  <motion.a 
+                    href="https://primesoftwaresolution.net/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0 text-center block"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      y: -10,
+                      transition: { duration: 0.3, ease: "easeOut" }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.div 
+                      className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                      whileHover={{
+                        boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <img 
+                        src={IMAGES.primeAll} 
+                        alt="Prime All Trading" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div 
+                        className="w-full h-full bg-gradient-to-br from-primary-dark to-neutral-700 flex items-center justify-center"
+                        style={{ display: 'none' }}
+                      >
+                        <span className="text-white font-bold text-lg">P</span>
+                      </div>
+                    </motion.div>
+                    <p className="text-sm text-accent/80">Prime All Trading</p>
+                  </motion.a>
+                  {/* Medavail Pharmaceutical */}
+                  <motion.div 
+                    className="flex-shrink-0 text-center"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      y: -10,
+                      transition: { duration: 0.3, ease: "easeOut" }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.div 
+                      className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                      whileHover={{
+                        boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <img 
+                        src={IMAGES.medavailLogo} 
+                        alt="Medavail Pharmaceutical" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div 
+                        className="w-full h-full bg-gradient-to-br from-accent to-primary-dark flex items-center justify-center"
+                        style={{ display: 'none' }}
+                      >
+                        <span className="text-white font-bold text-lg">M</span>
+                      </div>
+                    </motion.div>
+                    <p className="text-sm text-accent/80">Medavail Pharmaceutical</p>
+                  </motion.div>
+                  {/* GEDY-LAW */}
+                  <motion.a 
+                    href="https://gedy-law.com/welcome"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0 text-center block"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      y: -10,
+                      transition: { duration: 0.3, ease: "easeOut" }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.div 
+                      className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                      whileHover={{
+                        boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <img 
+                        src={IMAGES.gedylaw} 
+                        alt="GEDY-LAW" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div 
+                        className="w-full h-full bg-gradient-to-br from-primary-dark to-accent flex items-center justify-center"
+                        style={{ display: 'none' }}
+                      >
+                        <span className="text-white font-bold text-lg">G</span>
+                      </div>
+                    </motion.div>
+                    <p className="text-sm text-accent/80">GEDY-LAW</p>
+                  </motion.a>
+                  {/* Pioneer Diagnostic Center */}
+                  <motion.a 
+                    href="https://pdc-et.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0 text-center block"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      y: -10,
+                      transition: { duration: 0.3, ease: "easeOut" }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.div 
+                      className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                      whileHover={{
+                        boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <img 
+                        src={IMAGES.pdcLogo} 
+                        alt="Pioneer Diagnostic Center" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div 
+                        className="w-full h-full bg-gradient-to-br from-primary-dark to-accent flex items-center justify-center"
+                        style={{ display: 'none' }}
+                      >
+                        <span className="text-white font-bold text-lg">P</span>
+                      </div>
+                    </motion.div>
+                    <p className="text-sm text-accent/80">Pioneer Diagnostic Center</p>
+                  </motion.a>
+
+                  {/* Duplicate set for seamless loop */}
+                  {/* Andegna Furniture */}
+                  <motion.a 
+                    href="https://andegnafurniture.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0 text-center block"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      y: -10,
+                      transition: { duration: 0.3, ease: "easeOut" }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.div 
+                      className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                      whileHover={{
+                        boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <img 
+                        src={IMAGES.andegnaLogo} 
+                        alt="Andegna Furniture" 
+                        className="w-full h-full object-cover"
+                        style={{ 
+                          filter: 'drop-shadow(0 0 4px #8AEA92) drop-shadow(0 0 8px #8AEA92)',
+                          border: '2px solid #8AEA92',
+                          borderRadius: '50%'
+                        }}
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div 
+                        className="w-full h-full bg-primary/20 flex items-center justify-center"
+                        style={{ display: 'none' }}
+                      >
+                        <span className="text-primary font-bold text-lg">A</span>
+                      </div>
+                    </motion.div>
+                    <p className="text-sm text-accent/80">Andegna Furniture</p>
+                  </motion.a>
+                  {/* Niqat Coffee */}
+                  <motion.a 
+                    href="https://linktr.ee/Niqatcoffee"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0 text-center block"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      y: -10,
+                      transition: { duration: 0.3, ease: "easeOut" }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.div 
+                      className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                      whileHover={{
+                        boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <img 
+                        src={IMAGES.niqat} 
+                        alt="Niqat Coffee" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div 
+                        className="w-full h-full bg-gradient-to-br from-accent to-secondary flex items-center justify-center"
+                        style={{ display: 'none' }}
+                      >
+                        <span className="text-white font-bold text-lg">N</span>
+                      </div>
+                    </motion.div>
+                    <p className="text-sm text-accent/80">Niqat Coffee</p>
+                  </motion.a>
+                  {/* Prime All Trading */}
+                  <motion.a 
+                    href="https://primesoftwaresolution.net/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0 text-center block"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      y: -10,
+                      transition: { duration: 0.3, ease: "easeOut" }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.div 
+                      className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                      whileHover={{
+                        boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <img 
+                        src={IMAGES.primeAll} 
+                        alt="Prime All Trading" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div 
+                        className="w-full h-full bg-gradient-to-br from-primary-dark to-neutral-700 flex items-center justify-center"
+                        style={{ display: 'none' }}
+                      >
+                        <span className="text-white font-bold text-lg">P</span>
+                      </div>
+                    </motion.div>
+                    <p className="text-sm text-accent/80">Prime All Trading</p>
+                  </motion.a>
+                  {/* Medavail Pharmaceutical */}
+                  <motion.div 
+                    className="flex-shrink-0 text-center"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      y: -10,
+                      transition: { duration: 0.3, ease: "easeOut" }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.div 
+                      className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                      whileHover={{
+                        boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <img 
+                        src={IMAGES.medavailLogo} 
+                        alt="Medavail Pharmaceutical" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div 
+                        className="w-full h-full bg-gradient-to-br from-accent to-primary-dark flex items-center justify-center"
+                        style={{ display: 'none' }}
+                      >
+                        <span className="text-white font-bold text-lg">M</span>
+                      </div>
+                    </motion.div>
+                    <p className="text-sm text-accent/80">Medavail Pharmaceutical</p>
+                  </motion.div>
+                  {/* GEDY-LAW */}
+                  <motion.a 
+                    href="https://gedy-law.com/welcome"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0 text-center block"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      y: -10,
+                      transition: { duration: 0.3, ease: "easeOut" }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.div 
+                      className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                      whileHover={{
+                        boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <img 
+                        src={IMAGES.gedylaw} 
+                        alt="GEDY-LAW" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div 
+                        className="w-full h-full bg-gradient-to-br from-primary-dark to-accent flex items-center justify-center"
+                        style={{ display: 'none' }}
+                      >
+                        <span className="text-white font-bold text-lg">G</span>
+                      </div>
+                    </motion.div>
+                    <p className="text-sm text-accent/80">GEDY-LAW</p>
+                  </motion.a>
+                  {/* Pioneer Diagnostic Center */}
+                  <motion.a 
+                    href="https://pdc-et.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0 text-center block"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      y: -10,
+                      transition: { duration: 0.3, ease: "easeOut" }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.div 
+                      className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                      whileHover={{
+                        boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <img 
+                        src={IMAGES.pdcLogo} 
+                        alt="Pioneer Diagnostic Center" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div 
+                        className="w-full h-full bg-gradient-to-br from-primary-dark to-accent flex items-center justify-center"
+                        style={{ display: 'none' }}
+                      >
+                        <span className="text-white font-bold text-lg">P</span>
+                      </div>
+                    </motion.div>
+                    <p className="text-sm text-accent/80">Pioneer Diagnostic Center</p>
+                  </motion.a>
+
                 </motion.div>
-                <p className="text-sm text-accent/80">Andegna Furniture</p>
-              </motion.a>
-              <motion.a 
-                href="https://linktr.ee/Niqatcoffee"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-center block"
-                whileHover={{ 
-                  scale: 1.1, 
-                  y: -10,
-                  transition: { duration: 0.3, ease: "easeOut" }
-                }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <motion.div 
-                  className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
-                  whileHover={{
-                    boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
-                    transition: { duration: 0.3 }
-                  }}
-                >
-                  <img 
-                    src={IMAGES.niqat} 
-                    alt="Niqat Coffee" 
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
-                    }}
-                  />
-                  <div 
-                    className="w-full h-full bg-gradient-to-br from-accent to-secondary flex items-center justify-center"
-                    style={{ display: 'none' }}
-                  >
-                    <span className="text-white font-bold text-lg">N</span>
-                  </div>
-                </motion.div>
-                <p className="text-sm text-accent/80">Niqat Coffee</p>
-              </motion.a>
-              <motion.a 
-                href="https://primesoftwaresolution.net/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-center block"
-                whileHover={{ 
-                  scale: 1.1, 
-                  y: -10,
-                  transition: { duration: 0.3, ease: "easeOut" }
-                }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                <motion.div 
-                  className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
-                  whileHover={{
-                    boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
-                    transition: { duration: 0.3 }
-                  }}
-                >
-                  <img 
-                    src={IMAGES.primeAll} 
-                    alt="Prime All Trading" 
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
-                    }}
-                  />
-                  <div 
-                    className="w-full h-full bg-gradient-to-br from-primary-dark to-neutral-700 flex items-center justify-center"
-                    style={{ display: 'none' }}
-                  >
-                    <span className="text-white font-bold text-lg">P</span>
-                  </div>
-                </motion.div>
-                <p className="text-sm text-accent/80">Prime All Trading</p>
-              </motion.a>
-              <motion.div 
-                className="text-center"
-                whileHover={{ 
-                  scale: 1.1, 
-                  y: -10,
-                  transition: { duration: 0.3, ease: "easeOut" }
-                }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                <motion.div 
-                  className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
-                  whileHover={{
-                    boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
-                    transition: { duration: 0.3 }
-                  }}
-                >
-                  <img 
-                    src={IMAGES.medavailLogo} 
-                    alt="Medavail Pharmaceutical" 
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
-                    }}
-                  />
-                  <div 
-                    className="w-full h-full bg-gradient-to-br from-accent to-primary-dark flex items-center justify-center"
-                    style={{ display: 'none' }}
-                  >
-                    <span className="text-white font-bold text-lg">M</span>
-                  </div>
-                </motion.div>
-                <p className="text-sm text-accent/80">Medavail Pharmaceutical</p>
-              </motion.div>
-              <motion.a 
-                href="https://gedy-law.com/welcome"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-center block"
-                whileHover={{ 
-                  scale: 1.1, 
-                  y: -10,
-                  transition: { duration: 0.3, ease: "easeOut" }
-                }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-              >
-                <motion.div 
-                  className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
-                  whileHover={{
-                    boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
-                    transition: { duration: 0.3 }
-                  }}
-                >
-                  <img 
-                    src={IMAGES.gedylaw} 
-                    alt="GEDY-LAW" 
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
-                    }}
-                  />
-                  <div 
-                    className="w-full h-full bg-gradient-to-br from-primary-dark to-accent flex items-center justify-center"
-                    style={{ display: 'none' }}
-                  >
-                    <span className="text-white font-bold text-lg">G</span>
               </div>
-                </motion.div>
-                <p className="text-sm text-accent/80">GEDY-LAW</p>
-              </motion.a>
-              <motion.a 
-                href="https://pdc-et.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-center block"
-                whileHover={{ 
-                  scale: 1.1, 
-                  y: -10,
-                  transition: { duration: 0.3, ease: "easeOut" }
-                }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-              >
-                <motion.div 
-                  className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-2 overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
-                  whileHover={{
-                    boxShadow: "0 20px 40px rgba(167, 139, 250, 0.4)",
-                    transition: { duration: 0.3 }
-                  }}
-                >
-                  <img 
-                    src={IMAGES.pdcLogo} 
-                    alt="Pioneer Diagnostic Center" 
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
-                    }}
-                  />
-                  <div 
-                    className="w-full h-full bg-gradient-to-br from-primary-dark to-accent flex items-center justify-center"
-                    style={{ display: 'none' }}
-                  >
-                    <span className="text-white font-bold text-lg">P</span>
-                  </div>
-                </motion.div>
-                <p className="text-sm text-accent/80">Pioneer Diagnostic Center</p>
-              </motion.a>
-            </div>
             </div>
           </div>
         </motion.div>
@@ -3669,10 +3976,48 @@ export default function CreativeDesignerPortfolio() {
   const [isCRMIntegrationOpen, setIsCRMIntegrationOpen] = useState(false);
   const [isEmailMarketingOpen, setIsEmailMarketingOpen] = useState(false);
 
+  // Handle ESC key to close modals
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape') {
+        // Close all modals in order of priority
+        if (isEmailMarketingOpen) setIsEmailMarketingOpen(false);
+        else if (isCRMIntegrationOpen) setIsCRMIntegrationOpen(false);
+        else if (isSmartRecommendationsOpen) setIsSmartRecommendationsOpen(false);
+        else if (isAIContentGeneratorOpen) setIsAIContentGeneratorOpen(false);
+        else if (isSecurityDashboardOpen) setIsSecurityDashboardOpen(false);
+        else if (isSEOManagerOpen) setIsSEOManagerOpen(false);
+        else if (isPerformanceDashboardOpen) setIsPerformanceDashboardOpen(false);
+        else if (isAccessibilityOpen) setIsAccessibilityOpen(false);
+        else if (isPerformanceOpen) setIsPerformanceOpen(false);
+        else if (isPWAOpen) setIsPWAOpen(false);
+        else if (isAIOpen) setIsAIOpen(false);
+        else if (isAnalyticsOpen) setIsAnalyticsOpen(false);
+        else if (isTermsOpen) setIsTermsOpen(false);
+        else if (isPrivacyOpen) setIsPrivacyOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscKey);
+    return () => document.removeEventListener('keydown', handleEscKey);
+  }, [isPrivacyOpen, isTermsOpen, isAnalyticsOpen, isAIOpen, isPWAOpen, isPerformanceOpen, isAccessibilityOpen, isPerformanceDashboardOpen, isSEOManagerOpen, isSecurityDashboardOpen, isAIContentGeneratorOpen, isSmartRecommendationsOpen, isCRMIntegrationOpen, isEmailMarketingOpen]);
+
   React.useEffect(() => {
     // Register service worker for PWA functionality
     // Service workers disabled to reduce console noise
     // registerServiceWorker();
+
+    // Set up global deferredPrompt for install functionality
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      window.deferredPrompt = e;
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
     // registerAdvancedServiceWorker();
     // preloadCriticalComponents();
     // Initialize performance optimizations - DISABLED to reduce console noise

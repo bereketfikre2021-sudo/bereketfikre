@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Calendar, Clock, ArrowRight, ExternalLink, Tag } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, ExternalLink, Tag, X } from 'lucide-react';
 
 // BG images - using dynamic base path for production
 const BG1 = import.meta.env.PROD ? '/bereketfikre/img/BG.webp' : '/img/BG.webp';
@@ -85,7 +85,7 @@ const BLOG_POSTS = [
   }
 ];
 
-const BlogPost = ({ post, isFeatured = false }) => {
+const BlogPost = ({ post, isFeatured = false, onReadArticle }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -167,11 +167,7 @@ const BlogPost = ({ post, isFeatured = false }) => {
             <Button 
               variant="outline" 
               className="w-full border-accent/30 text-accent hover:bg-accent hover:text-primary group"
-              onClick={() => {
-                // For now, show an alert with the article title
-                // In a real app, this would navigate to the full article
-                alert(`Opening article: "${post.title}"\n\nThis would normally open the full article at /blog/${post.slug}`);
-              }}
+              onClick={() => onReadArticle(post)}
             >
               Read Article
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -184,8 +180,21 @@ const BlogPost = ({ post, isFeatured = false }) => {
 };
 
 const Blog = () => {
+  const [selectedArticle, setSelectedArticle] = useState(null);
   const featuredPosts = BLOG_POSTS.filter(post => post.featured);
   const regularPosts = BLOG_POSTS.filter(post => !post.featured);
+
+  // Handle ESC key to close article modal
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape' && selectedArticle) {
+        setSelectedArticle(null);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscKey);
+    return () => document.removeEventListener('keydown', handleEscKey);
+  }, [selectedArticle]);
 
   return (
     <section id="blog" className="py-20 bg-primary">
@@ -228,7 +237,7 @@ const Blog = () => {
           
           <div className="grid md:grid-cols-2 gap-8">
             {featuredPosts.map((post) => (
-              <BlogPost key={post.id} post={post} isFeatured={true} />
+              <BlogPost key={post.id} post={post} isFeatured={true} onReadArticle={setSelectedArticle} />
             ))}
           </div>
         </motion.div>
@@ -249,12 +258,105 @@ const Blog = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {regularPosts.map((post) => (
-              <BlogPost key={post.id} post={post} />
+              <BlogPost key={post.id} post={post} onReadArticle={setSelectedArticle} />
             ))}
           </div>
         </motion.div>
 
       </div>
+
+      {/* Article Modal */}
+      <AnimatePresence>
+        {selectedArticle && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedArticle(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-primary rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="p-6 border-b border-accent/20 flex items-center justify-between">
+                <div>
+                  <h2 className="text-2xl font-bold text-light">{selectedArticle.title}</h2>
+                  <div className="flex items-center gap-4 mt-2 text-sm text-accent/80">
+                    <span>By {selectedArticle.author}</span>
+                    <span>•</span>
+                    <span>{selectedArticle.date}</span>
+                    <span>•</span>
+                    <span>{selectedArticle.readTime}</span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setSelectedArticle(null)}
+                  className="p-2 hover:bg-accent/10 rounded-full transition-colors"
+                >
+                  <X className="w-6 h-6 text-accent" />
+                </button>
+              </div>
+
+              {/* Modal Content */}
+              <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+                <div className="prose prose-invert max-w-none">
+                  <div className="mb-6">
+                    <img 
+                      src={selectedArticle.image} 
+                      alt={selectedArticle.title}
+                      className="w-full h-64 object-cover rounded-xl mb-4"
+                    />
+                    <p className="text-lg text-accent/90 leading-relaxed mb-6">
+                      {selectedArticle.excerpt}
+                    </p>
+                  </div>
+                  
+                  <div className="text-light leading-relaxed space-y-4">
+                    <p>{selectedArticle.content}</p>
+                    
+                    <h3 className="text-xl font-semibold text-accent mt-8 mb-4">Key Takeaways</h3>
+                    <ul className="list-disc list-inside space-y-2 text-accent/90">
+                      <li>Understanding color psychology is crucial for effective brand design</li>
+                      <li>Different colors evoke specific emotions and influence purchasing decisions</li>
+                      <li>Consistent color usage across all brand touchpoints builds recognition</li>
+                      <li>Cultural context plays a significant role in color perception</li>
+                    </ul>
+
+                    <h3 className="text-xl font-semibold text-accent mt-8 mb-4">About the Author</h3>
+                    <p className="text-accent/90">
+                      {selectedArticle.author} is a creative designer with over 5 years of experience in brand identity, 
+                      UI/UX design, and digital marketing. Based in Addis Ababa, Ethiopia, he helps businesses 
+                      create compelling visual identities that resonate with their target audience.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="p-6 border-t border-accent/20 flex items-center justify-between">
+                <div className="flex flex-wrap gap-2">
+                  {selectedArticle.tags.map((tag, index) => (
+                    <Badge key={index} variant="secondary" className="text-xs bg-secondary/20 text-accent/80">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+                <Button 
+                  onClick={() => setSelectedArticle(null)}
+                  className="bg-accent text-primary hover:bg-accent/90"
+                >
+                  Close Article
+                </Button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -31,8 +31,8 @@ const CriticalResourceHints = () => {
     // addResourceHint('/fonts/inter-var.woff', 'preload', 'font', true);
     
     // Critical images (above the fold) - DISABLED FOR TEST APP
-    // addResourceHint('/img/Bereket-Fikre.webp', 'preload', 'image');
-    // addResourceHint('/img/Logo.webp', 'preload', 'image');
+    // addResourceHint(import.meta.env.PROD ? '/bereketfikre/img/Bereket-Fikre.webp' : '/img/Bereket-Fikre.webp', 'preload', 'image');
+    // addResourceHint(import.meta.env.PROD ? '/bereketfikre/img/Logo.webp' : '/img/Logo.webp', 'preload', 'image');
     
     // Critical JavaScript chunks
     addResourceHint('/assets/react-vendor-[hash].js', 'preload', 'script');

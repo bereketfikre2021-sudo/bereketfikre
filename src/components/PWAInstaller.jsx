@@ -59,27 +59,59 @@ const PWAInstaller = () => {
   }, []);
 
   const handleInstallClick = async () => {
-    if (deferredPrompt) {
-      // Use the browser's install prompt
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      
-      if (outcome === 'accepted') {
-        console.log('PWA installation accepted');
+    try {
+      if (deferredPrompt) {
+        // Use the browser's install prompt
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        
+        if (outcome === 'accepted') {
+          console.log('PWA installation accepted');
+          setIsInstalled(true);
+        } else {
+          console.log('PWA installation dismissed');
+        }
+        
+        setDeferredPrompt(null);
+        setShowInstallPrompt(false);
       } else {
-        console.log('PWA installation dismissed');
+        // Check if we can trigger install manually
+        if ('serviceWorker' in navigator && 'PushManager' in window) {
+          // Try to trigger install prompt
+          const installEvent = new Event('beforeinstallprompt');
+          window.dispatchEvent(installEvent);
+          
+          // If that doesn't work, show instructions
+          setTimeout(() => {
+            if (!deferredPrompt) {
+              showInstallInstructions();
+            }
+          }, 1000);
+        } else {
+          showInstallInstructions();
+        }
       }
-      
-      setDeferredPrompt(null);
-      setShowInstallPrompt(false);
-    } else {
-      // Fallback: Show instructions for manual installation
-      alert('To install this app:\n\n' +
-            'Chrome/Edge: Click the install icon in the address bar\n' +
-            'Safari: Tap Share > Add to Home Screen\n' +
-            'Firefox: Click the install icon in the address bar\n\n' +
-            'Or look for the install option in your browser menu.');
+    } catch (error) {
+      console.error('Install error:', error);
+      showInstallInstructions();
     }
+  };
+
+  const showInstallInstructions = () => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    let instructions = '';
+    
+    if (userAgent.includes('chrome') || userAgent.includes('edge')) {
+      instructions = 'Chrome/Edge: Look for the install icon (⊕) in the address bar and click it, or go to Menu > Install App';
+    } else if (userAgent.includes('safari')) {
+      instructions = 'Safari: Tap the Share button (□↗) and select "Add to Home Screen"';
+    } else if (userAgent.includes('firefox')) {
+      instructions = 'Firefox: Look for the install icon in the address bar or go to Menu > Install';
+    } else {
+      instructions = 'Look for an install option in your browser menu or address bar';
+    }
+    
+    alert(`To install this app:\n\n${instructions}\n\nThis will add the app to your home screen or desktop for quick access.`);
   };
 
   const handleDismiss = () => {
@@ -87,9 +119,8 @@ const PWAInstaller = () => {
     localStorage.setItem('pwa-install-dismissed', 'true');
   };
 
-  if (isInstalled || !showInstallPrompt) {
-    return null;
-  }
+  // Don't show any floating install buttons - install is now in Tools dropdown
+  return null;
 
   return (
     <AnimatePresence>
